@@ -1134,9 +1134,12 @@ html[data-mode="lux"]{--votus:#7c4dd8}
   .keypane--big{padding:34px 22px}
   /* the skin carries the surface and dissolves at the ends — the bar itself
      holds no background and no border, so it never reads as a box */
-  .tabbar{display:flex;position:fixed;left:10px;right:10px;bottom:12px;z-index:70;
-    gap:4px;padding:9px 8px;border-radius:30px;background:none;border:none;
-    box-shadow:0 18px 50px -12px rgba(0,0,0,.75),0 0 60px -18px rgba(0,120,255,.35);
+  /* the bar meets the bottom edge — no dead strip under it. Only the top
+     corners round, because the bottom is the screen. */
+  .tabbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:70;
+    gap:4px;padding:9px 10px calc(9px + env(safe-area-inset-bottom,0px));
+    border-radius:30px 30px 0 0;background:none;border:none;
+    box-shadow:0 -6px 44px -10px rgba(0,0,0,.8),0 0 70px -20px rgba(0,120,255,.35);
     isolation:isolate}
   .tabbar .nitem{flex-direction:column;gap:3px;min-height:66px;justify-content:center;
     padding:0;font-size:.72rem;font-family:var(--mono);font-weight:700;
@@ -2034,9 +2037,8 @@ html[data-mode="lux"]{--votus:#7c4dd8}
       for(x = 0; x <= W; x += step) top.push([x, TOP - surface(x, t)]);
       var d = 'M0,' + top[0][1].toFixed(2);
       for(var i=1;i<top.length;i++) d += 'L' + top[i][0] + ',' + top[i][1].toFixed(2);
-      var R = 30;   /* the body keeps the bar's own rounded shoulders */
-      var closed = d + 'L'+W+','+(H-R)+'Q'+W+','+H+' '+(W-R)+','+H
-                     + 'L'+R+','+H+'Q0,'+H+' 0,'+(H-R)+'Z';
+      /* the pool now sits ON the bottom edge — it fills to the corners */
+      var closed = d + 'L'+W+','+H+'L0,'+H+'Z';
       body.setAttribute('d', closed);
       rim.setAttribute('d', d);
       halo.setAttribute('d', d);
@@ -2174,6 +2176,67 @@ html[data-mode="lux"]{--votus:#7c4dd8}
       });
     });
   });
+
+  /* ═══════════════════════════════════════════════════════════════
+     THE LIVING PRISM — the Corpus mark reads YOUR OWN RECORD.
+
+     An empty corpus lets one white beam pass straight through,
+     undivided: potential that nothing has separated yet. Every move
+     you make, every model you mint, every offer you finish widens the
+     dispersion — the spectrum fans further, more wavelengths appear,
+     the crystal turns faster.
+
+     So the mark is not an illustration of a corpus. It IS the corpus,
+     read as light, and it evolves for as long as you keep moving.
+     ═══════════════════════════════════════════════════════════════ */
+  function tuneCorpus(){
+    var marks = document.querySelectorAll('.ix--corpus');
+    if(!marks.length) return;
+    var me = (typeof myPage === 'function' && myPage()) || 'august';
+
+    var moves  = (MOVES  || []).filter(function(m){return m.slug === me}).length,
+        models = (MM     || []).filter(function(x){return x.author && x.author.slug === me}).length,
+        runs   = (MM     || []).filter(function(x){return x.author && x.author.slug === me})
+                                .reduce(function(a,x){return a + (x.runs || 0)}, 0),
+        done   = (OFFERS || []).filter(function(o){return o.status === 'done'}).length,
+        logged = (CORPUS_SRV || []).length;
+
+    /* weighted: a minted model is worth more than a move, finished work most */
+    var mass = moves + models*3 + runs*0.5 + done*3 + logged;
+    /* saturating — the first moves change the most, as they should */
+    var k = 1 - Math.exp(-mass / 11);
+
+    var LIT = Math.max(1, Math.min(7, 1 + Math.round(k * 6)));
+
+    [].forEach.call(marks, function(svg){
+      var rays = svg.querySelectorAll('.px-ray');
+      [].forEach.call(rays, function(r, i){
+        var idx = i % 7;                     /* two layers of the same fan */
+        var on  = idx < LIT;
+        r.style.display = on ? '' : 'none';
+        /* with nothing to separate, the one ray stays white — undispersed */
+        if(LIT === 1 && idx === 0) r.setAttribute('stroke', '#ffffff');
+        else r.removeAttribute('stroke');
+      });
+      /* the fan opens as the record widens */
+      var fan = svg.querySelectorAll('.px-fan');
+      [].forEach.call(fan, function(g){
+        g.style.transformOrigin = '13.2px 12.6px';
+        g.style.transform = 'scaleY(' + (0.28 + k * 0.72).toFixed(3) + ')';
+      });
+      /* and the crystal turns with the energy in the record */
+      var glass = svg.querySelector('.px-glass');
+      if(glass) glass.style.animationDuration = (16 - k * 8).toFixed(1) + 's';
+      svg.style.setProperty('--k', k.toFixed(3));
+    });
+
+    var btn = document.querySelector('.nitem[data-go="corpus"]');
+    if(btn) btn.setAttribute('aria-label',
+      'The Corpus — ' + (mass ? (LIT + ' of 7 wavelengths separated') : 'undispersed; nothing recorded yet'));
+    window.__prism = {mass:mass, k:+k.toFixed(3), lit:LIT,
+      moves:moves, models:models, runs:runs, done:done, logged:logged};
+  }
+  window.__tuneCorpus = tuneCorpus;
 
   /* ═══════ THE MOTUSAGENT SKILL — read it, take it ═══════
      Fetched live from MotusMoves so the file on this page is always the file
@@ -2482,6 +2545,8 @@ html[data-mode="lux"]{--votus:#7c4dd8}
   window.__logEvent=logEvent;
 
   function drawCorpusLog(){
+    /* the mark reads the same record this log does — retune on every redraw */
+    try{ if(typeof tuneCorpus==='function') tuneCorpus(); }catch(e){}
     var el=document.getElementById('corpuslog');if(!el)return;
     var who=myPage()||'august';
     /* these are declared further down the file — an early draw must not throw */
@@ -3103,6 +3168,7 @@ html[data-mode="lux"]{--votus:#7c4dd8}
       .then(function(d){
         MM=(d&&d.models)||[];MMK=(d&&d.kpis)||null;
         drawKpis(MMK);drawInMotion(MM);drawMyModels();drawModels(MM);bindModelCards();
+        tuneCorpus();   /* minted models widen the dispersion */
         drawCorpusLog();
         window.__motus={count:MM.length,kpis:MMK,live:true,
           mine:signedIn()?mineModels().length:null};
