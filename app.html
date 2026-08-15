@@ -2122,7 +2122,7 @@ html[data-mode="lux"]{--votus:#7c4dd8}
                         + 'pointer-events:none;visibility:hidden';
     document.body.appendChild(probe);
 
-    var applied = 0, t = 0;
+    var applied = 0, t = 0, last = {};
     function apply(px){ applied = px; bar.style.bottom = px ? px + 'px' : ''; }
     function clamp(){
       /* a pinch-zoom also shrinks the visual viewport, and is not the chrome */
@@ -2130,16 +2130,61 @@ html[data-mode="lux"]{--votus:#7c4dd8}
       var landed  = probe.getBoundingClientRect().bottom,   /* where bottom:0 IS */
           visible = vv.height + vv.offsetTop,               /* where sight ends  */
           lift    = Math.max(0, Math.min(landed - visible, 160));
-      if(Math.abs(lift - applied) < 4) return;              /* deadzone: no jitter */
-      apply(lift);
+      last = {landed:landed, visible:visible, drop:landed-visible, lift:lift,
+              vvH:vv.height, vvTop:vv.offsetTop, innerH:window.innerHeight};
+      if(Math.abs(lift - applied) >= 4) apply(lift);        /* deadzone: no jitter */
+      if(dbg) paintDebug();
     }
-    function settle(){ clearTimeout(t); t = setTimeout(clamp, 90); }
-    vv.addEventListener('resize', settle);
+    function settle(ms){ clearTimeout(t); t = setTimeout(clamp, ms || 90); }
+
+    /* WHICH EVENTS. The first version listened to `resize` ONLY, on the reasoning
+       that the chrome appearing IS a resize — and on August's phone it never
+       fired, so the bar kept sinking through four rounds of this.
+       Browsers surface the URL bar sliding in three different ways: as a visual
+       viewport RESIZE, as a visual viewport SCROLL (only `offsetTop` moves), or
+       as nothing but a document scroll. So listen to all three.
+       The old PIN was dangerous because it acted on every scroll event as it
+       arrived. This one cannot: every trigger only arms a timer, so it acts once
+       the gesture goes quiet, and it can only ever lift UP. */
+    vv.addEventListener('resize', function(){ settle(90) });
+    vv.addEventListener('scroll', function(){ settle(110) });
+    window.addEventListener('scroll', function(){ settle(140) }, {passive:true});
     window.addEventListener('orientationchange', function(){ setTimeout(clamp, 320) });
+
+    /* and sample across the window where the chrome actually animates, because
+       a tab change is the exact moment he sees it and no event may arrive */
+    window.__barRecheck = function(){ [90,260,520,900].forEach(function(ms){
+      setTimeout(clamp, ms) }) };
+
+    /* ── the readout: load with ?bardebug=1 and it shows its own numbers ──
+       This bug cannot be reproduced in any environment I have. Rather than
+       guess a fifth time, the page can now say what it measures. */
+    var dbg = /(\?|&)bardebug=1/.test(location.search), panel;
+    function paintDebug(){
+      if(!panel){
+        panel = document.createElement('div');
+        panel.style.cssText = 'position:fixed;left:8px;right:8px;bottom:auto;top:8px;'
+          + 'z-index:9999;background:rgba(4,6,15,.94);color:#1ce7ff;font:11px/1.5 '
+          + 'ui-monospace,monospace;padding:10px 12px;border-radius:14px;'
+          + 'border:1px solid rgba(28,231,255,.4);pointer-events:none;white-space:pre';
+        document.body.appendChild(panel);
+      }
+      panel.textContent =
+        'BAR CLAMP\n'
+      + 'bottom:0 lands at   ' + last.landed + '\n'
+      + 'sight ends at       ' + last.visible + '  (vv.height ' + Math.round(last.vvH)
+                               + ' + offsetTop ' + Math.round(last.vvTop) + ')\n'
+      + 'window.innerHeight  ' + last.innerH + '\n'
+      + 'DROP (cut off by)   ' + Math.round(last.drop) + '\n'
+      + 'LIFT applied        ' + applied + 'px\n'
+      + 'bar top / gap below ' + Math.round(bar.getBoundingClientRect().top) + ' / '
+                               + Math.round(window.innerHeight - bar.getBoundingClientRect().bottom);
+    }
+
     clamp();
-    window.__barClamp = function(){ return {applied: applied,
-      landed: probe.getBoundingClientRect().bottom,
-      visible: vv.height + vv.offsetTop, scale: vv.scale}; };
+    window.__barClamp = function(){ return {applied: applied, last: last,
+      barTop: bar.getBoundingClientRect().top,
+      barBottom: bar.getBoundingClientRect().bottom}; };
   })();
 
   /* ═══════════════════════════════════════════════════════════════
@@ -3428,6 +3473,9 @@ html[data-mode="lux"]{--votus:#7c4dd8}
       setTimeout(function(){wp.classList.remove('fire')},560)}
     if(window.__flowLiquid)window.__flowLiquid(name);
     if(window.__ferro)window.__ferro.remeasure();   /* the field follows you */
+    /* a tab change is the exact moment the browser decides to show its chrome
+       again — re-check the bar across that whole animation, not just once */
+    if(window.__barRecheck)window.__barRecheck();
     try{history.replaceState(null,'','#'+name)}catch(e){}
   }
   [].forEach.call(document.querySelectorAll('.nitem'),function(b){
