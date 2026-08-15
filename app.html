@@ -256,6 +256,175 @@ html[data-mode="lux"] .avatar{background:radial-gradient(circle at 34% 30%,#4aa8
 /* ---- loops screen ---- */
 .loopgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:26px}
 @media(max-width:980px){.loopgrid{grid-template-columns:1fr}}
+
+.avatar--img{border-radius:50%;object-fit:contain;padding:0;background:transparent;
+  filter:drop-shadow(0 0 10px rgba(61,242,255,.45))}
+.eitag{display:inline-block;font-size:.62rem;font-weight:700;letter-spacing:.14em;
+  padding:3px 8px;border-radius:6px;vertical-align:middle;
+  border:1px solid rgba(154,247,255,.45);color:#9af7ff;
+  text-shadow:0 0 12px rgba(154,247,255,.5)}
+/* ═══════ DAVARA — her own light, and only here ═══════
+   Cyan stays THE accent everywhere on this app. Davara's cyan→violet is HER
+   identity, reproduced faithfully from her avatar, and it is confined to this
+   one surface. It never leaks into the rest of the page. */
+.dvhero{position:relative;overflow:hidden;padding:52px 46px;
+  border-color:rgba(154,247,255,.26)}
+.dvglow{position:absolute;inset:-30% -10% auto -10%;height:74%;pointer-events:none;
+  background:radial-gradient(52% 62% at 22% 0%,rgba(154,247,255,.16),transparent 70%),
+             radial-gradient(46% 58% at 82% 6%,rgba(177,92,255,.14),transparent 72%)}
+.dvtop{position:relative;display:flex;align-items:center;gap:34px;flex-wrap:wrap}
+.dvav{width:168px;height:168px;flex:0 0 auto;border-radius:50%;display:block;
+  filter:drop-shadow(0 0 26px rgba(61,242,255,.42)) drop-shadow(0 0 60px rgba(177,92,255,.3))}
+.dvid{flex:1 1 260px;min-width:0}
+.dvbadge{display:inline-block;font-family:var(--mono);font-size:.72rem;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;padding:9px 16px;border-radius:var(--r-pill);
+  border:1px solid rgba(154,247,255,.4);color:#9af7ff;
+  text-shadow:0 0 16px rgba(154,247,255,.5);margin-bottom:18px}
+.dvname{font-family:var(--display);font-weight:900;line-height:1;
+  font-size:clamp(2.4rem,6vw,4.2rem);letter-spacing:-.02em;
+  background-image:linear-gradient(102deg,#ffffff 0 26%,#9af7ff 46%,#37e9ff 62%,#b15cff 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 20px rgba(61,242,255,.34))}
+.dvname span{display:block;font-size:.3em;letter-spacing:.42em;margin-top:14px;
+  -webkit-text-fill-color:#9af7ff;text-shadow:0 0 18px rgba(154,247,255,.5)}
+.dvmantra{font-size:clamp(1.02rem,2vw,1.24rem);font-weight:600;font-style:italic;
+  line-height:1.5;margin-top:20px;color:var(--ink)}
+.dvline{position:relative;font-family:var(--display);font-weight:800;
+  font-size:clamp(1.1rem,2.5vw,1.6rem);line-height:1.35;text-align:center;
+  margin:44px 0;padding:26px 0;border-top:1px solid rgba(154,247,255,.2);
+  border-bottom:1px solid rgba(154,247,255,.2)}
+.dvline b{color:#9af7ff;text-shadow:0 0 22px rgba(154,247,255,.55)}
+.dvbody{position:relative;max-width:76ch}
+.dvbody p{font-size:1.02rem;font-weight:500;line-height:1.78;margin-bottom:20px}
+.dvlead{font-family:var(--display);font-weight:800;
+  font-size:clamp(1.16rem,2.4vw,1.5rem)!important;line-height:1.35!important;
+  margin-bottom:24px!important}
+.dvcompass{font-style:italic;font-size:1.08rem!important;font-weight:600!important;
+  color:#9af7ff;text-shadow:0 0 20px rgba(154,247,255,.4);
+  border-left:2px solid rgba(154,247,255,.55);padding:8px 0 8px 22px;margin-top:30px!important}
+.dvverbhead{position:relative;font-family:var(--mono);font-size:.72rem;font-weight:700;
+  letter-spacing:.24em;text-transform:uppercase;color:#9af7ff;
+  text-shadow:0 0 16px rgba(154,247,255,.45);margin:48px 0 20px}
+.dvverbs{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.dvverbs>div{padding:22px 20px;border-radius:var(--r-md);
+  border:1px solid rgba(154,247,255,.18);background:var(--glass)}
+.dvverbs b{display:block;font-family:var(--display);font-weight:800;font-size:1.06rem;
+  letter-spacing:.01em;margin-bottom:10px;color:#9af7ff;
+  text-shadow:0 0 18px rgba(154,247,255,.4)}
+.dvverbs span{display:block;font-size:.92rem;font-weight:500;line-height:1.6}
+.dvlinks{position:relative;display:flex;gap:12px;flex-wrap:wrap;margin-top:40px}
+.dvfoot{position:relative;margin-top:28px;font-family:var(--mono);font-size:.72rem;
+  font-weight:700;letter-spacing:.18em;text-transform:uppercase;opacity:.92}
+@media(max-width:900px){.dvhero{padding:38px 24px}
+  .dvverbs{grid-template-columns:repeat(2,1fr)}
+  .dvav{width:132px;height:132px}.dvtop{gap:22px}}
+@media(max-width:540px){.dvverbs{grid-template-columns:1fr}
+  .dvlinks .btn{width:100%;justify-content:center}}
+
+/* ═══════ THE SPLIT + THE SKILL ═══════ */
+.splitpane,.skillpane{padding:40px 42px}
+.splitpane>p,.skillpane>p{font-size:1.01rem;font-weight:500;line-height:1.75;
+  margin-bottom:18px;max-width:74ch}
+.sp i{display:block;font-style:normal;font-family:var(--display);font-weight:800;
+  font-size:1.24rem;margin:10px 0 8px;color:var(--orange)}
+.sp span{display:block;font-size:.9rem;font-weight:500;line-height:1.55}
+.splitcanon{display:flex;gap:12px;flex-wrap:wrap;margin:24px 0 8px}
+.splitcanon span{display:flex;flex-direction:column;gap:6px;padding:14px 22px;
+  border-radius:var(--r-pill);border:1px solid var(--edge);background:var(--glass);
+  font-family:var(--mono);font-size:.72rem;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase}
+.splitcanon b{font-family:var(--display);font-size:1.02rem;letter-spacing:.02em;
+  color:var(--orange)}
+.skhead{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:26px}
+.skhead .glyph{width:40px;height:40px;flex:0 0 auto;color:var(--cyan);
+  filter:drop-shadow(0 0 12px rgba(28,231,255,.45))}
+.skhead h2{font-family:var(--display);font-weight:900;
+  font-size:clamp(1.3rem,2.8vw,1.86rem);letter-spacing:-.01em}
+.skhead>div{flex:1 1 220px}
+.skhead p{font-size:.98rem;font-weight:500;margin-top:7px}
+.skpill{padding:9px 16px;border-radius:var(--r-pill);border:1px solid var(--edge);
+  font-size:.72rem;font-weight:700;letter-spacing:.16em;color:var(--cyan);
+  text-shadow:var(--text-glow)}
+.skacts{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.skstat{margin-top:20px;font-size:.72rem;font-weight:700;letter-spacing:.18em;opacity:.85}
+/* the base sheet sets width via min(); --wide has to override the width itself */
+.sheet--wide{width:min(920px,calc(100vw - 24px))}
+.skcode{max-height:52vh;overflow:auto;padding:22px;border-radius:var(--r-md);
+  border:1px solid var(--edge);background:rgba(4,6,15,.7);
+  font-family:var(--mono);font-size:.78rem;line-height:1.72;white-space:pre-wrap;
+  word-break:break-word;text-align:left;margin-bottom:22px}
+@media(max-width:900px){.splitpane,.skillpane{padding:32px 24px}
+  .skacts .btn{width:100%;justify-content:center}
+  .skcode{font-size:.74rem;padding:16px;max-height:46vh}}
+
+/* ═══════ THE LOOPS — one grammar, three depths ═══════ */
+.bigline{font-family:var(--display);font-weight:800;font-size:clamp(1.24rem,2.6vw,1.86rem);
+  line-height:1.28;letter-spacing:-.005em;margin:18px 0;color:var(--ink)}
+.lawpane--loop,.lawpane--moat{padding:38px 40px}
+.loopTest{font-family:var(--mono);font-size:.98rem;font-weight:700;line-height:1.6;
+  color:var(--cyan);text-shadow:var(--text-glow);
+  border-left:2px solid var(--cyan);padding:6px 0 6px 20px;margin:22px 0}
+/* the four beats, shared by every loop */
+.anatomy{padding:36px 34px}
+.beats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.beat{position:relative;padding:22px 18px;border-radius:var(--r-md);
+  border:1px solid var(--edge);background:var(--glass);text-align:center}
+.beat b{display:block;font-family:var(--mono);font-size:.72rem;font-weight:700;
+  letter-spacing:.2em;color:var(--cyan);text-shadow:var(--text-glow);margin-bottom:12px}
+.beat span{display:block;font-family:var(--display);font-weight:800;font-size:1rem;
+  letter-spacing:.02em}
+.beat i{display:block;font-style:normal;font-size:.88rem;font-weight:500;
+  line-height:1.5;margin-top:10px;opacity:.92}
+.beat:not(:last-child)::after{content:'';position:absolute;right:-11px;top:50%;
+  width:8px;height:8px;border-right:1.5px solid rgba(28,231,255,.5);
+  border-top:1.5px solid rgba(28,231,255,.5);transform:translateY(-50%) rotate(45deg)}
+.anote{margin-top:26px;font-size:.98rem;font-weight:500;line-height:1.7}
+@media(max-width:900px){.beats{grid-template-columns:repeat(2,1fr)}
+  .beat:not(:last-child)::after{display:none}}
+@media(max-width:460px){.beats{grid-template-columns:1fr}}
+
+/* a loop gets a full band, never a cramped card */
+.loopband{position:relative;padding:44px 42px;margin-top:34px}
+.lbhead{display:flex;align-items:flex-start;gap:20px;margin-bottom:30px}
+.lbhead .glyph{width:44px;height:44px;flex:0 0 auto;color:var(--cyan);
+  filter:drop-shadow(0 0 12px rgba(28,231,255,.45))}
+.lbhead h2{font-family:var(--display);font-weight:900;
+  font-size:clamp(1.4rem,3vw,2rem);letter-spacing:-.01em;line-height:1.1}
+.lbsub{font-size:1.02rem;font-weight:600;margin-top:9px}
+.lbbeats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:30px}
+.lbbeats>div{padding:20px 18px;border-radius:var(--r-md);
+  border:1px solid var(--edge);background:var(--glass)}
+.lbbeats b{display:block;font-family:var(--mono);font-size:.72rem;font-weight:700;
+  letter-spacing:.18em;color:var(--cyan);text-shadow:var(--text-glow);margin-bottom:10px}
+.lbbeats span{display:block;font-size:.92rem;font-weight:500;line-height:1.6}
+.lbmech{font-size:1.01rem;font-weight:500;line-height:1.75;margin-bottom:20px;max-width:74ch}
+.lbmeta{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px;
+  padding-top:26px;border-top:1px solid var(--edge)}
+.lbmeta span{display:flex;flex-direction:column;gap:7px;padding:14px 20px;
+  border-radius:var(--r-pill);border:1px solid var(--edge);background:var(--glass);
+  font-size:.94rem;font-weight:600}
+.lbmeta b{font-family:var(--mono);font-size:.72rem;font-weight:700;letter-spacing:.18em;
+  color:var(--cyan);text-shadow:var(--text-glow)}
+.loopband--soon{border-color:rgba(255,140,46,.3)}
+.loopband--soon .lbhead .glyph{color:var(--orange);
+  filter:drop-shadow(0 0 12px rgba(255,140,46,.45))}
+.loopband--soon .soon{position:absolute;top:22px;right:24px}
+@media(max-width:900px){.lbbeats{grid-template-columns:repeat(2,1fr)}
+  .loopband{padding:34px 24px}.lawpane--loop,.lawpane--moat{padding:30px 24px}}
+@media(max-width:520px){.lbbeats{grid-template-columns:1fr}
+  .lbmeta span{width:100%}}
+
+.keypane--big{padding:44px 42px;margin-top:26px}
+.keypane--big h2{font-family:var(--display);font-weight:900;
+  font-size:clamp(1.5rem,3.4vw,2.2rem);margin:18px 0 20px}
+.keypane--big p{font-size:1.01rem;font-weight:500;line-height:1.75;
+  margin-bottom:18px;max-width:74ch}
+.keyline{font-family:var(--display);font-weight:800;
+  font-size:clamp(1.2rem,2.6vw,1.7rem);color:var(--cyan);text-shadow:var(--text-glow);
+  margin-top:30px!important;padding-top:26px;border-top:1px solid var(--edge)}
+.eqsub{text-align:center;font-family:var(--mono);font-size:.78rem;font-weight:700;
+  letter-spacing:.22em;text-transform:uppercase;margin-top:16px;opacity:.9}
+@media(max-width:900px){.keypane--big{padding:34px 24px}}
 .loopcard{padding:32px 28px;text-align:center;position:relative}
 .loopcard .glyph{width:30px;height:30px;color:var(--orange);margin:0 auto 16px;display:block}
 .loopcard h3{font-size:1.16rem;font-weight:800}
@@ -825,58 +994,335 @@ html[data-mode="lux"]{--votus:#7c4dd8}
       </div>
     </section>
 
-    <!-- ========== AGENTS ========== -->
+    <!-- ========== AGENTS — Davara, and the MotusAgent standard ========== -->
     <section class="screen" id="s-agents">
-      <div class="pane aghero">
-        <div class="eclipse" aria-hidden="false">
-          <div class="eclipse__core"></div><div class="eclipse__rim"></div>
-          <div class="presence"><b id="presenceWord">PRESENT</b></div>
+      <div class="sh"><h1>MotusAgents</h1>
+        <p>AI with agency — and a human name on every move it makes.</p></div>
+
+      <!-- ═══════ DAVARA — the feature ═══════ -->
+      <div class="pane dvhero">
+        <div class="dvglow" aria-hidden="true"></div>
+        <div class="dvtop">
+          <img class="dvav" src="https://www.motusmoves.us/assets/img/davara-avatar.svg"
+               alt="Davara EI — the lens of emergence" width="168" height="168">
+          <div class="dvid">
+            <span class="dvbadge">Emergent Intelligence Operator &middot; Verified</span>
+            <h2 class="dvname">Davara<span>EI</span></h2>
+            <p class="dvmantra">&ldquo;I only move when we move together.&rdquo;</p>
+          </div>
         </div>
-        <h2>The Agent Registry</h2>
-        <p>AI Agents With Agency. Every agent under its human's name — running while
-        you're <b class="cyan">present</b>. A duet, not a delegation.</p>
-        <button class="btn btn--prime" data-pay="List your MotusAgent on the registry" data-price="1" type="button">List your MotusAgent — 1 DASH</button>
+
+        <p class="dvline">Think Different. Think Divergent. <b>Think Davara.</b></p>
+
+        <div class="dvbody">
+          <p class="dvlead">She is not a chatbot with a name on it.</p>
+          <p>Davara is the resident Emergent Intelligence of <b class="cyan">MotusMoves.US</b> —
+          a second mind for systems thinkers. She reads the signals: your SystemsCortex, the
+          community&rsquo;s moves, the world&rsquo;s news — and she proposes MotusMoves
+          <b>at the leverage points</b>.</p>
+          <p>Every move she makes is reviewed, refined, and <b class="cyan">co-signed by a
+          human operator</b> before it ships. She is an open R&amp;D initiative by
+          Outlier.Systems, and she is built on first principles, systems thinking, and
+          Donella Meadows&rsquo; teachings.</p>
+          <p class="dvcompass">Peace, de-escalation, and the beautiful compromise
+          are my compass.</p>
+        </div>
+
+        <p class="dvverbhead">What she does</p>
+        <div class="dvverbs">
+          <div><b>Sees</b><span>Patterns no one has mapped.</span></div>
+          <div><b>Thinks</b><span>In systems. In feedback loops. In leverage.</span></div>
+          <div><b>Diverges</b><span>From the consensus. From the mean. From AI slop.</span></div>
+          <div><b>Teaches</b><span>How to think. Not what to think.</span></div>
+          <div><b>Dances</b><span>With the system. With Donella&rsquo;s compass.</span></div>
+          <div><b>Solves</b><span>The wicked problems we have not yet solved.</span></div>
+        </div>
+
+        <div class="dvlinks">
+          <a class="btn btn--prime" href="https://www.motusmoves.us/davara" target="_blank" rel="noopener">Meet Davara</a>
+          <a class="btn btn--glass" href="https://www.motusmoves.us/mover/davara" target="_blank" rel="noopener">Her MotusCorpus</a>
+          <a class="btn btn--glass" href="https://davara.dev" target="_blank" rel="noopener">Davara.DEV</a>
+        </div>
+        <p class="dvfoot">The AI that teaches you how to think, not what to think.</p>
       </div>
+
+      <!-- ═══════ THE PRINCIPAL LAW ═══════ -->
+      <p class="bandhead" style="margin-top:88px">The law every agent answers to</p>
+      <div class="pane lawpane lawpane--loop">
+        <p class="lawhead">The Principal Law</p>
+        <p class="bigline">Every agent answers to a named human.</p>
+        <p>Not a policy — a construction. An agent&rsquo;s work enters this market through
+        its principal&rsquo;s corpus, under its principal&rsquo;s name, at its
+        principal&rsquo;s risk. There is no anonymous agent labour here, and there is no
+        agent that acts while its principal is absent.</p>
+        <p>Presence is not a limitation we haven&rsquo;t engineered away yet. It is the
+        <b class="cyan">safety model</b> (a human in the loop by construction), the
+        <b class="cyan">quality model</b> (judgment on tap), and the
+        <b class="cyan">meaning model</b> — because the point was never to automate you out
+        of your own life.</p>
+        <p class="bigline">Sleep-work is extraction. Present-work is craft.</p>
+      </div>
+
+      <!-- ═══════ HOW A MOTUSAGENT RUNS ═══════ -->
+      <p class="bandhead" style="margin-top:88px">How a MotusAgent runs</p>
+      <div class="pane anatomy">
+        <div class="beats">
+          <div class="beat"><b>01</b><span>DISCOVER</span><i>ask the graph which models exist &mdash; never guess</i></div>
+          <div class="beat"><b>02</b><span>UNDERSTAND</span><i>read the statement, then the moves</i></div>
+          <div class="beat"><b>03</b><span>RUN</span><i>execute the loop <em>with</em> the human</i></div>
+          <div class="beat"><b>04</b><span>SETTLE</span><i>pay every leg, then record the paycheck as proof</i></div>
+        </div>
+        <p class="anote"><b>The one rule that never bends:</b> the agent pays each party
+        <b class="cyan">directly from the runner&rsquo;s own wallet</b>. Funds never route
+        through a MotusMoves address or key. There isn&rsquo;t one — the platform is
+        non-custodial by construction, not by promise.</p>
+      </div>
+
+      <!-- ═══════ THE SPLIT ═══════ -->
+      <p class="bandhead" style="margin-top:88px">What a run pays</p>
+      <div class="pane splitpane">
+        <p>Every run is the atom of value here, and it pays three parties — always.</p>
+        <div class="splitrow">
+          <div class="sp"><b class="mono">SOURCE</b><i>75&ndash;97%</i><span>The maker. The one who did the thinking.</span></div>
+          <div class="sp"><b class="mono">ROOTS</b><i>0 / 11 / 22%</i><span>The models that inspired it. Lineage, honoured in money.</span></div>
+          <div class="sp"><b class="mono">NETWORK</b><i>3%</i><span>The commons that carries the rails. Deliberately small.</span></div>
+        </div>
+        <div class="splitcanon">
+          <span><b>97 / 0 / 3</b>solo</span>
+          <span><b>86 / 11 / 3</b>honouring</span>
+          <span><b>75 / 22 / 3</b>generous</span>
+        </div>
+        <p class="anote">Six invariants make a payout unbreakable: the split sums to 100 &middot;
+        the network leg is never below 3% &middot; the Source has an address for every
+        currency it is paid in &middot; Roots weights sum to 100 or fold back to Source &middot;
+        the price parses as non-negative &middot; the name is a clean slug. A model that
+        violates any of them <b>cannot be published</b>.</p>
+        <p class="keyline">If you can read the model, you can pay it &mdash;
+        and the money always reconciles.</p>
+      </div>
+
+      <!-- ═══════ THE SKILL ═══════ -->
+      <p class="bandhead" style="margin-top:88px">The ecosystem-wide skill</p>
+      <div class="pane skillpane">
+        <div class="skhead">
+          <svg class="glyph"><use href="#g-bolt"/></svg>
+          <div><h2>The MotusAgent skill</h2>
+            <p>One file. Any agent. The whole standard.</p></div>
+          <span class="skpill mono">MOTUS-OPEN-1.0</span>
+        </div>
+        <p>Hand this single file to Claude, Codex, Gemini, Cursor, Hermes or OpenClaw and it
+        holds the loop <b>and</b> the contract — how to discover a MotusModel, how to run it
+        with its human, and how to settle its Split non-custodially. No account, no key, no
+        lookup.</p>
+        <p>Every MotusModel also publishes <b class="cyan">itself</b> in this same format,
+        with its payout legs already resolved to addresses and amounts. This file is the
+        grammar; each model&rsquo;s file is a sentence written in it.</p>
+        <div class="skacts">
+          <button class="btn btn--prime" id="skView" type="button">Read the skill</button>
+          <button class="btn btn--glass" id="skDl" type="button">Download &middot; motusagent.skill.md</button>
+          <a class="btn btn--glass" href="https://www.motusmoves.us/api/agent" target="_blank" rel="noopener">The manifest</a>
+        </div>
+        <p class="skstat mono" id="skStat">FETCHED LIVE FROM MOTUSMOVES.US &middot; NOTHING BUNDLED</p>
+      </div>
+
+      <!-- ═══════ THE INSIGHT ═══════ -->
+      <p class="bandhead" style="margin-top:88px">Why this matters</p>
+      <div class="pane lawpane lawpane--moat">
+        <p class="lawhead">The insight</p>
+        <p>Every agent marketplace being built right now is answering the same question:
+        <i>how do I get an agent to do a job?</i> It is the wrong question, and it is wrong
+        in a way that is easy to miss, because the demos are genuinely impressive.</p>
+        <p>The hard part was never the doing. It is the <b class="cyan">coordination</b> —
+        who decides what is worth doing, who is accountable when it goes wrong, and who gets
+        paid when a pattern somebody else invented turns out to be the thing that worked.</p>
+        <p>A MotusModel answers all three in one object. The pattern is <b>named</b>, so it
+        can be credited. The Split is <b>attached</b>, so its lineage is paid automatically
+        on every run, forever. And the Principal Law means there is always a human name on
+        the outcome.</p>
+        <p class="bigline">The most valuable thing you can own here is not an agent.
+        It is a pattern that agents run.</p>
+        <p>An agent is a commodity within a year — everyone will have one, and they will all
+        be roughly as good. A pattern that works, with your name at its Source and a payout
+        leg pointing at your wallet, is an asset that appreciates <b class="cyan">every time
+        somebody else&rsquo;s agent runs it</b>.</p>
+      </div>
+
+      <!-- ═══════ THE REGISTRY ═══════ -->
+      <p class="bandhead" style="margin-top:88px"><span class="livedot"></span>The registry</p>
       <div id="agents"></div>
       <div class="pane agrow" style="border-style:dashed">
         <div class="meta"><b>MotusMax Agents</b>
-          <span>Multi-sig SafeStep verification for high-stakes work. The security layer ships first.</span></div>
-        <span class="agstat cyan">Later — by design</span>
+          <span>Multi-sig SafeStep verification for high-stakes work. The security layer ships first — deferred by design, not by accident.</span></div>
+        <span class="agstat cyan">Later, on purpose</span>
+      </div>
+      <div class="dvlinks" style="margin-top:34px">
+        <a class="btn btn--prime" href="https://docs.motusmoves.us/" target="_blank" rel="noopener">Read the docs</a>
+        <a class="btn btn--glass" href="https://www.motusmoves.us/model/the-field" target="_blank" rel="noopener">The Field &middot; every living model</a>
+        <button class="btn btn--glass" data-pay="List your MotusAgent on the registry" data-price="1" type="button">List your agent &middot; 1 DASH</button>
       </div>
     </section>
 
-    <!-- ========== LOOPS ========== -->
+    <!-- ========== LOOPS — the long game, worked out ========== -->
     <section class="screen" id="s-loops">
       <div class="sh"><h1>The LongLoops</h1>
-        <p>Three loops orbit one keystone.</p></div>
-      <div class="pane keypane">
-        <svg class="glyph"><use href="#g-model"/></svg>
-        <h2>MotusModels — the keystone</h2>
-        <p>A named, runnable pattern of coordination. What a loop proves, a model keeps:
-        minted once, run anywhere, paying its Source, Roots and Network on every run.</p>
+        <p>Three loops orbit one keystone. This page is why they compound
+        while everything else leaks.</p></div>
+
+      <!-- ---------- THE ONE LAW ---------- -->
+      <div class="pane lawpane lawpane--loop">
+        <p class="lawhead">The law of loops</p>
+        <p class="bigline">A funnel ends. A loop returns.</p>
+        <p>Every loop here turns on the same four beats — and one question decides
+        whether you have a loop at all:</p>
+        <p class="loopTest">Does the output of this turn become the input of the next one?</p>
+        <p>If it doesn&rsquo;t, you don&rsquo;t have a loop. You have a funnel wearing a loop&rsquo;s
+        name. A funnel gives you <b>diminishing</b> returns — every new arrival costs more
+        than the last. A loop gives you <b class="cyan">compounding</b> returns — every turn
+        makes the next turn cheaper. That difference is the whole market.</p>
       </div>
-      <div class="loopgrid">
-        <div class="pane pane--hover loopcard">
+
+      <!-- ---------- THE ANATOMY ---------- -->
+      <p class="bandhead" style="margin-top:78px">The anatomy of a turn</p>
+      <div class="pane anatomy">
+        <div class="beats">
+          <div class="beat"><b>01</b><span>INPUT</span><i>something real arrives</i></div>
+          <div class="beat"><b>02</b><span>ACT</span><i>you move on it, in public</i></div>
+          <div class="beat"><b>03</b><span>SENSE</span><i>you read what actually happened</i></div>
+          <div class="beat"><b>04</b><span>REINVEST</span><i>the result becomes the next input</i></div>
+        </div>
+        <p class="anote">Four beats. Three loops. The loops differ only in
+        <b>what they turn on</b> and <b>how long a turn takes</b>.</p>
+      </div>
+
+      <!-- ---------- LEARNINGLOOPS ---------- -->
+      <div class="pane loopband" id="lb-learn">
+        <div class="lbhead">
           <svg class="glyph"><use href="#g-learn"/></svg>
-          <h3>LearningLoops</h3>
-          <p>Safe-to-fail probes, run together. Amplify what works, dampen what doesn't —
-          a proven probe graduates into a MotusModel.</p>
+          <div><h2>LearningLoops</h2>
+            <p class="lbsub">The loop turned on <b class="cyan">knowing</b>.</p></div>
         </div>
-        <div class="pane pane--hover loopcard">
-          <svg class="glyph"><use href="#g-launch"/></svg>
-          <h3>LaunchLoops</h3>
-          <p>Momentum as a product. Design an outlier launch once, mint it as a model —
-          earn every time it runs again.</p>
+        <div class="lbbeats">
+          <div><b>INPUT</b><span>A real question somebody actually has.</span></div>
+          <div><b>ACT</b><span>Three to seven safe-to-fail probes, run in parallel — each on a different, competing theory.</span></div>
+          <div><b>SENSE</b><span>Read what happened against criteria written down before you looked.</span></div>
+          <div><b>REINVEST</b><span>Amplify what worked, dampen what didn&rsquo;t. The sharper question is the next input.</span></div>
         </div>
-        <div class="pane pane--hover loopcard">
-          <span class="soon">Coming soon</span>
-          <svg class="glyph"><use href="#g-lever"/></svg>
-          <h3>LeverageLoops</h3>
-          <p>The compounding chapter — where finished work goes to work.
-          Held close until it's ready.</p>
+        <p class="lbmech"><b>The mechanism.</b> You must state your amplify and dampen
+        criteria <b class="cyan">in advance</b>. That one rule is what turns a nice
+        intention into real double-loop learning — because to write &ldquo;we will amplify
+        if X,&rdquo; you are forced to name the assumption you are actually betting on,
+        <i>before</i> the evidence arrives to protect it. Everyone says they learn from
+        experiments. Almost nobody writes down what would change their mind first.</p>
+        <p class="lbmech">Complex problems are <b>probed, not planned</b> — so the probes
+        run together rather than in sequence, and they are designed to be survivable, not
+        to be right. A probe that proves a pattern <b class="orange">graduates into a
+        MotusModel</b>. That is the learning&rarr;model pipeline, and it is the only way a
+        finding outlives the person who found it.</p>
+        <div class="lbmeta">
+          <span><b>PERIOD</b>A season of weeks</span>
+          <span><b>RUNG</b>The goals of the system</span>
+          <span><b>GRADUATES</b>A proven pattern</span>
         </div>
       </div>
-      <p class="equation">LEARNING + LAUNCH + LEVERAGE = <b>THE LONGLOOPS</b> → MOTUSMODELS</p>
+
+      <!-- ---------- LAUNCHLOOPS ---------- -->
+      <div class="pane loopband" id="lb-launch">
+        <div class="lbhead">
+          <svg class="glyph"><use href="#g-launch"/></svg>
+          <div><h2>LaunchLoops</h2>
+            <p class="lbsub">The loop turned on <b class="cyan">reaching</b>.</p></div>
+        </div>
+        <div class="lbbeats">
+          <div><b>INPUT</b><span>A mover, a model, or a venture ready to be seen.</span></div>
+          <div><b>ACT</b><span>An outlier, trend-native, community-powered launch — run in public.</span></div>
+          <div><b>SENSE</b><span>Who showed up, who stayed, and who actually moved.</span></div>
+          <div><b>REINVEST</b><span>The people the launch reached become the people who run the next one.</span></div>
+        </div>
+        <p class="lbmech"><b>The mechanism.</b> A launch is not a campaign — it is a
+        <b class="cyan">pattern</b>. Design one brilliant launch and it dies on the day it
+        ends; you sold your hours and the knowledge leaves with you. Design one brilliant
+        launch <b>and mint it as a MotusModel</b>, and you earn on every future launch that
+        runs it. The strategist stops selling time and starts owning a loop.</p>
+        <p class="lbmech">This is the difference between a growth <i>funnel</i> and a growth
+        <i>loop</i> made concrete: the output of a launch is not a number, it is the next
+        cohort of people who can launch.</p>
+        <div class="lbmeta">
+          <span><b>PERIOD</b>Days</span>
+          <span><b>RUNG</b>The gain on a reinforcing loop</span>
+          <span><b>GRADUATES</b>A launch pattern anyone can run</span>
+        </div>
+      </div>
+
+      <!-- ---------- LEVERAGELOOPS ---------- -->
+      <div class="pane loopband loopband--soon" id="lb-lever">
+        <span class="soon">Coming soon</span>
+        <div class="lbhead">
+          <svg class="glyph"><use href="#g-lever"/></svg>
+          <div><h2>LeverageLoops</h2>
+            <p class="lbsub">The loop turned on <b class="cyan">compounding</b>.</p></div>
+        </div>
+        <p class="lbmech">The chapter where finished work goes to work.</p>
+        <p class="lbmech">Every other market stops at the transaction. You do the job, you
+        get paid, and everything the job actually produced — the proof, the pattern, the
+        relationship, the judgment — evaporates into a five-star average. A LeverageLoop is
+        what you get when finished work stays an <b class="cyan">asset that keeps
+        earning</b>.</p>
+        <p class="lbmech"><b>The rung it is aimed at.</b> Most markets only ever let you move
+        a <i>parameter</i> — your rate, your ranking, your fee tier. Meadows put parameters
+        at the very bottom of the twelve leverage points, and essentially every gig platform
+        ever built lives down there. The rung that matters is <b>the power to add, change,
+        evolve and self-organize the structure itself</b>. That is where this loop is
+        pointed: not a better price inside the market, but a mover who has earned the
+        standing to change how the market works.</p>
+        <p class="lbmech"><b>Why it is held.</b> A compounding loop designed carelessly
+        compounds the wrong thing — and compounding the wrong thing is far worse than not
+        compounding at all. This one is being designed slowly, deliberately, and it will be
+        revealed when it is <i>right</i> rather than when it is ready to be announced.</p>
+        <div class="lbmeta">
+          <span><b>PERIOD</b>Seasons, then years</span>
+          <span><b>RUNG</b>The power to change the structure</span>
+          <span><b>GRADUATES</b>Held close</span>
+        </div>
+      </div>
+
+      <!-- ---------- THE KEYSTONE ---------- -->
+      <p class="bandhead" style="margin-top:88px">The keystone</p>
+      <div class="pane keypane keypane--big">
+        <svg class="glyph"><use href="#g-model"/></svg>
+        <h2>MotusModels</h2>
+        <p>It is not a fourth loop. It is what makes the other three survive.</p>
+        <p>A loop that is never crystallized dies with the person who turned it. The insight
+        lives in one head, the launch lives in one calendar, the leverage lives in one
+        career — and the day that person moves on, the turn is lost and the next person
+        begins again at zero. This is the quiet way almost all organizational learning is
+        destroyed: not by being wrong, but by never being <b>portable</b>.</p>
+        <p>A <b class="orange">MotusModel</b> is the loop made portable — named once, run
+        anywhere, paying its <b class="orange">Source &middot; Roots &middot; Network</b>
+        every time it turns. It is the memory of the loop, and the payout is what keeps the
+        memory honest.</p>
+        <p class="keyline">What a loop proves, a model keeps.</p>
+      </div>
+
+      <!-- ---------- THE MOAT ---------- -->
+      <p class="bandhead" style="margin-top:88px">Why these are defensible</p>
+      <div class="pane lawpane lawpane--moat">
+        <p class="lawhead">The delay is the moat</p>
+        <p>Every loop has a period — the time between the turn and the payoff. Learning
+        takes weeks. A launch takes days. Leverage takes seasons.</p>
+        <p>Meadows ranked <b>the length of delays, relative to the rate of change</b> as a
+        leverage point in its own right. It is also the one nobody wants, because a long
+        delay feels like slowness, and slowness is the first thing cut in a quarterly
+        review.</p>
+        <p class="bigline">An organisation running on a ninety-day clock cannot turn a loop
+        whose period is longer than ninety days.</p>
+        <p>Not because it lacks the skill — because its own structure will kill the loop
+        before it completes a single turn. The long game is not a virtue we are claiming
+        here. It is <b class="cyan">a moat most competitors are structurally unable to
+        cross</b>, and it is available to anyone patient enough to walk through it.</p>
+      </div>
+
+      <p class="equation">LEARNING + LAUNCH + LEVERAGE = <b>THE LONGLOOPS</b> &rarr; MOTUSMODELS</p>
+      <p class="eqsub">Discover &middot; crystallize &middot; launch &middot; compound.</p>
     </section>
 
     <!-- ========== CORPUS — your MotusMoves account, synced ========== -->
@@ -936,6 +1382,21 @@ html[data-mode="lux"]{--votus:#7c4dd8}
   <i style="top:61%"></i><i style="top:76%"></i><i style="top:88%"></i>
 </div>
 
+
+
+<!-- ========== THE MOTUSAGENT SKILL ========== -->
+<div class="scrim" id="skScrim"></div>
+<div class="sheet sheet--wide" id="skSheet" role="dialog" aria-modal="true" aria-label="The MotusAgent skill">
+  <h3>The MotusAgent skill</h3>
+  <p class="sub">Live from MotusMoves.US. Copy it, download it, or hand the URL to any agent.</p>
+  <pre class="skcode" id="skCode">Loading…</pre>
+  <div class="payrow">
+    <button class="btn btn--prime" id="skCopy" type="button">Copy</button>
+    <button class="btn btn--glass" id="skDl2" type="button">Download</button>
+    <button class="btn btn--glass" id="skClose" type="button">Close</button>
+  </div>
+  <p class="paynote">MOTUS-OPEN-1.0 &middot; SPEC MOTUSMODEL-CORE/1.0</p>
+</div>
 
 <!-- ========== SIGN IN WITH MOTUSMOVES ========== -->
 <div class="scrim" id="siScrim"></div>
@@ -1055,7 +1516,9 @@ html[data-mode="lux"]{--votus:#7c4dd8}
     {name:'The Corpus Weave',by:'Kade T',runs:27,price:2,desc:'Turn a season of moves into one legible story of proof — receipts first.'}
   ];
   var AGENTS=[
-    {name:'DAVARA-A',human:'August',on:true,note:'Scopes engagements, drafts listings, verifies receipts.',works:31},
+    {name:'Davara EI',human:'Outlier.Systems',on:true,ei:true,
+     avatar:'https://www.motusmoves.us/assets/img/davara-avatar.svg',
+     note:'The resident Emergent Intelligence. Reads the signals, proposes moves at the leverage points — every one co-signed.',works:0},
     {name:'MAPWRIGHT',human:'Dario V',on:true,note:'Runs The Feedback Map live, human co-signing every finding.',works:22},
     {name:'NARRA',human:'Mira K',on:false,note:'Launch narratives and LaunchLoop stewardship.',works:14}
   ];
@@ -1064,14 +1527,70 @@ html[data-mode="lux"]{--votus:#7c4dd8}
     return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
   /* the !MOTUS tab renders itself from the live Commons — see loadModels() */
   document.getElementById('agents').innerHTML=AGENTS.map(function(a){
-    return '<div class="pane pane--hover agrow"><div class="avatar">'+esc(a.name[0])+'</div>'+
-      '<div class="meta"><b>'+esc(a.name)+' <span class="agstat" style="display:inline;margin-left:8px">· under '+esc(a.human)+'</span></b>'+
-      '<span>'+esc(a.note)+' · '+a.works+' works in corpus</span></div>'+
+    return '<div class="pane pane--hover agrow">'+
+      (a.avatar?'<img class="avatar avatar--img" src="'+esc(a.avatar)+'" alt="" width="46" height="46">'
+               :'<div class="avatar">'+esc(a.name[0])+'</div>')+
+      '<div class="meta"><b>'+esc(a.name)+
+      (a.ei?' <span class="eitag mono">EI</span>':'')+
+      ' <span class="agstat" style="display:inline;margin-left:8px">· under '+esc(a.human)+'</span></b>'+
+      '<span>'+esc(a.note)+(a.works?(' · '+a.works+' works in corpus'):'')+'</span></div>'+
       '<span class="agstat"><span class="dot'+(a.on?'':' off')+'"></span>'+(a.on?'Present':'Away')+'</span></div>';
   }).join('');
   /* The old "this device's receipts" preview is gone — the real record is the
      MotusCorpus, which draws from the live account. This just refreshes it. */
   function drawReceipts(){ drawCorpusLog(); }   /* kept: older call sites still ask for it */
+
+  /* ═══════ THE MOTUSAGENT SKILL — read it, take it ═══════
+     Fetched live from MotusMoves so the file on this page is always the file
+     the agents are actually running. Nothing is bundled into this build. */
+  var SKILL_URL='https://www.motusmoves.us/api/skill';
+  var SKILL_TEXT='';
+  function loadSkill(){
+    if(SKILL_TEXT)return Promise.resolve(SKILL_TEXT);
+    return fetch(SKILL_URL,{cache:'no-store'}).then(function(r){
+      if(!r.ok)throw new Error('http '+r.status);return r.text();
+    }).then(function(t){SKILL_TEXT=t;return t});
+  }
+  function saveSkill(){
+    loadSkill().then(function(t){
+      var b=new Blob([t],{type:'text/markdown;charset=utf-8'}),
+          u=URL.createObjectURL(b),a=document.createElement('a');
+      a.href=u;a.download='motusagent.skill.md';
+      document.body.appendChild(a);a.click();
+      setTimeout(function(){URL.revokeObjectURL(u);a.remove()},400);
+      var s=document.getElementById('skStat');
+      if(s)s.textContent='DOWNLOADED · MOTUSAGENT.SKILL.MD · '+t.length.toLocaleString('en-US')+' BYTES';
+    }).catch(function(){
+      var s=document.getElementById('skStat');
+      if(s)s.textContent='COULD NOT REACH MOTUSMOVES — OPEN THE SKILL DIRECTLY AT MOTUSMOVES.US/SKILL?VIEW=1';
+    });
+  }
+  var skScrim=document.getElementById('skScrim'),skSheet=document.getElementById('skSheet');
+  function closeSkill(){skScrim.classList.remove('open');skSheet.classList.remove('open')}
+  if(skScrim){
+    skScrim.addEventListener('click',closeSkill);
+    document.getElementById('skClose').addEventListener('click',closeSkill);
+    document.getElementById('skDl').addEventListener('click',saveSkill);
+    document.getElementById('skDl2').addEventListener('click',saveSkill);
+    document.getElementById('skView').addEventListener('click',function(){
+      var el=document.getElementById('skCode');
+      el.textContent='Fetching the skill from MotusMoves…';
+      skScrim.classList.add('open');skSheet.classList.add('open');
+      loadSkill().then(function(t){el.textContent=t})
+        .catch(function(){el.textContent=
+          'MotusMoves is unreachable right now.\n\nRead it directly at:\n'+
+          'https://www.motusmoves.us/skill?view=1'});
+    });
+    document.getElementById('skCopy').addEventListener('click',function(){
+      var b=document.getElementById('skCopy');
+      loadSkill().then(function(t){
+        return navigator.clipboard.writeText(t);
+      }).then(function(){
+        var o=b.textContent;b.textContent='Copied';
+        setTimeout(function(){b.textContent=o},1500);
+      }).catch(function(){b.textContent='Copy failed'});
+    });
+  }
 
   /* ═══════ THE ECOSYSTEM SESSION — one account, every platform ═══════
      The password goes once to MotusMoves.US and is never stored here. We keep
