@@ -151,4 +151,4 @@ Found a security problem? [SECURITY.md](SECURITY.md), and please don't open a pu
 
 ## License
 
-[MIT](LICENSE).
+[MIT](LICENSE). Two things sit alongside it — the mark and `hope.html`. See [NOTICE.md](NOTICE.md).

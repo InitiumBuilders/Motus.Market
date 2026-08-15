@@ -19,18 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-
-NOTE ON THE MARK AND ON hope.html
-
-This licence covers the source code and documentation.
-
-The Motus.Market logo (assets/logo.png) and the names "Motus.Market",
-"MotusMoves", "MotusMove", "MotusModel", "MotusCorpus" and "VotusMove" are
-identifiers of the project and its ecosystem. You are free to fork and modify
-this software; please do not present a fork as the original project, and
-please replace the mark if you do.
-
-hope.html contains the personal written words of August Domanchuk, published
-under his signature. Please do not reproduce that page under another name.
