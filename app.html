@@ -394,25 +394,22 @@
   .nitem.on .ix *{animation:none!important}
 }
 
-/* ---- THE LOCK-IN: the icon bulges, a shockwave leaves it ---- */
-@keyframes bulge{
-  0%{transform:scale(1)}
-  38%{transform:scale(1.62)}
-  62%{transform:scale(1.06)}
-  80%{transform:scale(1.3)}
-  100%{transform:scale(1.22)}}
-@keyframes bulgeInf{
-  0%{transform:scale(1.72)}
-  38%{transform:scale(2.5)}
-  62%{transform:scale(1.62)}
-  80%{transform:scale(1.94)}
-  100%{transform:scale(1.78)}}
-.tabbar .nitem.lock 
-/* ---- WARP: the screen arrives at light speed ---- */
+/* ---- WARP: the screen arrives ----
+   THIS BLOCK WAS DEAD. An orphaned `.tabbar .nitem.lock` selector — left
+   behind when the old lock-in was retired, with its declaration block deleted
+   but its selector kept — sat directly above it with no `{}`. A selector
+   without a block does not error: the parser keeps reading, swallows the next
+   rule as part of its prelude, and drops BOTH. So `@keyframes warpIn` never
+   existed and `.screen.on{animation:warpIn}` animated nothing, silently.
+
+   Restored — but deliberately NOT as it was written. The original animated
+   `filter:blur(9px)` and `scale()` on `.screen`, which on the Loops and Agents
+   screens is a ~10,000px-tall element: blurring and scaling a layer that size
+   forces an enormous rasterisation on a phone. Opacity and a small translate
+   are compositor-only and cost nothing. */
 @keyframes warpIn{
-  0%{opacity:0;transform:scale(1.05) translateY(26px);filter:blur(9px)}
-  55%{opacity:1;filter:blur(0)}
-  100%{opacity:1;transform:none;filter:blur(0)}}
+  0%{opacity:0;transform:translateY(14px)}
+  100%{opacity:1;transform:none}}
 .warpline{position:fixed;left:236px;right:0;top:0;bottom:0;z-index:40;
   pointer-events:none;opacity:0;overflow:hidden}
 .warpline.fire{animation:warpFlash .5s ease-out both}
@@ -1154,20 +1151,14 @@ html[data-mode="lux"]{--votus:#7c4dd8}
 .paynote{margin-top:16px;font-family:var(--mono);font-size:.78rem;font-weight:700;
   letter-spacing:.1em;color:var(--cyan);min-height:22px}
 
-/* the mark rides the same slot as every other glyph — scaled, not shifted */
-.nitem:hover .nitem.on .tabbar .tabbar .nitem.on 
-/* ---- the horizontal conduit (mobile) ---- */
-.tconduit{position:absolute;left:16px;right:16px;top:6px;height:1px;pointer-events:none;
-  background:linear-gradient(90deg,transparent,rgba(28,231,255,.24),transparent)}
-.ttrail{position:absolute;top:4.5px;height:4px;border-radius:3px;opacity:0;
-  pointer-events:none;filter:blur(1.5px);
-  background:linear-gradient(90deg,transparent,var(--cyan),transparent);
-  transition:opacity .5s ease}
-.ttrail.fire{opacity:1;transition:opacity .1s ease}
-.tspark{position:absolute;top:1.5px;width:10px;height:10px;border-radius:50%;
-  background:var(--cyan-hot);pointer-events:none;z-index:2;
-  box-shadow:0 0 10px var(--cyan),0 0 24px var(--cyan),0 0 48px rgba(28,231,255,.5);
-  transition:left .62s var(--ease-out)}
+/* THE SECOND ORPHAN. `.nitem:hover .nitem.on .tabbar .tabbar .nitem.on` —
+   four retired selectors whose blocks were deleted but whose selectors were
+   left — sat here with no `{}`, so the parser welded them onto `.tconduit` and
+   dropped that rule too. `.tconduit` therefore never got `position:absolute`
+   and sat in the tab bar as a STATIC in-flow flex item.
+   The conduit itself was retired long ago (see .liquid — the mass IS the
+   indicator, and two travelling indicators in one bar read as an artifact), so
+   the fix is deletion, not repair: the rules AND the ghost element are gone. */
 
 /* ---- mobile collapse ---- */
 .tabbar{display:none}
@@ -1901,7 +1892,6 @@ html[data-mode="lux"]{--votus:#7c4dd8}
 <nav class="tabbar" aria-label="App">
   <svg class="ferroedge" aria-hidden="true" preserveAspectRatio="none"><path class="ff-halo" fill="none" stroke="url(#ffIris)" stroke-width="9" opacity=".28" filter="url(#ffSoft)"/><path class="ff-body" fill="url(#ffBody)"/><path class="ff-rim"  fill="none" stroke="url(#ffIris)" stroke-width="1.4" opacity=".5" stroke-linecap="round"/><path class="ff-spec" fill="none" stroke="url(#ffSpec)" stroke-width="1" opacity=".55" stroke-linecap="round"/></svg>
   <div class="liquid" aria-hidden="true"><i class="blob"></i><i class="drop"></i></div>
-  <div class="tconduit" aria-hidden="true"></div>
   <button class="nitem on" data-go="market" type="button"><span class="ico"><svg class="glyph ix ix--market" viewBox="0 0 24 24" aria-hidden="true"><circle class="ix-ring" cx="12" cy="12" r="9.1" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="url(#gxMarket)" stroke-width="1.6"/><g class="ix-orbit" fill="url(#gxMarket)"><circle cx="12" cy="6.5" r="1.5"/><circle cx="16.76" cy="14.75" r="1.5"/><circle cx="7.24" cy="14.75" r="1.5"/></g><circle class="ix-core" cx="12" cy="12" r="2.1" fill="url(#gxMarket)"/></svg></span><span class="lab">Market</span></button>
   <button class="nitem" data-go="models" type="button"><span class="ico"><svg class="glyph ix ix--model" viewBox="0 0 24 24" aria-hidden="true"><g class="mx-space"><g class="mx-grid" mask="url(#mxFade)"><path d="M0 4.6 H24" fill="none" stroke="#ff9a3d" stroke-width=".42"/><path d="M0 8.6 H24" fill="none" stroke="#ff9a3d" stroke-width=".42"/><path d="M0 15.4 H24" fill="none" stroke="#ff9a3d" stroke-width=".42"/><path d="M0 19.4 H24" fill="none" stroke="#ff9a3d" stroke-width=".42"/><path d="M4.6 0 V24" fill="none" stroke="#ff9a3d" stroke-width=".42"/><path d="M8.6 0 V24" fill="none" stroke="#ff9a3d" stroke-width=".42"/><path d="M15.4 0 V24" fill="none" stroke="#ff9a3d" stroke-width=".42"/><path d="M19.4 0 V24" fill="none" stroke="#ff9a3d" stroke-width=".42"/></g><circle class="mx-wave" cx="12" cy="12" r="3" fill="none" stroke="#ffb86b" stroke-width="1.35" opacity="0" style="--wd:0s"/><circle class="mx-wave" cx="12" cy="12" r="3" fill="none" stroke="#ffb86b" stroke-width="1.35" opacity="0" style="--wd:-1.05s"/><circle class="mx-wave" cx="12" cy="12" r="3" fill="none" stroke="#ffb86b" stroke-width="1.35" opacity="0" style="--wd:-2.1s"/><circle class="mx-wave" cx="12" cy="12" r="3" fill="none" stroke="#ffb86b" stroke-width="1.35" opacity="0" style="--wd:-3.15s"/><circle class="mx-wave mx-trough" cx="12" cy="12" r="3" fill="none" stroke="#ff8c2e" stroke-width="1" opacity="0" style="--wd:-0.46s"/><circle class="mx-wave mx-trough" cx="12" cy="12" r="3" fill="none" stroke="#ff8c2e" stroke-width="1" opacity="0" style="--wd:-1.51s"/><circle class="mx-wave mx-trough" cx="12" cy="12" r="3" fill="none" stroke="#ff8c2e" stroke-width="1" opacity="0" style="--wd:-2.56s"/><circle class="mx-wave mx-trough" cx="12" cy="12" r="3" fill="none" stroke="#ff8c2e" stroke-width="1" opacity="0" style="--wd:-3.61s"/><circle class="mx-burst" cx="12" cy="12" r="3" fill="none" stroke="#ffe0a8" stroke-width="2.2" opacity="0"/></g><circle class="mx-well" cx="12" cy="12" r="5.4" fill="url(#mxWell)"/><circle class="mx-heart" cx="12" cy="12" r="2.5" fill="url(#mxHeart)"/><circle class="mx-seed" cx="12" cy="12" r="1" fill="#fffdf7"/></svg></span><span class="lab">!MOTUS</span></button>
   <button class="nitem" data-go="agents" type="button"><span class="ico"><svg class="glyph ix ix--agent" viewBox="0 0 512 512" aria-hidden="true"><g filter="url(#fxDvGlow)"><path class="dv-cresL" d="M 208 52 A 232 232 0 0 0 208 460 A 158 204 0 0 1 208 52 Z" fill="none" stroke="url(#gxDavara)" stroke-width="30" stroke-linecap="round"/><path class="dv-cresR" d="M 304 52 A 232 232 0 0 1 304 460 A 158 204 0 0 0 304 52 Z" fill="none" stroke="url(#gxDavara)" stroke-width="30" stroke-linecap="round"/></g><g class="dv-traces" stroke="#a78bfa" stroke-width="11" fill="none" opacity=".9" stroke-linecap="round" filter="url(#fxDvGlow)"><path class="dv-tr" d="M256 196 V158 M256 316 V354"/><path class="dv-tr" style="--td:-1.5s" d="M216 236 H176 M296 236 H336"/><path class="dv-tr" style="--td:-3s" d="M216 276 H176 M296 276 H336"/><path class="dv-tr" style="--td:-4.5s" d="M232 210 L204 182 M280 210 L308 182 M232 302 L204 330 M280 302 L308 330"/></g><g class="dv-nodes" fill="#c4b5fd"><circle cx="256" cy="150" r="15"/><circle cx="256" cy="362" r="15"/><circle cx="168" cy="236" r="15"/><circle cx="344" cy="236" r="15"/><circle cx="168" cy="276" r="15"/><circle cx="344" cy="276" r="15"/></g><g class="dv-corehex" filter="url(#fxDvGlow)"><path class="dv-hex" fill="rgba(196,181,253,.28)" stroke="#e9d5ff" stroke-width="16" stroke-linejoin="round" d="M256 214 L292 235 L292 277 L256 298 L220 277 L220 235 Z"/><circle class="dv-core" cx="256" cy="256" r="30" fill="#f5f3ff"/></g></svg></span><span class="lab">Agents</span></button>
@@ -2840,8 +2830,9 @@ html[data-mode="lux"]{--votus:#7c4dd8}
         if(el)el.innerHTML='<div class="pane restnote">MotusMoves is unreachable. '+
           '<a href="'+esc(moverUrlSlug(slug))+'" target="_blank" rel="noopener" style="color:var(--cyan)">Open @'+esc(slug)+' directly</a>.</div>';
       });
-    if(window.__app&&document.getElementById('s-corpus').classList.contains('on'))
-      window.scrollTo({top:0,behavior:'smooth'});
+    /* jump, never glide — a programmatic upward glide disturbs the fixed bar */
+    if(window.__app&&document.getElementById('s-corpus').classList.contains('on')
+       &&window.__jumpTop)window.__jumpTop();
   }
 
   function loadMovers(){
@@ -3342,43 +3333,62 @@ html[data-mode="lux"]{--votus:#7c4dd8}
   /* The travelling spark and its trail are retired: the liquid mass now shows
      where you are and how you got there, and two travelling indicators competing
      in one bar just read as a loose artifact. flowLiquid() is the whole thing. */
-  function fireConduit(){}
-
   /* ---------- screens ---------- */
   var screens={market:1,models:1,agents:1,loops:1,corpus:1};
+  /* ═══════ A PROGRAMMATIC SCROLL MUST JUMP, NEVER GLIDE ═══════
+     THIS is what dropped the bar and hid its labels. The stylesheet sets
+     `html{scroll-behavior:smooth}` — which is right for anchor links — and
+     `behavior:'auto'` means "use the CSS value", so it meant SMOOTH. The old
+     guard `'instant' in window` tested a property that has never existed on
+     window, so it was false every time and `'auto'` was what actually got
+     passed. Every tab change therefore ran a ~700ms ANIMATED scroll to the top
+     (measured: 1475px → 0 over 700ms).
+
+     On a phone a sustained upward scroll is precisely the gesture that makes
+     the browser re-expand its URL bar. For that whole 700ms the chrome is
+     animating in and a `position:fixed;bottom:0` bar is being re-anchored
+     underneath it — so the bar visibly drops and the labels, being its
+     bottom-most content, go under the chrome. It looked tab-specific only
+     because Loops is the tab you reach for after scrolling a long way; tap one
+     while already at the top and the scroll is 0px and nothing happens at all.
+
+     `behavior:'instant'` is the fix, and it must be passed EXPLICITLY. Two
+     things that look like they would work and do not: `behavior:'auto'` means
+     "ask the CSS", and toggling `scroll-behavior` inline around the call is
+     restored before the scroll animation ever reads it (measured: still glided,
+     1500 to 577 in 300ms). An engine too old for 'instant' throws on the
+     unknown enum — and is also too old for scroll-behavior:smooth, so the
+     two-argument form there is already a jump. */
+  function jumpTop(){
+    try{window.scrollTo({top:0,left:0,behavior:'instant'})}
+    catch(e){window.scrollTo(0,0)}
+  }
+  window.__jumpTop=jumpTop;
+
   function go(name){
     Object.keys(screens).forEach(function(k){
       document.getElementById('s-'+k).classList.toggle('on',k===name)});
+    /* land at the top of the new screen in one frame, before anything measures */
+    jumpTop();
     [].forEach.call(document.querySelectorAll('.nitem'),function(b){
-      var isOn=b.getAttribute('data-go')===name;
-      b.classList.toggle('on',isOn);
-      /* the lock-in: bulge + shockwave, replayed each selection */
-      b.classList.remove('lock');
-      if(isOn){void b.offsetWidth;b.classList.add('lock');
-        setTimeout(function(){b.classList.remove('lock')},820)}
-    });
+      b.classList.toggle('on',b.getAttribute('data-go')===name)});
     /* warp streaks across the deck */
     var wp=document.getElementById('warp');
     if(wp){wp.classList.remove('fire');void wp.offsetWidth;wp.classList.add('fire');
       setTimeout(function(){wp.classList.remove('fire')},560)}
-    fireConduit(name);
     if(window.__flowLiquid)window.__flowLiquid(name);
     if(window.__ferro)window.__ferro.remeasure();   /* the field follows you */
     try{history.replaceState(null,'','#'+name)}catch(e){}
-    window.scrollTo({top:0,behavior:'instant' in window?'instant':'auto'});
   }
   [].forEach.call(document.querySelectorAll('.nitem'),function(b){
     b.addEventListener('click',function(){go(b.getAttribute('data-go'))})});
   var h=(location.hash||'').replace('#','');
-  var startScreen=screens[h]?h:'market';
   if(screens[h])go(h);
-  /* place the light without a flight on first paint, and after any resize */
-  requestAnimationFrame(function(){fireConduit(startScreen,true)});
+  /* re-place the mass after any reflow — settled, never mid-gesture */
   var cT;window.addEventListener('resize',function(){
     clearTimeout(cT);cT=setTimeout(function(){
       var cur=document.querySelector('.nitem.on');
-      if(cur){fireConduit(cur.getAttribute('data-go'),true);
-        if(window.__flowLiquid)window.__flowLiquid(cur.getAttribute('data-go'),true)}
+      if(cur&&window.__flowLiquid)window.__flowLiquid(cur.getAttribute('data-go'),true);
     },180)});
   /* the mass takes its opening position without animating in from nowhere */
   requestAnimationFrame(function(){
@@ -3503,8 +3513,7 @@ html[data-mode="lux"]{--votus:#7c4dd8}
       price:ofKind==='votus'?0:Math.round(pr*100)/100,
       tips:0,status:'open',ts:Date.now()});
     saveOffers();ofText.value='';ofPrice.value='';
-    closeList();go('market');refreshMarket();
-    window.scrollTo({top:0,behavior:'smooth'});
+    closeList();go('market');refreshMarket();   /* go() already lands at the top */
   });
   setKind('dash');
 
