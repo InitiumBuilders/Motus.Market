@@ -2079,18 +2079,68 @@ html[data-mode="lux"]{--votus:#7c4dd8}
      MotusCorpus, which draws from the live account. This just refreshes it. */
   function drawReceipts(){ drawCorpusLog(); }   /* kept: older call sites still ask for it */
 
-  /* ═══════ THE BAR IS NOT SCRIPTED. ═══════
-     I tried to pin it to the visual viewport with a transform. That WAS the
-     glitch: it jumped on fast scrolls, stuck halfway up, shoved itself up on
-     tab change and left a gap beneath, because a tab change scrolls to top,
-     which re-expands the URL bar, which changes the viewport, which fired the
-     correction — a feedback loop I built.
+  /* ═══════ THE BAR: A CLAMP, NOT A PIN ═══════
 
-     A `position:fixed; bottom:0` element is ALREADY glued to the bottom of the
-     visible area by the browser, through every toolbar animation, and it does
-     it on the compositor where no script can stutter it. The correct amount of
-     JavaScript for this problem is none. The only thing CSS needs is the safe
-     area inset, which it has. */
+     HISTORY, because it matters. Version one was a PIN: it listened to the
+     visual viewport's `scroll` event and carried the bar on a transform. That
+     was itself the glitch — the visual viewport fires `scroll` continuously
+     through a flick, so the bar chased the finger; and the correction could
+     translate DOWNWARD, so a tab change (which scrolls to top, which re-expands
+     the URL bar, which changes the viewport, which fires the correction) shoved
+     the bar up and left a gap beneath it. A feedback loop I built. Deleted.
+
+     Then the real cause of the drop turned out to be elsewhere entirely — the
+     tab change was running a 700ms ANIMATED scroll to the top (see jumpTop).
+     Fixed. And the bar still drops on some devices, because arriving at scroll
+     0 makes the browser show its full chrome no matter how you get there.
+
+     So: the last piece. Browsers disagree about what `position:fixed;bottom:0`
+     is anchored to. Some glue it to the bottom of what you can SEE (then this
+     code is dead weight and correctly does nothing). Others anchor it to the
+     large viewport — the one measured with the toolbars hidden — so when the
+     toolbars come back the bar sits BELOW the visible area by their height, and
+     its bottom-most content, the labels, is what disappears.
+
+     I cannot know which one a given phone is, and guessing wrong regresses the
+     other half. So this does not guess: it drops a 1px probe at `bottom:0` and
+     MEASURES where the browser actually put it, against where the visual
+     viewport says the visible area ends. If the browser already got it right
+     the difference is zero and nothing is touched, ever.
+
+     Four rules learned the hard way, all of them the opposite of version one:
+       · RESIZE only. Never `scroll` — that is what made it chase the finger.
+       · SETTLED. 90ms of quiet, so it moves once after the chrome finishes.
+       · UP ONLY, capped. It can never push the bar down or open a gap below.
+       · `bottom`, not `transform` — the bar is still `transform:none!important`,
+         because a transform is what made it jump.                              */
+  (function(){
+    var vv = window.visualViewport, bar = document.querySelector('.tabbar');
+    if(!vv || !bar) return;
+    var probe = document.createElement('div');
+    probe.setAttribute('aria-hidden','true');
+    probe.style.cssText = 'position:fixed;left:0;bottom:0;width:1px;height:1px;'
+                        + 'pointer-events:none;visibility:hidden';
+    document.body.appendChild(probe);
+
+    var applied = 0, t = 0;
+    function apply(px){ applied = px; bar.style.bottom = px ? px + 'px' : ''; }
+    function clamp(){
+      /* a pinch-zoom also shrinks the visual viewport, and is not the chrome */
+      if(vv.scale > 1.01){ apply(0); return; }
+      var landed  = probe.getBoundingClientRect().bottom,   /* where bottom:0 IS */
+          visible = vv.height + vv.offsetTop,               /* where sight ends  */
+          lift    = Math.max(0, Math.min(landed - visible, 160));
+      if(Math.abs(lift - applied) < 4) return;              /* deadzone: no jitter */
+      apply(lift);
+    }
+    function settle(){ clearTimeout(t); t = setTimeout(clamp, 90); }
+    vv.addEventListener('resize', settle);
+    window.addEventListener('orientationchange', function(){ setTimeout(clamp, 320) });
+    clamp();
+    window.__barClamp = function(){ return {applied: applied,
+      landed: probe.getBoundingClientRect().bottom,
+      visible: vv.height + vv.offsetTop, scale: vv.scale}; };
+  })();
 
   /* ═══════════════════════════════════════════════════════════════
      THE FERROFLUID EDGE — the bar is a black liquid body, and its
