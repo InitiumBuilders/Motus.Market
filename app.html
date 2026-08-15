@@ -113,13 +113,14 @@
 .nitem[data-go="models"]{--sig:rgba(255,140,46,.9);--sig2:rgba(255,90,31,.45)}
 .nitem[data-go="agents"]{--sig:rgba(167,139,250,.9);--sig2:rgba(125,211,252,.5)}
 .nitem[data-go="loops"]{--sig:rgba(28,231,255,.9);--sig2:rgba(0,102,255,.5)}
-.nitem[data-go="corpus"]{--sig:rgba(255,154,60,.85);--sig2:rgba(139,92,246,.5)}
-/* the soul never dims */
-.ix--corpus{filter:drop-shadow(0 0 5px rgba(255,154,60,.35))!important}
+.nitem[data-go="corpus"]{--sig:rgba(226,242,255,.9);--sig2:rgba(164,76,255,.5)}
+/* the record never dims — and a prism throws WHITE light, so its halo is white
+   with the two ends of its own spectrum in it, never amber */
+.ix--corpus{filter:drop-shadow(0 0 5px rgba(214,236,255,.42))!important}
 .nitem.on .ix--corpus,.nitem:hover .ix--corpus{
-  filter:drop-shadow(0 0 9px rgba(255,154,60,.8))
-         drop-shadow(0 0 20px rgba(28,231,255,.5))
-         drop-shadow(0 0 40px rgba(139,92,246,.45))!important}
+  filter:drop-shadow(0 0 8px rgba(255,255,255,.8))
+         drop-shadow(0 0 19px rgba(34,211,238,.55))
+         drop-shadow(0 0 36px rgba(164,76,255,.45))!important}
 
 /* ── Davara's own mark: her crescents breathe, her core pulses ── */
 .dv-cresL,.dv-cresR,.dv-hex,.dv-core{transform-origin:256px 256px}
@@ -143,10 +144,9 @@
 @keyframes ixSpin{to{transform:rotate(360deg)}}
 @keyframes ixBreathe{0%,100%{opacity:.75}50%{opacity:1}}
 
-.nitem.on .ix--model .ix-leg{animation:ixLeg 3.6s ease-in-out infinite}
-.nitem.on .ix--model .ix-leg2{animation-delay:.32s}
-.nitem.on .ix--model .ix-leg3{animation-delay:.64s}
-@keyframes ixLeg{0%,70%,100%{opacity:.5}22%{opacity:1}}
+/* !MOTUS has no verb to add here — its whole mark IS the verb. See the ripple
+   block below: the field strains, the fronts propagate, and arriving throws one
+   of its own. */
 
 .nitem.on .ix--agent .ix-cresL{animation:ixMeetL 4.2s ease-in-out infinite}
 .nitem.on .ix--agent .ix-cresR{animation:ixMeetR 4.2s ease-in-out infinite}
@@ -160,65 +160,100 @@
 .nitem.on .ix--loop .ix-trace{opacity:1;animation:ixTrace 3.4s linear infinite}
 @keyframes ixTrace{to{stroke-dashoffset:-71}}
 
-/* ── CORPUS · the soul orb ──
-   Two rings of tongues turning against each other around a burning core.
-   Counter-rotation is what stops it reading as a spinning wheel and starts
-   it reading as something combusting. It burns quietly at rest and takes
-   a real breath when you arrive. */
-/* ── !MOTUS · THE KEYSTONE ──
-   A faceted block with the pattern burning inside it, and three channels that
-   fire in payout order: Source, then Roots, then Network. */
-.mx-stone{transform-origin:12px 12px;animation:mxTilt 9s ease-in-out infinite}
-@keyframes mxTilt{0%,100%{transform:rotate(-2.2deg)}50%{transform:rotate(2.2deg)}}
-.mx-core{animation:mxBurn 3.1s ease-in-out infinite}
-@keyframes mxBurn{0%,100%{opacity:.8;r:2}50%{opacity:1;r:2.45}}
-.mx-spark{animation:mxSpark 3.1s ease-in-out infinite}
-@keyframes mxSpark{0%,100%{opacity:.65}50%{opacity:1}}
-.mx-leg{opacity:.35;stroke-dasharray:11;animation:mxPay 3.9s ease-in-out infinite}
-.mx-leg2{animation-delay:.42s}
-.mx-leg3{animation-delay:.84s}
-@keyframes mxPay{0%{stroke-dashoffset:11;opacity:.2}
-  22%{stroke-dashoffset:0;opacity:1}60%,100%{stroke-dashoffset:-11;opacity:.2}}
-.mx-edges{animation:mxEdge 6s ease-in-out infinite}
-@keyframes mxEdge{0%,100%{opacity:.62}50%{opacity:.95}}
-@media(prefers-reduced-motion:reduce){.ix--model *{animation:none!important}}
+/* ── !MOTUS · A RIPPLE IN SPACETIME ──
+   A MotusModel is a pattern that deforms the field it lands in, and every run
+   of it throws another front out through the network.
+
+   Two things keep this a WAVE and not the atom-diagram everyone draws:
+   there is a MEDIUM (a lattice, bowed into the source — a well), and the strain
+   is QUADRUPOLAR — a passing gravitational wave stretches one axis while it
+   squeezes the other, then swaps. That swap is the real physics, and as motion
+   it can never be mistaken for an orbit. */
+.mx-space{transform-origin:12px 12px;
+  animation:mxStrain 4.4s cubic-bezier(.45,0,.55,1) infinite;will-change:transform}
+@keyframes mxStrain{
+  0%,100%{transform:scale(1.06,.945)}
+  50%    {transform:scale(.945,1.06)}}
+.mx-grid path{opacity:.28;animation:mxLattice 4.4s ease-in-out infinite}
+@keyframes mxLattice{0%,100%{opacity:.2}50%{opacity:.42}}
+/* the well the source holds open in the field */
+.mx-well{animation:mxWell 4.4s ease-in-out infinite}
+@keyframes mxWell{0%,100%{opacity:.5}50%{opacity:.85}}
+/* the wavefronts: born at the source, expanding until the field lets them go.
+   One ring is a target — a CREST chased by a TROUGH is a wave. */
+.mx-wave{animation:mxProp 4.2s cubic-bezier(.22,.55,.3,1) infinite;
+  animation-delay:var(--wd,0s)}
+@keyframes mxProp{
+  0%  {r:2.4;opacity:0;stroke-width:2.2}
+  14% {opacity:1}
+  100%{r:11.3;opacity:0;stroke-width:.5}}
+.mx-trough{animation-name:mxTrough}
+@keyframes mxTrough{
+  0%  {r:2.4;opacity:0;stroke-width:1.15}
+  18% {opacity:.44}
+  100%{r:11.3;opacity:0;stroke-width:.28}}
+.mx-heart{animation:mxHeartBeat 2.1s ease-in-out infinite}
+@keyframes mxHeartBeat{0%,100%{r:2.25;opacity:.85}50%{r:2.8;opacity:1}}
+.mx-seed{animation:mxSeed 2.1s ease-in-out infinite}
+@keyframes mxSeed{0%,100%{opacity:.72;r:.85}50%{opacity:1;r:1.2}}
+/* THE FRONT THROWN BY CHOOSING IT — the wave grows when you click */
+.nitem.on .mx-burst{animation:mxBurst 1.05s cubic-bezier(.16,.7,.28,1)}
+@keyframes mxBurst{
+  0%  {r:2;opacity:1;stroke-width:2.8}
+  100%{r:13.6;opacity:0;stroke-width:.35}}
+/* and the field itself recoils from the launch */
+.nitem.on .mx-space{animation:mxRecoil 1.05s cubic-bezier(.16,.7,.28,1),
+  mxStrain 4.4s cubic-bezier(.45,0,.55,1) 1.05s infinite}
+@keyframes mxRecoil{
+  0%{transform:scale(.86)}55%{transform:scale(1.09)}100%{transform:scale(1.06,.945)}}
+@media(prefers-reduced-motion:reduce){.ix--model *{animation:none!important}
+  .mx-wave{opacity:.45}}
 
 /* ── CORPUS · THE PRISM ──
-   One white beam in, a readable spectrum out. The crystal turns slowly in the
-   light; the fan breathes as the refraction angle shifts; the entry point
-   burns. The rainbow is what the object DOES, not paint applied to it. */
-/* the crystal turns slowly in the light; the whole optic turns with it, so the
-   beam, the internal path and the fan stay physically attached to the glass */
-.px-glass{transform-origin:12px 12px;animation:pxTurn 13s ease-in-out infinite}
+   The optics, obeyed. White light arrives, refracts at the entry face, crosses
+   the body as ONE undivided line, and disperses at the exit — where it is still
+   white, because every wavelength is still on top of every other. Colour is
+   what DISTANCE does to it. The whole optic turns as one solid, so the beam,
+   the internal path and the spectrum never come unglued from the glass. */
+.px-glass{transform-origin:11.5px 12.9px;animation:pxTurn 14s ease-in-out infinite;
+  will-change:transform}
 @keyframes pxTurn{
-  0%,100%{transform:rotate(-3.4deg)}
-  50%{transform:rotate(3.4deg)}}
-/* light arrives, crosses the boundary, and travels through the body */
-.px-in{stroke-dasharray:9;animation:pxFeed 3.2s linear infinite}
-@keyframes pxFeed{0%{stroke-dashoffset:9;opacity:.3}
-  45%{opacity:1}100%{stroke-dashoffset:-9;opacity:.3}}
-.px-thru{stroke-dasharray:10;animation:pxThru 3.2s linear infinite;animation-delay:.42s}
-@keyframes pxThru{0%{stroke-dashoffset:10;opacity:.35}
-  45%{opacity:.95}100%{stroke-dashoffset:-10;opacity:.35}}
-.px-fL{animation:pxFacet 7.5s ease-in-out infinite}
-.px-fR{animation:pxFacet 7.5s ease-in-out infinite reverse}
-@keyframes pxFacet{0%,100%{opacity:.78}50%{opacity:1}}
-.px-bevel{animation:pxBevelLit 5.2s ease-in-out infinite}
-@keyframes pxBevelLit{0%,100%{opacity:.7}50%{opacity:1}}
-.px-caustic{animation:pxCaustic 4.4s ease-in-out infinite}
-@keyframes pxCaustic{0%,100%{opacity:.22}50%{opacity:.55}}
-.px-out{animation:pxHit 3.2s ease-in-out infinite;animation-delay:.6s}
-.px-ray{opacity:.5;transform-origin:16.9px 14.6px;
-  animation:pxRay 4.6s ease-in-out infinite;animation-delay:var(--rd,0s)}
-@keyframes pxRay{
-  0%,100%{opacity:.34;transform:scaleX(.86) rotate(-1.1deg)}
-  50%{opacity:.95;transform:scaleX(1.06) rotate(1.1deg)}}
-.px-fan--core .px-ray{opacity:.85;stroke-width:.9}
+  0%,100%{transform:rotate(-2.6deg)}
+  50%{transform:rotate(2.6deg)}}
+/* light arrives, crosses the boundary, travels through the body */
+.px-in{stroke-dasharray:7;animation:pxFeed 3.4s linear infinite}
+@keyframes pxFeed{0%{stroke-dashoffset:7;opacity:.35}
+  45%{opacity:1}100%{stroke-dashoffset:-7;opacity:.35}}
+.px-thru{stroke-dasharray:8.3;animation:pxThru 3.4s linear infinite;animation-delay:.44s}
+@keyframes pxThru{0%{stroke-dashoffset:8.3;opacity:.35}
+  45%{opacity:.95}100%{stroke-dashoffset:-8.3;opacity:.35}}
+/* the Fresnel ghost only shows when the beam is actually striking the face */
+.px-ghost{animation:pxGhost 3.4s ease-in-out infinite;animation-delay:.15s}
+@keyframes pxGhost{0%,100%{opacity:.08}42%{opacity:.34}}
+/* the glass breathes as the angle of incidence wanders */
+.px-body{animation:pxBody 8.5s ease-in-out infinite}
+@keyframes pxBody{0%,100%{opacity:.86}50%{opacity:1}}
+.px-side{animation:pxBody 8.5s ease-in-out infinite reverse}
+.px-lit{animation:pxLit 5.4s ease-in-out infinite}
+@keyframes pxLit{0%,100%{opacity:.72}50%{opacity:1}}
+.px-tir{animation:pxTir 6.2s ease-in-out infinite}
+@keyframes pxTir{0%,100%{opacity:.14}50%{opacity:.4}}
+.px-caustic{animation:pxCaustic 4.6s ease-in-out infinite}
+@keyframes pxCaustic{0%,100%{opacity:.2}50%{opacity:.56}}
+/* THE FAN — scaled about the exit point by the record (see tuneCorpus) */
+.px-fan{transform-origin:14.49px 12.18px;transform:scaleY(var(--spread,1))}
+/* the spectrum sweeps as the crystal turns — the same wavelengths, thrown wider */
+.px-core{animation:pxSweep 7.2s ease-in-out infinite;transform-origin:14.49px 12.18px}
+.px-bloom{animation:pxSweep 7.2s ease-in-out infinite;transform-origin:14.49px 12.18px}
+@keyframes pxSweep{0%,100%{transform:rotate(-1.6deg) scaleY(.94)}
+  50%{transform:rotate(1.6deg) scaleY(1.06)}}
+/* the white core is brightest the instant the pulse reaches the exit face */
+.px-white{animation:pxWhite 3.4s ease-in-out infinite;animation-delay:.8s}
+@keyframes pxWhite{0%,100%{opacity:.5}45%{opacity:1}}
 .px-hit{animation:pxHit 3.4s ease-in-out infinite}
-@keyframes pxHit{0%,100%{r:1.3;opacity:.7}50%{r:2;opacity:1}}
-.px-face{animation:pxFace 6.5s ease-in-out infinite}
-@keyframes pxFace{0%,100%{opacity:.9}50%{opacity:1}}
-@media(prefers-reduced-motion:reduce){}
+.px-out{animation:pxHit 3.4s ease-in-out infinite;animation-delay:.62s}
+@keyframes pxHit{0%,100%{r:1.05;opacity:.65}50%{r:1.55;opacity:1}}
+@media(prefers-reduced-motion:reduce){.ix--corpus *{animation:none!important}}
 
 /* ── DAVARA · her circuitry draws itself, exactly as it does on her deck ── */
 .dv-tr{stroke-dasharray:120;animation:dvTrace 6s linear infinite;
@@ -233,13 +268,6 @@
 .dv-nodes circle:nth-child(6){animation-delay:2s}
 @keyframes dvNode{0%,100%{opacity:.55}50%{opacity:1}}
 .dv-corehex{transform-origin:256px 256px}
-/* rotate() and scaleY() must live in the SAME transform, or the rotation is
-   thrown away and every tongue lands on top of the first one */
-/* arrival: the soul flares */
-.nitem.on .nitem.on .nitem.on .nitem.on .ix--corpus{filter:drop-shadow(0 0 9px var(--cyan))
-  drop-shadow(0 0 22px rgba(28,231,255,.6)) drop-shadow(0 0 44px rgba(0,120,255,.4))}
-@media(prefers-reduced-motion:reduce){
-  }
 
 /* ═══════════════════════════════════════════════════════════════
    THE LIQUID NAV — dark matter, not a highlighted box.
@@ -1172,7 +1200,9 @@ html[data-mode="lux"]{--votus:#7c4dd8}
     gap:4px;padding:9px 10px calc(9px + env(safe-area-inset-bottom,0px));
     border-radius:30px 30px 0 0;background:none;border:none;
     box-shadow:0 -6px 44px -10px rgba(0,0,0,.8),0 0 70px -20px rgba(0,120,255,.35);
-    isolation:isolate}
+    isolation:isolate;
+    /* nothing may transform this bar — a transform is what made it jump */
+    transform:none!important}
   .tabbar .nitem{flex-direction:column;gap:3px;min-height:66px;justify-content:center;
     padding:0;font-size:.72rem;font-family:var(--mono);font-weight:700;
     letter-spacing:.06em;text-transform:uppercase;flex:1 1 0;min-width:0;
@@ -1195,42 +1225,51 @@ html[data-mode="lux"]{--votus:#7c4dd8}
 <div class="grain" aria-hidden="true"></div>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-<linearGradient id="mxTop" x1="0" y1="0" x2=".8" y2="1">
-  <stop offset="0" stop-color="#ffe6bf"/><stop offset="1" stop-color="#ff9f43"/>
-</linearGradient>
-<linearGradient id="mxLeft" x1="0" y1="0" x2="1" y2=".7">
-  <stop offset="0" stop-color="#ff8c2e" stop-opacity=".85"/>
-  <stop offset="1" stop-color="#c2470c" stop-opacity=".55"/>
-</linearGradient>
-<linearGradient id="mxRight" x1="1" y1="0" x2="0" y2=".7">
-  <stop offset="0" stop-color="#ffb86b" stop-opacity=".6"/>
-  <stop offset="1" stop-color="#8a3306" stop-opacity=".38"/>
-</linearGradient>
-<radialGradient id="mxCore" cx="50%" cy="45%" r="55%">
-  <stop offset="0" stop-color="#fffdf5"/><stop offset=".5" stop-color="#ffd48a"/>
-  <stop offset="1" stop-color="#ff8c2e" stop-opacity=".25"/>
+<radialGradient id="mxHeart" cx="50%" cy="42%" r="58%">
+  <stop offset="0" stop-color="#ffffff"/>
+  <stop offset=".38" stop-color="#ffe0a8"/>
+  <stop offset="1" stop-color="#ff8c2e" stop-opacity=".18"/>
 </radialGradient>
+<radialGradient id="mxWell" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#ff9a3d" stop-opacity=".34"/><stop offset=".5" stop-color="#c2470c" stop-opacity=".1"/><stop offset="1" stop-color="#000000" stop-opacity="0"/></radialGradient>
+<radialGradient id="mxFadeG" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#ffffff"/><stop offset=".42" stop-color="#ffffff"/><stop offset="1" stop-color="#000000"/></radialGradient><mask id="mxFade"><rect width="24" height="24" fill="url(#mxFadeG)"/></mask>
 
-<linearGradient id="pxFaceL" x1="0" y1="0" x2="1" y2=".6">
-  <stop offset="0" stop-color="#eaf6ff" stop-opacity=".62"/>
-  <stop offset=".55" stop-color="#9ed8ff" stop-opacity=".26"/>
-  <stop offset="1" stop-color="#6fb6ff" stop-opacity=".12"/>
+<linearGradient id="px2Body" x1=".1" y1="0" x2=".75" y2="1">
+  <stop offset="0" stop-color="#eaf7ff" stop-opacity=".42"/>
+  <stop offset=".4" stop-color="#8cc4ff" stop-opacity=".16"/>
+  <stop offset=".78" stop-color="#3351c9" stop-opacity=".13"/>
+  <stop offset="1" stop-color="#eaf7ff" stop-opacity=".5"/>
 </linearGradient>
-<linearGradient id="pxFaceR" x1="1" y1="0" x2="0" y2=".8">
-  <stop offset="0" stop-color="#c9a6ff" stop-opacity=".42"/>
-  <stop offset=".6" stop-color="#5f7cff" stop-opacity=".16"/>
-  <stop offset="1" stop-color="#0b1024" stop-opacity=".05"/>
+<linearGradient id="px2Side" x1="0" y1="0" x2="1" y2=".35">
+  <stop offset="0" stop-color="#b6ddff" stop-opacity=".4"/>
+  <stop offset=".55" stop-color="#222e6b" stop-opacity=".16"/>
+  <stop offset="1" stop-color="#dcefff" stop-opacity=".3"/>
 </linearGradient>
-<linearGradient id="pxBevel" x1="0" y1="0" x2="1" y2="1">
-  <stop offset="0" stop-color="#ffffff" stop-opacity=".95"/>
-  <stop offset=".5" stop-color="#bfe6ff" stop-opacity=".5"/>
-  <stop offset="1" stop-color="#ffffff" stop-opacity=".8"/>
+<linearGradient id="px2Lit" x1="0" y1="0" x2=".4" y2="1">
+  <stop offset="0" stop-color="#ffffff"/>
+  <stop offset=".5" stop-color="#eaf8ff"/>
+  <stop offset="1" stop-color="#a9d6ff" stop-opacity=".6"/>
 </linearGradient>
-<linearGradient id="pxInner" x1="0" y1="0" x2="1" y2="0">
-  <stop offset="0" stop-color="#ffffff" stop-opacity=".95"/>
-  <stop offset="1" stop-color="#fff6d8" stop-opacity=".8"/>
+<linearGradient id="px2Beam" x1="0" y1="0" x2="1" y2="0">
+  <stop offset="0" stop-color="#ffffff" stop-opacity="0"/>
+  <stop offset=".5" stop-color="#ffffff" stop-opacity=".9"/>
+  <stop offset="1" stop-color="#fffdf2"/>
 </linearGradient>
-<filter id="pxGlow" x="-90%" y="-90%" width="280%" height="280%">
+<linearGradient id="px2Core" x1="12.56" y1="0" x2="18.8" y2="0" gradientUnits="userSpaceOnUse">
+  <stop offset="0" stop-color="#ffffff"/>
+  <stop offset=".5" stop-color="#ffffff" stop-opacity=".6"/>
+  <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+</linearGradient>
+<linearGradient id="px2SepG" x1="12.56" y1="0" x2="23.7" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#000000"/><stop offset=".3" stop-color="#6e6e6e"/><stop offset=".55" stop-color="#ffffff"/><stop offset=".8" stop-color="#ffffff"/><stop offset="1" stop-color="#000000"/></linearGradient>
+<mask id="px2Sep" maskUnits="userSpaceOnUse" x="11" y="8" width="14" height="16">
+  <rect x="11" y="8" width="14" height="16" fill="url(#px2SepG)"/>
+</mask>
+<filter id="px2Soft" x="-40%" y="-40%" width="190%" height="190%">
+  <feGaussianBlur stdDeviation=".45"/>
+</filter>
+<filter id="px2Bloom" x="-70%" y="-70%" width="260%" height="260%">
+  <feGaussianBlur stdDeviation="1.5"/>
+</filter>
+<filter id="px2Glow" x="-90%" y="-90%" width="280%" height="280%">
   <feGaussianBlur stdDeviation=".9"/>
 </filter>
 
@@ -1360,10 +1399,10 @@ html[data-mode="lux"]{--votus:#7c4dd8}
       
       
       <button class="nitem on" data-go="market" type="button"><span class="ico"><svg class="glyph ix ix--market" viewBox="0 0 24 24" aria-hidden="true"><circle class="ix-ring" cx="12" cy="12" r="9.1" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="url(#gxMarket)" stroke-width="1.6"/><g class="ix-orbit" fill="url(#gxMarket)"><circle cx="12" cy="6.5" r="1.5"/><circle cx="16.76" cy="14.75" r="1.5"/><circle cx="7.24" cy="14.75" r="1.5"/></g><circle class="ix-core" cx="12" cy="12" r="2.1" fill="url(#gxMarket)"/></svg></span><span class="lab">Market</span></button>
-      <button class="nitem" data-go="models" type="button"><span class="ico"><svg class="glyph ix ix--model" viewBox="0 0 24 24" aria-hidden="true"><g class="mx-legs"><path class="mx-leg mx-leg1" d="M12 11.6 V3.4" stroke="url(#mxTop)" stroke-width="1.5" stroke-linecap="round" fill="none"/><path class="mx-leg mx-leg2" d="M13 12.4 L19.6 16.2" stroke="url(#mxTop)" stroke-width="1.5" stroke-linecap="round" fill="none"/><path class="mx-leg mx-leg3" d="M11 12.4 L4.4 16.2" stroke="url(#mxTop)" stroke-width="1.5" stroke-linecap="round" fill="none"/></g><g class="mx-stone"><path class="mx-face mx-top" d="M12 4.6 L18.4 8.3 L12 12 L5.6 8.3 Z" fill="url(#mxTop)" opacity=".92"/><path class="mx-face mx-left" d="M5.6 8.3 L12 12 L12 19.4 L5.6 15.7 Z" fill="url(#mxLeft)"/><path class="mx-face mx-right" d="M18.4 8.3 L18.4 15.7 L12 19.4 L12 12 Z" fill="url(#mxRight)"/><path class="mx-edges" d="M12 4.6 L18.4 8.3 L18.4 15.7 L12 19.4 L5.6 15.7 L5.6 8.3 Z M5.6 8.3 L12 12 L18.4 8.3 M12 12 V19.4" fill="none" stroke="#ffe9c9" stroke-width=".85" stroke-linejoin="round" opacity=".85"/></g><circle class="mx-core" cx="12" cy="10.4" r="2.15" fill="url(#mxCore)"/><circle class="mx-spark" cx="12" cy="10.4" r=".9" fill="#fffdf5"/></svg></span><span class="lab">!MOTUS</span></button>
+      <button class="nitem" data-go="models" type="button"><span class="ico"><svg class="glyph ix ix--model" viewBox="0 0 24 24" aria-hidden="true"><g class="mx-space"><g class="mx-grid" mask="url(#mxFade)"><path d="M0 4.6 H24" fill="none" stroke="#ff9a3d" stroke-width=".42"/><path d="M0 8.6 H24" fill="none" stroke="#ff9a3d" stroke-width=".42"/><path d="M0 15.4 H24" fill="none" stroke="#ff9a3d" stroke-width=".42"/><path d="M0 19.4 H24" fill="none" stroke="#ff9a3d" stroke-width=".42"/><path d="M4.6 0 V24" fill="none" stroke="#ff9a3d" stroke-width=".42"/><path d="M8.6 0 V24" fill="none" stroke="#ff9a3d" stroke-width=".42"/><path d="M15.4 0 V24" fill="none" stroke="#ff9a3d" stroke-width=".42"/><path d="M19.4 0 V24" fill="none" stroke="#ff9a3d" stroke-width=".42"/></g><circle class="mx-wave" cx="12" cy="12" r="3" fill="none" stroke="#ffb86b" stroke-width="1.35" opacity="0" style="--wd:0s"/><circle class="mx-wave" cx="12" cy="12" r="3" fill="none" stroke="#ffb86b" stroke-width="1.35" opacity="0" style="--wd:-1.05s"/><circle class="mx-wave" cx="12" cy="12" r="3" fill="none" stroke="#ffb86b" stroke-width="1.35" opacity="0" style="--wd:-2.1s"/><circle class="mx-wave" cx="12" cy="12" r="3" fill="none" stroke="#ffb86b" stroke-width="1.35" opacity="0" style="--wd:-3.15s"/><circle class="mx-wave mx-trough" cx="12" cy="12" r="3" fill="none" stroke="#ff8c2e" stroke-width="1" opacity="0" style="--wd:-0.46s"/><circle class="mx-wave mx-trough" cx="12" cy="12" r="3" fill="none" stroke="#ff8c2e" stroke-width="1" opacity="0" style="--wd:-1.51s"/><circle class="mx-wave mx-trough" cx="12" cy="12" r="3" fill="none" stroke="#ff8c2e" stroke-width="1" opacity="0" style="--wd:-2.56s"/><circle class="mx-wave mx-trough" cx="12" cy="12" r="3" fill="none" stroke="#ff8c2e" stroke-width="1" opacity="0" style="--wd:-3.61s"/><circle class="mx-burst" cx="12" cy="12" r="3" fill="none" stroke="#ffe0a8" stroke-width="2.2" opacity="0"/></g><circle class="mx-well" cx="12" cy="12" r="5.4" fill="url(#mxWell)"/><circle class="mx-heart" cx="12" cy="12" r="2.5" fill="url(#mxHeart)"/><circle class="mx-seed" cx="12" cy="12" r="1" fill="#fffdf7"/></svg></span><span class="lab">!MOTUS</span></button>
       <button class="nitem" data-go="agents" type="button"><span class="ico"><svg class="glyph ix ix--agent" viewBox="0 0 512 512" aria-hidden="true"><g filter="url(#fxDvGlow)"><path class="dv-cresL" d="M 208 52 A 232 232 0 0 0 208 460 A 158 204 0 0 1 208 52 Z" fill="none" stroke="url(#gxDavara)" stroke-width="30" stroke-linecap="round"/><path class="dv-cresR" d="M 304 52 A 232 232 0 0 1 304 460 A 158 204 0 0 0 304 52 Z" fill="none" stroke="url(#gxDavara)" stroke-width="30" stroke-linecap="round"/></g><g class="dv-traces" stroke="#a78bfa" stroke-width="11" fill="none" opacity=".9" stroke-linecap="round" filter="url(#fxDvGlow)"><path class="dv-tr" d="M256 196 V158 M256 316 V354"/><path class="dv-tr" style="--td:-1.5s" d="M216 236 H176 M296 236 H336"/><path class="dv-tr" style="--td:-3s" d="M216 276 H176 M296 276 H336"/><path class="dv-tr" style="--td:-4.5s" d="M232 210 L204 182 M280 210 L308 182 M232 302 L204 330 M280 302 L308 330"/></g><g class="dv-nodes" fill="#c4b5fd"><circle cx="256" cy="150" r="15"/><circle cx="256" cy="362" r="15"/><circle cx="168" cy="236" r="15"/><circle cx="344" cy="236" r="15"/><circle cx="168" cy="276" r="15"/><circle cx="344" cy="276" r="15"/></g><g class="dv-corehex" filter="url(#fxDvGlow)"><path class="dv-hex" fill="rgba(196,181,253,.28)" stroke="#e9d5ff" stroke-width="16" stroke-linejoin="round" d="M256 214 L292 235 L292 277 L256 298 L220 277 L220 235 Z"/><circle class="dv-core" cx="256" cy="256" r="30" fill="#f5f3ff"/></g></svg></span><span class="lab">Agents</span></button>
       <button class="nitem" data-go="loops" type="button"><span class="ico"><svg class="glyph ix ix--loop" viewBox="0 0 24 24" aria-hidden="true"><path class="ix-lem" d="M12 12c-1.95-3.45-3.85-5.05-5.75-5.05a4.45 4.45 0 0 0 0 10.1c1.9 0 3.8-1.6 5.75-5.05 1.95-3.45 3.85-5.05 5.75-5.05a4.45 4.45 0 0 1 0 10.1c-1.9 0-3.8-1.6-5.75-5.05Z" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="url(#gxLoop)" stroke-width="1.6"/><path class="ix-trace" d="M12 12c-1.95-3.45-3.85-5.05-5.75-5.05a4.45 4.45 0 0 0 0 10.1c1.9 0 3.8-1.6 5.75-5.05 1.95-3.45 3.85-5.05 5.75-5.05a4.45 4.45 0 0 1 0 10.1c-1.9 0-3.8-1.6-5.75-5.05Z" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="#c2fbff" stroke-width="2.1"/></svg></span><span class="lab">Loops</span></button>
-      <button class="nitem" data-go="corpus" type="button"><span class="ico"><svg class="glyph ix ix--corpus" viewBox="0 0 24 24" aria-hidden="true"><path class="px-in" d="M.4 8.9 L7.5 12.0" stroke="url(#pxInner)" stroke-width="1.7" stroke-linecap="round" fill="none"/><path class="px-thru" d="M7.5 12.0 L16.9 14.6" stroke="url(#pxInner)" stroke-width="1.25" stroke-linecap="round" fill="none" opacity=".9"/><g class="px-fan" filter="url(#pxGlow)"><path class="px-ray" d="M16.90 14.60 L23.6 17.50" stroke="#ff2f4d" stroke-width="1.35" stroke-linecap="round" fill="none" style="--rd:0s"/><path class="px-ray" d="M16.90 14.60 L23.6 15.80" stroke="#ff8a2e" stroke-width="1.35" stroke-linecap="round" fill="none" style="--rd:.07s"/><path class="px-ray" d="M16.90 14.60 L23.6 14.30" stroke="#ffd93d" stroke-width="1.35" stroke-linecap="round" fill="none" style="--rd:.14s"/><path class="px-ray" d="M16.90 14.60 L23.6 12.70" stroke="#5ef08a" stroke-width="1.35" stroke-linecap="round" fill="none" style="--rd:.21s"/><path class="px-ray" d="M16.90 14.60 L23.6 11.00" stroke="#22d3ee" stroke-width="1.35" stroke-linecap="round" fill="none" style="--rd:.28s"/><path class="px-ray" d="M16.90 14.60 L23.6 9.20" stroke="#6b8cff" stroke-width="1.35" stroke-linecap="round" fill="none" style="--rd:.35s"/><path class="px-ray" d="M16.90 14.60 L23.6 7.30" stroke="#b15cff" stroke-width="1.35" stroke-linecap="round" fill="none" style="--rd:.42s"/></g><g class="px-fan px-fan--core"><path class="px-ray" d="M16.90 14.60 L23.6 17.50" stroke="#ff2f4d" stroke-width="1.35" stroke-linecap="round" fill="none" style="--rd:0s"/><path class="px-ray" d="M16.90 14.60 L23.6 15.80" stroke="#ff8a2e" stroke-width="1.35" stroke-linecap="round" fill="none" style="--rd:.07s"/><path class="px-ray" d="M16.90 14.60 L23.6 14.30" stroke="#ffd93d" stroke-width="1.35" stroke-linecap="round" fill="none" style="--rd:.14s"/><path class="px-ray" d="M16.90 14.60 L23.6 12.70" stroke="#5ef08a" stroke-width="1.35" stroke-linecap="round" fill="none" style="--rd:.21s"/><path class="px-ray" d="M16.90 14.60 L23.6 11.00" stroke="#22d3ee" stroke-width="1.35" stroke-linecap="round" fill="none" style="--rd:.28s"/><path class="px-ray" d="M16.90 14.60 L23.6 9.20" stroke="#6b8cff" stroke-width="1.35" stroke-linecap="round" fill="none" style="--rd:.35s"/><path class="px-ray" d="M16.90 14.60 L23.6 7.30" stroke="#b15cff" stroke-width="1.35" stroke-linecap="round" fill="none" style="--rd:.42s"/></g><g class="px-glass"><path class="px-fL" d="M12 2.6 L12 19.6 L2.6 19.6 Z" fill="url(#pxFaceL)"/><path class="px-fR" d="M12 2.6 L21.4 19.6 L12 19.6 Z" fill="url(#pxFaceR)"/><path class="px-bevel" d="M12 2.6 L21.4 19.6 L2.6 19.6 Z" fill="none" stroke="url(#pxBevel)" stroke-width="1.15" stroke-linejoin="round"/><path class="px-ridge" d="M12 2.6 L12 19.6" stroke="#ffffff" stroke-width=".55" opacity=".35"/><path class="px-caustic" d="M6.6 19.05 L17.4 19.05" stroke="#dff1ff" stroke-width="1" stroke-linecap="round" opacity=".4" filter="url(#pxGlow)"/></g><circle class="px-hit" cx="7.5" cy="12.0" r="1.25" fill="#fff"/><circle class="px-out" cx="16.9" cy="14.6" r="1.05" fill="#fff" opacity=".85"/></svg></span><span class="lab">Corpus</span></button>
+      <button class="nitem" data-go="corpus" type="button"><span class="ico"><svg class="glyph ix ix--corpus" viewBox="0 0 24 24" aria-hidden="true"><g class="px-glass"><path class="px-side" d="M8.6 3.4 L15.8 17.9 L17.3 16.75 L10.1 2.25 Z" fill="url(#px2Side)"/><path class="px-body" d="M8.6 3.4 L15.8 17.9 L1.4 17.9 Z" fill="url(#px2Body)"/><path class="px-tir" d="M8.59 7.01 L4.63 14.99" stroke="#ffffff" stroke-width=".65" stroke-linecap="round" fill="none" opacity=".3"/><path class="px-caustic" d="M3.2 17.55 L13.2 17.55" stroke="#e4f4ff" stroke-width="1.2" stroke-linecap="round" opacity=".42" filter="url(#px2Glow)"/><path class="px-in" d="M.2 8.65 L5 10.65" stroke="url(#px2Beam)" stroke-width="1.7" stroke-linecap="round" fill="none"/><path class="px-ghost" d="M5 10.65 L2.42 9.13" stroke="#ffffff" stroke-width=".7" stroke-linecap="round" fill="none" opacity=".24"/><path class="px-thru" d="M5 10.65 L12.56 11.38" stroke="#ffffff" stroke-width="1.3" stroke-linecap="round" fill="none" opacity=".92"/><g class="px-fan"><g mask="url(#px2Sep)"><g class="px-bloom" filter="url(#px2Bloom)" opacity=".62"><path class="px-band" d="M12.56 11.38 L23.6 14.03 L23.6 15.26 Z" fill="#ff2f3a" opacity=".9"/><path class="px-band" d="M12.56 11.38 L23.6 15.04 L23.6 16.27 Z" fill="#ff8a1e" opacity=".9"/><path class="px-band" d="M12.56 11.38 L23.6 16.05 L23.6 17.28 Z" fill="#ffe14a" opacity=".9"/><path class="px-band" d="M12.56 11.38 L23.6 17.06 L23.6 18.29 Z" fill="#46e86a" opacity=".9"/><path class="px-band" d="M12.56 11.38 L23.6 18.07 L23.6 19.30 Z" fill="#21d6ee" opacity=".9"/><path class="px-band" d="M12.56 11.38 L23.6 19.08 L23.6 20.31 Z" fill="#4a6cff" opacity=".9"/><path class="px-band" d="M12.56 11.38 L23.6 20.09 L23.6 21.32 Z" fill="#a44cff" opacity=".9"/></g><g class="px-core" filter="url(#px2Soft)"><path class="px-band" d="M12.56 11.38 L23.6 14.03 L23.6 15.26 Z" fill="#ff2f3a" opacity="1"/><path class="px-band" d="M12.56 11.38 L23.6 15.04 L23.6 16.27 Z" fill="#ff8a1e" opacity="1"/><path class="px-band" d="M12.56 11.38 L23.6 16.05 L23.6 17.28 Z" fill="#ffe14a" opacity="1"/><path class="px-band" d="M12.56 11.38 L23.6 17.06 L23.6 18.29 Z" fill="#46e86a" opacity="1"/><path class="px-band" d="M12.56 11.38 L23.6 18.07 L23.6 19.30 Z" fill="#21d6ee" opacity="1"/><path class="px-band" d="M12.56 11.38 L23.6 19.08 L23.6 20.31 Z" fill="#4a6cff" opacity="1"/><path class="px-band" d="M12.56 11.38 L23.6 20.09 L23.6 21.32 Z" fill="#a44cff" opacity="1"/></g></g><path class="px-white" d="M12.56 11.38 L18.8 14.87" stroke="url(#px2Core)" stroke-width="1.8" stroke-linecap="round" fill="none"/></g><path class="px-back" d="M10.1 2.25 L17.3 16.75 M8.6 3.4 L10.1 2.25 M15.8 17.9 L17.3 16.75" stroke="#c6dfff" stroke-width=".6" stroke-linejoin="round" fill="none" opacity=".38"/><path class="px-dim" d="M1.4 17.9 L15.8 17.9 M8.6 3.4 L15.8 17.9" stroke="#d6ecff" stroke-width=".85" stroke-linejoin="round" fill="none" opacity=".55"/><path class="px-lit" d="M8.6 3.4 L1.4 17.9" stroke="url(#px2Lit)" stroke-width="1.3" stroke-linecap="round" fill="none"/><circle class="px-hit" cx="5" cy="10.65" r="1.9" fill="#ffffff" opacity=".4" filter="url(#px2Glow)"/><circle class="px-hit2" cx="5" cy="10.65" r=".6" fill="#ffffff"/><circle class="px-out" cx="12.56" cy="11.38" r="1.55" fill="#fffdf2" opacity=".42" filter="url(#px2Glow)"/><circle class="px-out2" cx="12.56" cy="11.38" r=".5" fill="#ffffff" opacity=".9"/></g></svg></span><span class="lab">Corpus</span></button>
     </div>
     <div class="railfoot">
       <div class="wallet"><svg class="glyph"><use href="#g-bolt"/></svg><span id="dashBal">128.4 DASH</span></div>
@@ -1798,7 +1837,7 @@ html[data-mode="lux"]{--votus:#7c4dd8}
       <!-- ---------- THE KEYSTONE ---------- -->
       <p class="bandhead" style="margin-top:88px">The keystone</p>
       <div class="pane keypane keypane--big">
-        <svg class="glyph ix ix--model ix--big" viewBox="0 0 24 24" aria-hidden="true"><g class="mx-legs"><path class="mx-leg mx-leg1" d="M12 11.6 V3.4" stroke="url(#mxTop)" stroke-width="1.5" stroke-linecap="round" fill="none"/><path class="mx-leg mx-leg2" d="M13 12.4 L19.6 16.2" stroke="url(#mxTop)" stroke-width="1.5" stroke-linecap="round" fill="none"/><path class="mx-leg mx-leg3" d="M11 12.4 L4.4 16.2" stroke="url(#mxTop)" stroke-width="1.5" stroke-linecap="round" fill="none"/></g><g class="mx-stone"><path class="mx-face mx-top" d="M12 4.6 L18.4 8.3 L12 12 L5.6 8.3 Z" fill="url(#mxTop)" opacity=".92"/><path class="mx-face mx-left" d="M5.6 8.3 L12 12 L12 19.4 L5.6 15.7 Z" fill="url(#mxLeft)"/><path class="mx-face mx-right" d="M18.4 8.3 L18.4 15.7 L12 19.4 L12 12 Z" fill="url(#mxRight)"/><path class="mx-edges" d="M12 4.6 L18.4 8.3 L18.4 15.7 L12 19.4 L5.6 15.7 L5.6 8.3 Z M5.6 8.3 L12 12 L18.4 8.3 M12 12 V19.4" fill="none" stroke="#ffe9c9" stroke-width=".85" stroke-linejoin="round" opacity=".85"/></g><circle class="mx-core" cx="12" cy="10.4" r="2.15" fill="url(#mxCore)"/><circle class="mx-spark" cx="12" cy="10.4" r=".9" fill="#fffdf5"/></svg>
+        <svg class="glyph ix ix--model ix--big" viewBox="0 0 24 24" aria-hidden="true"><g class="mx-space"><g class="mx-grid" mask="url(#mxFade)"><path d="M0 4.6 H24" fill="none" stroke="#ff9a3d" stroke-width=".42"/><path d="M0 8.6 H24" fill="none" stroke="#ff9a3d" stroke-width=".42"/><path d="M0 15.4 H24" fill="none" stroke="#ff9a3d" stroke-width=".42"/><path d="M0 19.4 H24" fill="none" stroke="#ff9a3d" stroke-width=".42"/><path d="M4.6 0 V24" fill="none" stroke="#ff9a3d" stroke-width=".42"/><path d="M8.6 0 V24" fill="none" stroke="#ff9a3d" stroke-width=".42"/><path d="M15.4 0 V24" fill="none" stroke="#ff9a3d" stroke-width=".42"/><path d="M19.4 0 V24" fill="none" stroke="#ff9a3d" stroke-width=".42"/></g><circle class="mx-wave" cx="12" cy="12" r="3" fill="none" stroke="#ffb86b" stroke-width="1.35" opacity="0" style="--wd:0s"/><circle class="mx-wave" cx="12" cy="12" r="3" fill="none" stroke="#ffb86b" stroke-width="1.35" opacity="0" style="--wd:-1.05s"/><circle class="mx-wave" cx="12" cy="12" r="3" fill="none" stroke="#ffb86b" stroke-width="1.35" opacity="0" style="--wd:-2.1s"/><circle class="mx-wave" cx="12" cy="12" r="3" fill="none" stroke="#ffb86b" stroke-width="1.35" opacity="0" style="--wd:-3.15s"/><circle class="mx-wave mx-trough" cx="12" cy="12" r="3" fill="none" stroke="#ff8c2e" stroke-width="1" opacity="0" style="--wd:-0.46s"/><circle class="mx-wave mx-trough" cx="12" cy="12" r="3" fill="none" stroke="#ff8c2e" stroke-width="1" opacity="0" style="--wd:-1.51s"/><circle class="mx-wave mx-trough" cx="12" cy="12" r="3" fill="none" stroke="#ff8c2e" stroke-width="1" opacity="0" style="--wd:-2.56s"/><circle class="mx-wave mx-trough" cx="12" cy="12" r="3" fill="none" stroke="#ff8c2e" stroke-width="1" opacity="0" style="--wd:-3.61s"/><circle class="mx-burst" cx="12" cy="12" r="3" fill="none" stroke="#ffe0a8" stroke-width="2.2" opacity="0"/></g><circle class="mx-well" cx="12" cy="12" r="5.4" fill="url(#mxWell)"/><circle class="mx-heart" cx="12" cy="12" r="2.5" fill="url(#mxHeart)"/><circle class="mx-seed" cx="12" cy="12" r="1" fill="#fffdf7"/></svg>
         <h2>MotusModels</h2>
         <p>It is not a fourth loop. It is what makes the other three survive.</p>
         <p>A loop that is never crystallized dies with the person who turned it. The insight
@@ -1864,10 +1903,10 @@ html[data-mode="lux"]{--votus:#7c4dd8}
   <div class="liquid" aria-hidden="true"><i class="blob"></i><i class="drop"></i></div>
   <div class="tconduit" aria-hidden="true"></div>
   <button class="nitem on" data-go="market" type="button"><span class="ico"><svg class="glyph ix ix--market" viewBox="0 0 24 24" aria-hidden="true"><circle class="ix-ring" cx="12" cy="12" r="9.1" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="url(#gxMarket)" stroke-width="1.6"/><g class="ix-orbit" fill="url(#gxMarket)"><circle cx="12" cy="6.5" r="1.5"/><circle cx="16.76" cy="14.75" r="1.5"/><circle cx="7.24" cy="14.75" r="1.5"/></g><circle class="ix-core" cx="12" cy="12" r="2.1" fill="url(#gxMarket)"/></svg></span><span class="lab">Market</span></button>
-  <button class="nitem" data-go="models" type="button"><span class="ico"><svg class="glyph ix ix--model" viewBox="0 0 24 24" aria-hidden="true"><g class="mx-legs"><path class="mx-leg mx-leg1" d="M12 11.6 V3.4" stroke="url(#mxTop)" stroke-width="1.5" stroke-linecap="round" fill="none"/><path class="mx-leg mx-leg2" d="M13 12.4 L19.6 16.2" stroke="url(#mxTop)" stroke-width="1.5" stroke-linecap="round" fill="none"/><path class="mx-leg mx-leg3" d="M11 12.4 L4.4 16.2" stroke="url(#mxTop)" stroke-width="1.5" stroke-linecap="round" fill="none"/></g><g class="mx-stone"><path class="mx-face mx-top" d="M12 4.6 L18.4 8.3 L12 12 L5.6 8.3 Z" fill="url(#mxTop)" opacity=".92"/><path class="mx-face mx-left" d="M5.6 8.3 L12 12 L12 19.4 L5.6 15.7 Z" fill="url(#mxLeft)"/><path class="mx-face mx-right" d="M18.4 8.3 L18.4 15.7 L12 19.4 L12 12 Z" fill="url(#mxRight)"/><path class="mx-edges" d="M12 4.6 L18.4 8.3 L18.4 15.7 L12 19.4 L5.6 15.7 L5.6 8.3 Z M5.6 8.3 L12 12 L18.4 8.3 M12 12 V19.4" fill="none" stroke="#ffe9c9" stroke-width=".85" stroke-linejoin="round" opacity=".85"/></g><circle class="mx-core" cx="12" cy="10.4" r="2.15" fill="url(#mxCore)"/><circle class="mx-spark" cx="12" cy="10.4" r=".9" fill="#fffdf5"/></svg></span><span class="lab">!MOTUS</span></button>
+  <button class="nitem" data-go="models" type="button"><span class="ico"><svg class="glyph ix ix--model" viewBox="0 0 24 24" aria-hidden="true"><g class="mx-space"><g class="mx-grid" mask="url(#mxFade)"><path d="M0 4.6 H24" fill="none" stroke="#ff9a3d" stroke-width=".42"/><path d="M0 8.6 H24" fill="none" stroke="#ff9a3d" stroke-width=".42"/><path d="M0 15.4 H24" fill="none" stroke="#ff9a3d" stroke-width=".42"/><path d="M0 19.4 H24" fill="none" stroke="#ff9a3d" stroke-width=".42"/><path d="M4.6 0 V24" fill="none" stroke="#ff9a3d" stroke-width=".42"/><path d="M8.6 0 V24" fill="none" stroke="#ff9a3d" stroke-width=".42"/><path d="M15.4 0 V24" fill="none" stroke="#ff9a3d" stroke-width=".42"/><path d="M19.4 0 V24" fill="none" stroke="#ff9a3d" stroke-width=".42"/></g><circle class="mx-wave" cx="12" cy="12" r="3" fill="none" stroke="#ffb86b" stroke-width="1.35" opacity="0" style="--wd:0s"/><circle class="mx-wave" cx="12" cy="12" r="3" fill="none" stroke="#ffb86b" stroke-width="1.35" opacity="0" style="--wd:-1.05s"/><circle class="mx-wave" cx="12" cy="12" r="3" fill="none" stroke="#ffb86b" stroke-width="1.35" opacity="0" style="--wd:-2.1s"/><circle class="mx-wave" cx="12" cy="12" r="3" fill="none" stroke="#ffb86b" stroke-width="1.35" opacity="0" style="--wd:-3.15s"/><circle class="mx-wave mx-trough" cx="12" cy="12" r="3" fill="none" stroke="#ff8c2e" stroke-width="1" opacity="0" style="--wd:-0.46s"/><circle class="mx-wave mx-trough" cx="12" cy="12" r="3" fill="none" stroke="#ff8c2e" stroke-width="1" opacity="0" style="--wd:-1.51s"/><circle class="mx-wave mx-trough" cx="12" cy="12" r="3" fill="none" stroke="#ff8c2e" stroke-width="1" opacity="0" style="--wd:-2.56s"/><circle class="mx-wave mx-trough" cx="12" cy="12" r="3" fill="none" stroke="#ff8c2e" stroke-width="1" opacity="0" style="--wd:-3.61s"/><circle class="mx-burst" cx="12" cy="12" r="3" fill="none" stroke="#ffe0a8" stroke-width="2.2" opacity="0"/></g><circle class="mx-well" cx="12" cy="12" r="5.4" fill="url(#mxWell)"/><circle class="mx-heart" cx="12" cy="12" r="2.5" fill="url(#mxHeart)"/><circle class="mx-seed" cx="12" cy="12" r="1" fill="#fffdf7"/></svg></span><span class="lab">!MOTUS</span></button>
   <button class="nitem" data-go="agents" type="button"><span class="ico"><svg class="glyph ix ix--agent" viewBox="0 0 512 512" aria-hidden="true"><g filter="url(#fxDvGlow)"><path class="dv-cresL" d="M 208 52 A 232 232 0 0 0 208 460 A 158 204 0 0 1 208 52 Z" fill="none" stroke="url(#gxDavara)" stroke-width="30" stroke-linecap="round"/><path class="dv-cresR" d="M 304 52 A 232 232 0 0 1 304 460 A 158 204 0 0 0 304 52 Z" fill="none" stroke="url(#gxDavara)" stroke-width="30" stroke-linecap="round"/></g><g class="dv-traces" stroke="#a78bfa" stroke-width="11" fill="none" opacity=".9" stroke-linecap="round" filter="url(#fxDvGlow)"><path class="dv-tr" d="M256 196 V158 M256 316 V354"/><path class="dv-tr" style="--td:-1.5s" d="M216 236 H176 M296 236 H336"/><path class="dv-tr" style="--td:-3s" d="M216 276 H176 M296 276 H336"/><path class="dv-tr" style="--td:-4.5s" d="M232 210 L204 182 M280 210 L308 182 M232 302 L204 330 M280 302 L308 330"/></g><g class="dv-nodes" fill="#c4b5fd"><circle cx="256" cy="150" r="15"/><circle cx="256" cy="362" r="15"/><circle cx="168" cy="236" r="15"/><circle cx="344" cy="236" r="15"/><circle cx="168" cy="276" r="15"/><circle cx="344" cy="276" r="15"/></g><g class="dv-corehex" filter="url(#fxDvGlow)"><path class="dv-hex" fill="rgba(196,181,253,.28)" stroke="#e9d5ff" stroke-width="16" stroke-linejoin="round" d="M256 214 L292 235 L292 277 L256 298 L220 277 L220 235 Z"/><circle class="dv-core" cx="256" cy="256" r="30" fill="#f5f3ff"/></g></svg></span><span class="lab">Agents</span></button>
   <button class="nitem" data-go="loops" type="button"><span class="ico"><svg class="glyph ix ix--loop" viewBox="0 0 24 24" aria-hidden="true"><path class="ix-lem" d="M12 12c-1.95-3.45-3.85-5.05-5.75-5.05a4.45 4.45 0 0 0 0 10.1c1.9 0 3.8-1.6 5.75-5.05 1.95-3.45 3.85-5.05 5.75-5.05a4.45 4.45 0 0 1 0 10.1c-1.9 0-3.8-1.6-5.75-5.05Z" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="url(#gxLoop)" stroke-width="1.6"/><path class="ix-trace" d="M12 12c-1.95-3.45-3.85-5.05-5.75-5.05a4.45 4.45 0 0 0 0 10.1c1.9 0 3.8-1.6 5.75-5.05 1.95-3.45 3.85-5.05 5.75-5.05a4.45 4.45 0 0 1 0 10.1c-1.9 0-3.8-1.6-5.75-5.05Z" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="#c2fbff" stroke-width="2.1"/></svg></span><span class="lab">Loops</span></button>
-  <button class="nitem" data-go="corpus" type="button"><span class="ico"><svg class="glyph ix ix--corpus" viewBox="0 0 24 24" aria-hidden="true"><path class="px-in" d="M.4 8.9 L7.5 12.0" stroke="url(#pxInner)" stroke-width="1.7" stroke-linecap="round" fill="none"/><path class="px-thru" d="M7.5 12.0 L16.9 14.6" stroke="url(#pxInner)" stroke-width="1.25" stroke-linecap="round" fill="none" opacity=".9"/><g class="px-fan" filter="url(#pxGlow)"><path class="px-ray" d="M16.90 14.60 L23.6 17.50" stroke="#ff2f4d" stroke-width="1.35" stroke-linecap="round" fill="none" style="--rd:0s"/><path class="px-ray" d="M16.90 14.60 L23.6 15.80" stroke="#ff8a2e" stroke-width="1.35" stroke-linecap="round" fill="none" style="--rd:.07s"/><path class="px-ray" d="M16.90 14.60 L23.6 14.30" stroke="#ffd93d" stroke-width="1.35" stroke-linecap="round" fill="none" style="--rd:.14s"/><path class="px-ray" d="M16.90 14.60 L23.6 12.70" stroke="#5ef08a" stroke-width="1.35" stroke-linecap="round" fill="none" style="--rd:.21s"/><path class="px-ray" d="M16.90 14.60 L23.6 11.00" stroke="#22d3ee" stroke-width="1.35" stroke-linecap="round" fill="none" style="--rd:.28s"/><path class="px-ray" d="M16.90 14.60 L23.6 9.20" stroke="#6b8cff" stroke-width="1.35" stroke-linecap="round" fill="none" style="--rd:.35s"/><path class="px-ray" d="M16.90 14.60 L23.6 7.30" stroke="#b15cff" stroke-width="1.35" stroke-linecap="round" fill="none" style="--rd:.42s"/></g><g class="px-fan px-fan--core"><path class="px-ray" d="M16.90 14.60 L23.6 17.50" stroke="#ff2f4d" stroke-width="1.35" stroke-linecap="round" fill="none" style="--rd:0s"/><path class="px-ray" d="M16.90 14.60 L23.6 15.80" stroke="#ff8a2e" stroke-width="1.35" stroke-linecap="round" fill="none" style="--rd:.07s"/><path class="px-ray" d="M16.90 14.60 L23.6 14.30" stroke="#ffd93d" stroke-width="1.35" stroke-linecap="round" fill="none" style="--rd:.14s"/><path class="px-ray" d="M16.90 14.60 L23.6 12.70" stroke="#5ef08a" stroke-width="1.35" stroke-linecap="round" fill="none" style="--rd:.21s"/><path class="px-ray" d="M16.90 14.60 L23.6 11.00" stroke="#22d3ee" stroke-width="1.35" stroke-linecap="round" fill="none" style="--rd:.28s"/><path class="px-ray" d="M16.90 14.60 L23.6 9.20" stroke="#6b8cff" stroke-width="1.35" stroke-linecap="round" fill="none" style="--rd:.35s"/><path class="px-ray" d="M16.90 14.60 L23.6 7.30" stroke="#b15cff" stroke-width="1.35" stroke-linecap="round" fill="none" style="--rd:.42s"/></g><g class="px-glass"><path class="px-fL" d="M12 2.6 L12 19.6 L2.6 19.6 Z" fill="url(#pxFaceL)"/><path class="px-fR" d="M12 2.6 L21.4 19.6 L12 19.6 Z" fill="url(#pxFaceR)"/><path class="px-bevel" d="M12 2.6 L21.4 19.6 L2.6 19.6 Z" fill="none" stroke="url(#pxBevel)" stroke-width="1.15" stroke-linejoin="round"/><path class="px-ridge" d="M12 2.6 L12 19.6" stroke="#ffffff" stroke-width=".55" opacity=".35"/><path class="px-caustic" d="M6.6 19.05 L17.4 19.05" stroke="#dff1ff" stroke-width="1" stroke-linecap="round" opacity=".4" filter="url(#pxGlow)"/></g><circle class="px-hit" cx="7.5" cy="12.0" r="1.25" fill="#fff"/><circle class="px-out" cx="16.9" cy="14.6" r="1.05" fill="#fff" opacity=".85"/></svg></span><span class="lab">Corpus</span></button>
+  <button class="nitem" data-go="corpus" type="button"><span class="ico"><svg class="glyph ix ix--corpus" viewBox="0 0 24 24" aria-hidden="true"><g class="px-glass"><path class="px-side" d="M8.6 3.4 L15.8 17.9 L17.3 16.75 L10.1 2.25 Z" fill="url(#px2Side)"/><path class="px-body" d="M8.6 3.4 L15.8 17.9 L1.4 17.9 Z" fill="url(#px2Body)"/><path class="px-tir" d="M8.59 7.01 L4.63 14.99" stroke="#ffffff" stroke-width=".65" stroke-linecap="round" fill="none" opacity=".3"/><path class="px-caustic" d="M3.2 17.55 L13.2 17.55" stroke="#e4f4ff" stroke-width="1.2" stroke-linecap="round" opacity=".42" filter="url(#px2Glow)"/><path class="px-in" d="M.2 8.65 L5 10.65" stroke="url(#px2Beam)" stroke-width="1.7" stroke-linecap="round" fill="none"/><path class="px-ghost" d="M5 10.65 L2.42 9.13" stroke="#ffffff" stroke-width=".7" stroke-linecap="round" fill="none" opacity=".24"/><path class="px-thru" d="M5 10.65 L12.56 11.38" stroke="#ffffff" stroke-width="1.3" stroke-linecap="round" fill="none" opacity=".92"/><g class="px-fan"><g mask="url(#px2Sep)"><g class="px-bloom" filter="url(#px2Bloom)" opacity=".62"><path class="px-band" d="M12.56 11.38 L23.6 14.03 L23.6 15.26 Z" fill="#ff2f3a" opacity=".9"/><path class="px-band" d="M12.56 11.38 L23.6 15.04 L23.6 16.27 Z" fill="#ff8a1e" opacity=".9"/><path class="px-band" d="M12.56 11.38 L23.6 16.05 L23.6 17.28 Z" fill="#ffe14a" opacity=".9"/><path class="px-band" d="M12.56 11.38 L23.6 17.06 L23.6 18.29 Z" fill="#46e86a" opacity=".9"/><path class="px-band" d="M12.56 11.38 L23.6 18.07 L23.6 19.30 Z" fill="#21d6ee" opacity=".9"/><path class="px-band" d="M12.56 11.38 L23.6 19.08 L23.6 20.31 Z" fill="#4a6cff" opacity=".9"/><path class="px-band" d="M12.56 11.38 L23.6 20.09 L23.6 21.32 Z" fill="#a44cff" opacity=".9"/></g><g class="px-core" filter="url(#px2Soft)"><path class="px-band" d="M12.56 11.38 L23.6 14.03 L23.6 15.26 Z" fill="#ff2f3a" opacity="1"/><path class="px-band" d="M12.56 11.38 L23.6 15.04 L23.6 16.27 Z" fill="#ff8a1e" opacity="1"/><path class="px-band" d="M12.56 11.38 L23.6 16.05 L23.6 17.28 Z" fill="#ffe14a" opacity="1"/><path class="px-band" d="M12.56 11.38 L23.6 17.06 L23.6 18.29 Z" fill="#46e86a" opacity="1"/><path class="px-band" d="M12.56 11.38 L23.6 18.07 L23.6 19.30 Z" fill="#21d6ee" opacity="1"/><path class="px-band" d="M12.56 11.38 L23.6 19.08 L23.6 20.31 Z" fill="#4a6cff" opacity="1"/><path class="px-band" d="M12.56 11.38 L23.6 20.09 L23.6 21.32 Z" fill="#a44cff" opacity="1"/></g></g><path class="px-white" d="M12.56 11.38 L18.8 14.87" stroke="url(#px2Core)" stroke-width="1.8" stroke-linecap="round" fill="none"/></g><path class="px-back" d="M10.1 2.25 L17.3 16.75 M8.6 3.4 L10.1 2.25 M15.8 17.9 L17.3 16.75" stroke="#c6dfff" stroke-width=".6" stroke-linejoin="round" fill="none" opacity=".38"/><path class="px-dim" d="M1.4 17.9 L15.8 17.9 M8.6 3.4 L15.8 17.9" stroke="#d6ecff" stroke-width=".85" stroke-linejoin="round" fill="none" opacity=".55"/><path class="px-lit" d="M8.6 3.4 L1.4 17.9" stroke="url(#px2Lit)" stroke-width="1.3" stroke-linecap="round" fill="none"/><circle class="px-hit" cx="5" cy="10.65" r="1.9" fill="#ffffff" opacity=".4" filter="url(#px2Glow)"/><circle class="px-hit2" cx="5" cy="10.65" r=".6" fill="#ffffff"/><circle class="px-out" cx="12.56" cy="11.38" r="1.55" fill="#fffdf2" opacity=".42" filter="url(#px2Glow)"/><circle class="px-out2" cx="12.56" cy="11.38" r=".5" fill="#ffffff" opacity=".9"/></g></svg></span><span class="lab">Corpus</span></button>
 </nav>
 
 <!-- ========== THE FOCUS SHEET ========== -->
@@ -2050,43 +2089,18 @@ html[data-mode="lux"]{--votus:#7c4dd8}
      MotusCorpus, which draws from the live account. This just refreshes it. */
   function drawReceipts(){ drawCorpusLog(); }   /* kept: older call sites still ask for it */
 
-  /* ═══════ PIN THE BAR TO THE *VISUAL* VIEWPORT ═══════
-     A `position:fixed; bottom:0` element pins to the LAYOUT viewport, which on
-     a phone does not move. The VISUAL viewport does: collapsing and expanding
-     the URL bar shrinks it and offsets it, so a fixed bar slides above or below
-     the screen edge mid-scroll. That is the glitch.
+  /* ═══════ THE BAR IS NOT SCRIPTED. ═══════
+     I tried to pin it to the visual viewport with a transform. That WAS the
+     glitch: it jumped on fast scrolls, stuck halfway up, shoved itself up on
+     tab change and left a gap beneath, because a tab change scrolls to top,
+     which re-expands the URL bar, which changes the viewport, which fired the
+     correction — a feedback loop I built.
 
-     The fix is to measure the difference every time the visual viewport moves
-     and carry the bar with it on a composited transform. */
-  (function(){
-    var bar = document.querySelector('.tabbar'), vv = window.visualViewport;
-    if(!bar || !vv) return;
-    var applied = 0, settle = 0;
-
-    function pin(){
-      /* how far the visual bottom sits above the layout bottom */
-      var drop = window.innerHeight - (vv.height + vv.offsetTop);
-      /* NEVER push the bar DOWN — that is what buried its labels below the
-         screen edge. Only ever pull it up onto the visible bottom. */
-      if(!(drop > 2)) drop = 0;
-      if(Math.abs(drop - applied) < 2) return;   /* deadzone: no micro-jitter */
-      applied = drop;
-      bar.style.transform = drop ? 'translate3d(0,'+(-drop).toFixed(1)+'px,0)' : '';
-      if(window.__ferro) window.__ferro.remeasure();
-    }
-
-    /* RESIZE ONLY — never `scroll`.
-       The visual viewport fires `scroll` continuously through a flick, and
-       correcting on every one of those made the bar chase the scroll and jump.
-       Its HEIGHT is the only thing that actually changes when the URL bar
-       collapses, so `resize` is the honest signal — and we let it settle first
-       so the bar moves once, after the browser chrome has finished animating. */
-    vv.addEventListener('resize', function(){
-      clearTimeout(settle); settle = setTimeout(pin, 90);
-    });
-    addEventListener('orientationchange', function(){ setTimeout(pin, 260) });
-    pin();
-  })();
+     A `position:fixed; bottom:0` element is ALREADY glued to the bottom of the
+     visible area by the browser, through every toolbar animation, and it does
+     it on the compositor where no script can stutter it. The correct amount of
+     JavaScript for this problem is none. The only thing CSS needs is the safe
+     area inset, which it has. */
 
   /* ═══════════════════════════════════════════════════════════════
      THE FERROFLUID EDGE — the bar is a black liquid body, and its
@@ -2337,32 +2351,32 @@ html[data-mode="lux"]{--votus:#7c4dd8}
 
     /* Corpus is the one mark that is ALWAYS in colour, so the spectrum never
        collapses to nothing — an untouched record still throws a narrow rainbow.
-       What the record changes is how WIDE it throws. */
-    var LIT = Math.max(3, Math.min(7, 3 + Math.round(k * 4)));
+       What the record changes is the ANGLE OF DISPERSION: how far apart the
+       wavelengths land by the time they reach the edge. Every wavelength is
+       always present, exactly as in real glass. */
+    var SPREAD = 0.56 + k * 0.44;            /* 56% → 100% of the full fan */
 
     [].forEach.call(marks, function(svg){
-      var rays = svg.querySelectorAll('.px-ray');
-      [].forEach.call(rays, function(r, i){
-        var idx = i % 7;                     /* two layers of the same fan */
-        var on  = idx < LIT;
-        r.style.display = on ? '' : 'none';
-      });
-      /* the fan opens as the record widens — pivoted on the EXIT face */
+      /* the fan opens as the record widens — pivoted on the EXIT face, so the
+         spectrum stays welded to the point on the glass it actually leaves */
       var fan = svg.querySelectorAll('.px-fan');
       [].forEach.call(fan, function(g){
-        g.style.transformOrigin = '16.9px 14.6px';
-        g.style.transform = 'scaleY(' + (0.62 + k * 0.38).toFixed(3) + ')';
+        g.style.setProperty('--spread', SPREAD.toFixed(3));
       });
+      /* a fuller record also concentrates more light into the base */
+      var caustic = svg.querySelector('.px-caustic');
+      if(caustic) caustic.style.strokeWidth = (0.85 + k * 0.55).toFixed(2);
       /* and the crystal turns with the energy in the record */
       var glass = svg.querySelector('.px-glass');
-      if(glass) glass.style.animationDuration = (16 - k * 8).toFixed(1) + 's';
+      if(glass) glass.style.animationDuration = (17 - k * 8).toFixed(1) + 's';
       svg.style.setProperty('--k', k.toFixed(3));
     });
 
     var btn = document.querySelector('.nitem[data-go="corpus"]');
     if(btn) btn.setAttribute('aria-label',
-      'The Corpus — ' + (mass ? (LIT + ' of 7 wavelengths separated') : 'undispersed; nothing recorded yet'));
-    window.__prism = {mass:mass, k:+k.toFixed(3), lit:LIT,
+      'The Corpus — dispersing at ' + Math.round(SPREAD * 100) + '% of full angle'
+      + (mass ? '' : '; nothing recorded yet'));
+    window.__prism = {mass:mass, k:+k.toFixed(3), spread:+SPREAD.toFixed(3),
       moves:moves, models:models, runs:runs, done:done, logged:logged};
   }
   window.__tuneCorpus = tuneCorpus;
