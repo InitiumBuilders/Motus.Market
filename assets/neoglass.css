@@ -79,6 +79,20 @@ html[data-mode="lux"] .field{
     radial-gradient(58vw 52vw at 14% -8%,rgba(0,170,255,.28),transparent 66%),
     radial-gradient(48vw 44vw at 90% 26%,rgba(120,100,255,.18),transparent 70%),
     linear-gradient(150deg,#e2eeff,#eae6ff 46%,#dff4ff);}
+/* ═══════ THE BLUE BOX, KILLED AT THE SOURCE ═══════
+   `-webkit-tap-highlight-color` defaults to rgba(51,181,229,.4) — a solid BLUE
+   RECTANGLE the browser paints over any tapped control. It is a User-Agent
+   paint, so it never appears in a computed-style audit and no amount of
+   removing my own backgrounds could ever find it. Killed globally, for every
+   element, on every page. Never let a UA control state paint on this site. */
+*,*::before,*::after{-webkit-tap-highlight-color:transparent}
+button,a,label,summary,select,input,textarea,[role="button"],[tabindex]{
+  -webkit-tap-highlight-color:transparent;
+  -webkit-touch-callout:none;
+  -webkit-appearance:none;appearance:none}
+button::-moz-focus-inner{border:0;padding:0}
+button:active,a:active,[role="button"]:active{background-image:none}
+
 /* ═══════ NO SHARP CORNERS — THE SAFETY NET ═══════
    The offenders are the ones nobody writes a rule for: code blocks, images,
    form controls, tables, rules, scrollbars. They inherit a 0 and ship square.
