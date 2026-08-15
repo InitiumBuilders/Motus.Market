@@ -265,19 +265,17 @@
 
 /* ── the bar itself: no rectangle, no hard border. A surface whose
      edges dissolve into the void instead of stopping at a line. ── */
-.navskin{position:absolute;inset:0;pointer-events:none;z-index:-1;
-  border-radius:inherit;
-  background:
-    radial-gradient(120% 190% at 50% 8%,rgba(30,48,96,.62),transparent 72%),
-    linear-gradient(180deg,rgba(12,18,40,.86),rgba(4,6,15,.94));
-  -webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);
-  -webkit-mask:radial-gradient(125% 150% at 50% 50%,#000 58%,rgba(0,0,0,.55) 84%,transparent 100%);
-  mask:radial-gradient(125% 150% at 50% 50%,#000 58%,rgba(0,0,0,.55) 84%,transparent 100%)}
-/* a lit meniscus along the top, brightest in the middle, gone at the ends */
-.navskin::after{content:'';position:absolute;left:8%;right:8%;top:0;height:1.5px;
-  border-radius:var(--r-pill);
-  background:linear-gradient(90deg,transparent,rgba(28,231,255,.55) 30%,
-    rgba(194,251,255,.75) 50%,rgba(28,231,255,.55) 70%,transparent)}
+/* ── the bar has NO drawn surface. Its body is the ferrofluid itself, and the
+     spikes on its crest are the only edge it has. ── */
+.ferroedge{position:absolute;left:0;right:0;bottom:0;top:-50px;
+  width:100%;height:calc(100% + 50px);pointer-events:none;z-index:-1;
+  overflow:visible;filter:drop-shadow(0 14px 34px rgba(0,0,0,.65))}
+.ff-body{-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur)}
+/* the iridescence is a FRESNEL effect: it lives on the rim at grazing angles,
+   never floating inside the black body */
+.ff-rim{mix-blend-mode:screen}
+.ff-halo{mix-blend-mode:screen}
+.ff-spec{mix-blend-mode:screen}
 
 
 /* ═══════ NO BOX. EVER. ═══════
@@ -1174,6 +1172,25 @@ html[data-mode="lux"]{--votus:#7c4dd8}
 <div class="grain" aria-hidden="true"></div>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<linearGradient id="ffBody" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#0d1428"/><stop offset=".45" stop-color="#070b18"/>
+  <stop offset="1" stop-color="#04060f"/>
+</linearGradient>
+<linearGradient id="ffIris" x1="0" y1="0" x2="1" y2="0">
+  <stop offset="0" stop-color="#ff3b6b"/><stop offset=".17" stop-color="#ff9f1c"/>
+  <stop offset=".34" stop-color="#ffe066"/><stop offset=".5" stop-color="#4ade80"/>
+  <stop offset=".67" stop-color="#1ce7ff"/><stop offset=".84" stop-color="#8b5cf6"/>
+  <stop offset="1" stop-color="#ff3b6b"/>
+</linearGradient>
+<linearGradient id="ffSpec" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#ffffff" stop-opacity=".85"/>
+  <stop offset=".6" stop-color="#c2fbff" stop-opacity=".22"/>
+  <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+</linearGradient>
+<filter id="ffSoft" x="-30%" y="-60%" width="160%" height="260%">
+  <feGaussianBlur stdDeviation="2.2"/>
+</filter>
+
 <filter id="fxDvGlow" x="-70%" y="-70%" width="240%" height="240%">
   <feGaussianBlur stdDeviation="9" result="b"/>
   <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
@@ -1767,7 +1784,7 @@ html[data-mode="lux"]{--votus:#7c4dd8}
 
 <!-- ========== mobile tab bar ========== -->
 <nav class="tabbar" aria-label="App">
-  <div class="navskin" aria-hidden="true"></div>
+  <svg class="ferroedge" aria-hidden="true" preserveAspectRatio="none"><path class="ff-halo" fill="none" stroke="url(#ffIris)" stroke-width="9" opacity=".28" filter="url(#ffSoft)"/><path class="ff-body" fill="url(#ffBody)"/><path class="ff-rim"  fill="none" stroke="url(#ffIris)" stroke-width="1.4" opacity=".5" stroke-linecap="round"/><path class="ff-spec" fill="none" stroke="url(#ffSpec)" stroke-width="1" opacity=".55" stroke-linecap="round"/></svg>
   <div class="liquid" aria-hidden="true"><i class="blob"></i><i class="drop"></i></div>
   <div class="tconduit" aria-hidden="true"></div>
   <button class="nitem on" data-go="market" type="button"><span class="ico"><svg class="glyph ix ix--market" viewBox="0 0 24 24" aria-hidden="true"><circle class="ix-ring" cx="12" cy="12" r="9.1" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="url(#gxMarket)" stroke-width="1.6"/><g class="ix-orbit" fill="url(#gxMarket)"><circle cx="12" cy="6.5" r="1.5"/><circle cx="16.76" cy="14.75" r="1.5"/><circle cx="7.24" cy="14.75" r="1.5"/></g><circle class="ix-core" cx="12" cy="12" r="2.1" fill="url(#gxMarket)"/></svg></span><span class="lab">Market</span></button>
@@ -1956,6 +1973,119 @@ html[data-mode="lux"]{--votus:#7c4dd8}
   /* The old "this device's receipts" preview is gone — the real record is the
      MotusCorpus, which draws from the live account. This just refreshes it. */
   function drawReceipts(){ drawCorpusLog(); }   /* kept: older call sites still ask for it */
+
+  /* ═══════════════════════════════════════════════════════════════
+     THE FERROFLUID EDGE — the bar is a black liquid body, and its
+     surface is unstable.
+
+     Rosensweig instability: above a critical field strength, magnetic
+     force overcomes surface tension and the flat surface breaks into a
+     regular array of SHARP CONES. Not round bumps — cones, evenly
+     spaced, travelling as waves.
+
+     The magnet is where you ARE. The field peaks over the selected
+     destination and decays away from it, so the instability itself is
+     the indicator. Move, and the spikes migrate with you.
+     ═══════════════════════════════════════════════════════════════ */
+  var FF = (function(){
+    /* Tuned against the real instability, not by eye. Few spikes, tall and
+       CONICAL: a high sharpening exponent keeps the surface flat for most of
+       each period and then erupts, which is what a cone actually is. A low
+       exponent gives you ripples — that was the C−. */
+    var LAMBDA = 34,      /* spike spacing (px) — REGULAR. never random. */
+        SHARP  = 4.2,     /* the cone exponent. below ~3 it reads as a wave */
+        PEAK   = 34,      /* crest height directly over the magnet */
+        SIGMA  = 88,      /* how far the field reaches before the pool calms */
+        FLOOR  = 2;       /* the smooth pool far from the field */
+
+    /* NOTE: SVG y grows DOWNWARD. A spike is `BASE - height`, never `height` —
+       used directly it renders the instability upside down and the spikes
+       hang into the bar like drips instead of erupting out of the pool. */
+    var TOP = 50;         /* headroom above the bar for the spikes to rise into */
+    var svg, body, rim, spec, halo, W = 0, H = 0,
+        magnet = 0, magnetTo = 0, t0 = 0, raf = 0, live = false;
+
+    function measure(){
+      var bar = svg && svg.parentElement; if(!bar) return;
+      var r = bar.getBoundingClientRect();
+      W = Math.round(r.width); H = Math.round(r.height) + TOP;
+      if(!W || !H) return;
+      svg.setAttribute('viewBox','0 0 '+W+' '+H);
+      var on = bar.querySelector('.nitem.on');
+      if(on){ var o = on.getBoundingClientRect();
+        magnetTo = (o.left - r.left) + o.width/2; }
+      if(!magnet) magnet = magnetTo;
+    }
+
+    /* the surface height at x — the whole effect lives in these four lines */
+    function surface(x, t){
+      var field = PEAK * Math.exp(-((x-magnet)*(x-magnet)) / (2*SIGMA*SIGMA));
+      var wave  = Math.abs(Math.sin((Math.PI * x) / LAMBDA + t * 1.15));
+      var cone  = Math.pow(wave, SHARP);
+      var swell = 0.7 + 0.3 * Math.sin(t * 0.85 + x / 47);
+      return FLOOR + (field + FLOOR*0.5) * cone * swell;
+    }
+
+    function build(t){
+      var step = 2, top = [], x;
+      /* y = TOP - height : the spikes rise OUT of the pool */
+      for(x = 0; x <= W; x += step) top.push([x, TOP - surface(x, t)]);
+      var d = 'M0,' + top[0][1].toFixed(2);
+      for(var i=1;i<top.length;i++) d += 'L' + top[i][0] + ',' + top[i][1].toFixed(2);
+      var R = 30;   /* the body keeps the bar's own rounded shoulders */
+      var closed = d + 'L'+W+','+(H-R)+'Q'+W+','+H+' '+(W-R)+','+H
+                     + 'L'+R+','+H+'Q0,'+H+' 0,'+(H-R)+'Z';
+      body.setAttribute('d', closed);
+      rim.setAttribute('d', d);
+      halo.setAttribute('d', d);
+      /* the specular sits just BELOW the crest — this is what makes it wet */
+      var s = 'M0,' + (top[0][1]+2.6).toFixed(2);
+      for(var j=1;j<top.length;j++) s += 'L'+top[j][0]+','+(top[j][1]+2.6).toFixed(2);
+      spec.setAttribute('d', s);
+    }
+
+    function frame(ts){
+      if(!live) return;
+      if(!t0) t0 = ts;
+      var t = (ts - t0)/1000;
+      /* the field slides to its new home with viscosity, never a jump */
+      magnet += (magnetTo - magnet) * 0.075;
+      build(t);
+      raf = requestAnimationFrame(frame);
+    }
+
+    return {
+      mount:function(el){
+        svg = el;
+        body = el.querySelector('.ff-body'); rim = el.querySelector('.ff-rim');
+        spec = el.querySelector('.ff-spec'); halo = el.querySelector('.ff-halo');
+        measure(); build(0);
+      },
+      remeasure:measure,
+      /* below the critical field there are no spikes — a still, smooth pool */
+      still:function(){ if(!svg) return; measure();
+        PEAK = 0; FLOOR = 3; build(0); },
+      start:function(){ if(live||!svg) return; live = true; t0 = 0;
+        raf = requestAnimationFrame(frame); },
+      stop:function(){ live = false; cancelAnimationFrame(raf); }
+    };
+  })();
+
+  (function(){
+    var el = document.querySelector('.ferroedge'); if(!el) return;
+    FF.mount(el);
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches){ FF.still(); return; }
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(es){
+        es.forEach(function(e){ e.isIntersecting ? FF.start() : FF.stop(); });
+      },{threshold:0}).observe(el.parentElement);
+    } else FF.start();
+    addEventListener('resize', FF.remeasure, {passive:true});
+    document.addEventListener('visibilitychange', function(){
+      document.hidden ? FF.stop() : FF.start();
+    });
+  })();
+  window.__ferro = FF;
 
   /* ═══════ THE LIQUID — dark matter that flows to where you are going ═══════
      Position is MEASURED from the live layout every time, so the mass lands
@@ -3022,6 +3152,7 @@ html[data-mode="lux"]{--votus:#7c4dd8}
       setTimeout(function(){wp.classList.remove('fire')},560)}
     fireConduit(name);
     if(window.__flowLiquid)window.__flowLiquid(name);
+    if(window.__ferro)window.__ferro.remeasure();   /* the field follows you */
     try{history.replaceState(null,'','#'+name)}catch(e){}
     window.scrollTo({top:0,behavior:'instant' in window?'instant':'auto'});
   }
