@@ -154,10 +154,93 @@
 .nitem.on .ix--loop .ix-trace{opacity:1;animation:ixTrace 3.4s linear infinite}
 @keyframes ixTrace{to{stroke-dashoffset:-71}}
 
-.nitem.on .ix--corpus .ix-r1{animation:ixRing 4.8s ease-in-out infinite}
-.nitem.on .ix--corpus .ix-r2{animation:ixRing 4.8s ease-in-out infinite .5s}
-.nitem.on .ix--corpus .ix-r3{animation:ixRing 4.8s ease-in-out infinite 1s}
-@keyframes ixRing{0%,72%,100%{opacity:.42}26%{opacity:1}}
+/* ── CORPUS · the soul orb ──
+   Two rings of tongues turning against each other around a burning core.
+   Counter-rotation is what stops it reading as a spinning wheel and starts
+   it reading as something combusting. It burns quietly at rest and takes
+   a real breath when you arrive. */
+.ix--corpus .ix-fl{opacity:.62}
+.ix--corpus .ix-fl2{opacity:.42}
+.ix--corpus .ix-flares{animation:orbTurn 11s linear infinite}
+.ix--corpus .ix-flares2{animation:orbTurnBack 7.5s linear infinite}
+/* rotate() and scaleY() must live in the SAME transform, or the rotation is
+   thrown away and every tongue lands on top of the first one */
+.ix--corpus .ix-fl,.ix--corpus .ix-fl2{transform:rotate(var(--rot,0deg));
+  animation:orbLick 2.6s ease-in-out infinite;animation-delay:var(--fd,0s)}
+.ix--corpus .ix-soul{animation:orbBeat 2.6s ease-in-out infinite}
+.ix--corpus .ix-spark{animation:orbSpark 2.6s ease-in-out infinite}
+.ix--corpus .ix-halo{animation:orbHalo 11s linear infinite}
+@keyframes orbTurn{to{transform:rotate(360deg)}}
+@keyframes orbTurnBack{to{transform:rotate(-360deg)}}
+@keyframes orbHalo{to{transform:rotate(-360deg)}}
+@keyframes orbLick{
+  0%,100%{opacity:.34;transform:rotate(var(--rot,0deg)) scaleY(.8)}
+  50%{opacity:.95;transform:rotate(var(--rot,0deg)) scaleY(1.14)}}
+@keyframes orbBeat{0%,100%{r:3.2}50%{r:3.9}}
+@keyframes orbSpark{0%,100%{opacity:.4;r:1.3}50%{opacity:.95;r:1.9}}
+/* arrival: the soul flares */
+.nitem.on .ix--corpus .ix-soul{animation:orbBeat 1.9s ease-in-out infinite}
+.nitem.on .ix--corpus .ix-fl{opacity:.9}
+.nitem.on .ix--corpus .ix-fl2{opacity:.7}
+.nitem.on .ix--corpus{filter:drop-shadow(0 0 9px var(--cyan))
+  drop-shadow(0 0 22px rgba(28,231,255,.6)) drop-shadow(0 0 44px rgba(0,120,255,.4))}
+@media(prefers-reduced-motion:reduce){
+  .ix--corpus *{animation:none!important}}
+
+/* ═══════════════════════════════════════════════════════════════
+   THE LIQUID NAV — dark matter, not a highlighted box.
+
+   Selection is a body of dark matter that FLOWS to where you are
+   going. Two shapes ride a gooey filter: the blob leads, a droplet
+   lags on a slower curve. While they are apart the filter fuses
+   them into one stretched surface with a real meniscus; when the
+   droplet catches up they merge and settle.
+
+   The mass is a dark core with light bleeding round its rim — a
+   void with energy at its edge, rather than a glowing slab.
+   ═══════════════════════════════════════════════════════════════ */
+.liquid{position:absolute;inset:0;pointer-events:none;z-index:0;
+  filter:url(#goo);opacity:0;transition:opacity .5s var(--ease-out)}
+.liquid.live{opacity:1}
+.blob,.drop{position:absolute;border-radius:50%;
+  background:
+    radial-gradient(circle at 50% 38%,rgba(28,231,255,.30),transparent 58%),
+    radial-gradient(circle at 50% 50%,rgba(8,12,28,.96) 42%,rgba(28,231,255,.42) 84%,
+      rgba(0,110,255,.16) 100%)}
+.blob{width:46px;height:46px}
+.drop{width:30px;height:30px}
+/* the rail: the mass travels DOWN the spine */
+.railbar .liquid .blob{left:32px;top:0;transform:translateY(var(--by,0px));
+  transition:transform .78s cubic-bezier(.62,.02,.24,1)}
+.railbar .liquid .drop{left:40px;top:8px;transform:translateY(var(--by,0px));
+  transition:transform .96s cubic-bezier(.5,.04,.2,1)}
+/* the tab bar: the mass travels ACROSS */
+.tabbar .liquid .blob{top:9px;left:0;transform:translateX(var(--bx,0px));
+  transition:transform .72s cubic-bezier(.62,.02,.24,1)}
+.tabbar .liquid .drop{top:17px;left:8px;transform:translateX(var(--bx,0px));
+  transition:transform .92s cubic-bezier(.5,.04,.2,1)}
+/* the mass swells as it launches and settles as it lands */
+.liquid.flowing .blob{animation:blobStretch .78s var(--ease-out)}
+@keyframes blobStretch{
+  0%{transform-origin:center}
+  38%{filter:blur(.4px)}
+  100%{filter:none}}
+
+/* ── the bar itself: no rectangle, no hard border. A surface whose
+     edges dissolve into the void instead of stopping at a line. ── */
+.navskin{position:absolute;inset:0;pointer-events:none;z-index:-1;
+  border-radius:inherit;
+  background:
+    radial-gradient(120% 190% at 50% 8%,rgba(30,48,96,.62),transparent 72%),
+    linear-gradient(180deg,rgba(12,18,40,.86),rgba(4,6,15,.94));
+  -webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);
+  -webkit-mask:radial-gradient(125% 150% at 50% 50%,#000 58%,rgba(0,0,0,.55) 84%,transparent 100%);
+  mask:radial-gradient(125% 150% at 50% 50%,#000 58%,rgba(0,0,0,.55) 84%,transparent 100%)}
+/* a lit meniscus along the top, brightest in the middle, gone at the ends */
+.navskin::after{content:'';position:absolute;left:8%;right:8%;top:0;height:1.5px;
+  border-radius:var(--r-pill);
+  background:linear-gradient(90deg,transparent,rgba(28,231,255,.55) 30%,
+    rgba(194,251,255,.75) 50%,rgba(28,231,255,.55) 70%,transparent)}
 
 /* ---- THE CONDUIT — light travels between destinations ---- */
 .rails-wrap{position:relative;display:flex;flex-direction:column;gap:6px}
@@ -194,8 +277,10 @@
 .nitem:hover .ix{transform:scale(1.1)}
 .nitem:hover .aperture{opacity:.3;transform:scale(1.12);
   transition:opacity .4s var(--ease-out),transform .4s var(--ease-out)}
-.nitem.on{background:var(--glass-2);border-color:var(--edge-hi);letter-spacing:.03em;
-  box-shadow:0 0 26px rgba(28,231,255,.13)}
+/* the liquid IS the indicator now — the item keeps no pill of its own */
+.nitem{position:relative;z-index:1}
+.nitem.on{background:none;border-color:transparent;letter-spacing:.03em}
+.nitem:hover{background:rgba(255,255,255,.045)}
 .nitem.on .ix{color:var(--cyan);
   filter:drop-shadow(0 0 9px var(--cyan)) drop-shadow(0 0 20px rgba(28,231,255,.45))}
 .nitem.on .ix-core{r:2.6}
@@ -1016,10 +1101,12 @@ html[data-mode="lux"]{--votus:#7c4dd8}
   .dvhero{padding:34px 22px}
   .mecard{padding:26px 22px}
   .keypane--big{padding:34px 22px}
-  .tabbar{display:flex;position:fixed;left:12px;right:12px;bottom:12px;z-index:70;
-    gap:4px;padding:8px;border-radius:26px;background:var(--glass-2);
-    -webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);
-    border:1px solid var(--edge-hi);box-shadow:var(--pane-shadow)}
+  /* the skin carries the surface and dissolves at the ends — the bar itself
+     holds no background and no border, so it never reads as a box */
+  .tabbar{display:flex;position:fixed;left:10px;right:10px;bottom:12px;z-index:70;
+    gap:4px;padding:9px 8px;border-radius:30px;background:none;border:none;
+    box-shadow:0 18px 50px -12px rgba(0,0,0,.75),0 0 60px -18px rgba(0,120,255,.35);
+    isolation:isolate}
   .tabbar .nitem{flex-direction:column;gap:3px;min-height:66px;justify-content:center;
     padding:0;font-size:.72rem;font-family:var(--mono);font-weight:700;
     letter-spacing:.06em;text-transform:uppercase;flex:1 1 0;min-width:0;
@@ -1051,6 +1138,18 @@ html[data-mode="lux"]{--votus:#7c4dd8}
 <div class="grain" aria-hidden="true"></div>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<filter id="goo" x="-60%" y="-60%" width="220%" height="220%" color-interpolation-filters="sRGB">
+  <feGaussianBlur in="SourceGraphic" stdDeviation="7" result="blur"/>
+  <feColorMatrix in="blur" type="matrix"
+    values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 26 -12" result="goo"/>
+  <feBlend in="SourceGraphic" in2="goo"/>
+</filter>
+<filter id="gooSoft" x="-60%" y="-60%" width="220%" height="220%" color-interpolation-filters="sRGB">
+  <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="b2"/>
+  <feColorMatrix in="b2" type="matrix"
+    values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -9"/>
+</filter>
+
 <linearGradient id="infGrad" x1="0" y1="1" x2="1" y2="0">
   <stop offset="0" stop-color="#0066ff"/><stop offset=".42" stop-color="#1ce7ff"/>
   <stop offset="1" stop-color="#c2fbff"/>
@@ -1081,13 +1180,14 @@ html[data-mode="lux"]{--votus:#7c4dd8}
     <a class="brand" href="/"><img class="inf" src="/assets/logo.png" alt="" aria-hidden="true"><span class="bt"><span class="mo">MOTUS</span><b>.MARKET</b></span></a>
     <div class="rails-wrap" id="railsWrap">
       <div class="conduit" aria-hidden="true"></div>
-      <div class="trail" id="railTrail" aria-hidden="true"></div>
-      <div class="spark" id="railSpark" aria-hidden="true"></div>
+      <div class="liquid" aria-hidden="true"><i class="blob"></i><i class="drop"></i></div>
+      
+      
       <button class="nitem on" data-go="market" type="button"><span class="ico"><i class="aperture" aria-hidden="true"></i><i class="brk" aria-hidden="true"></i><svg class="glyph ix ix--market" viewBox="0 0 24 24" aria-hidden="true"><circle class="ix-ring" cx="12" cy="12" r="9.1" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><g class="ix-orbit"><circle cx="12" cy="6.5" r="1.45" fill="currentColor"/><circle cx="16.76" cy="14.75" r="1.45" fill="currentColor"/><circle cx="7.24" cy="14.75" r="1.45" fill="currentColor"/></g><circle class="ix-core" cx="12" cy="12" r="2" fill="currentColor"/></svg></span><span class="lab">Market</span><i class="wave" aria-hidden="true"></i></button>
       <button class="nitem" data-go="models" type="button"><span class="ico"><i class="aperture" aria-hidden="true"></i><i class="brk" aria-hidden="true"></i><svg class="glyph ix ix--model" viewBox="0 0 24 24" aria-hidden="true"><path class="ix-hex" d="M12 3.1 19.7 7.55v8.9L12 20.9 4.3 16.45v-8.9Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path class="ix-leg ix-leg1" d="M12 11.4V5.2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path class="ix-leg ix-leg2" d="M12.7 12.5 18 15.6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path class="ix-leg ix-leg3" d="M11.3 12.5 6 15.6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><circle class="ix-core" cx="12" cy="12" r="2.05" fill="currentColor"/></svg></span><span class="lab">!MOTUS</span><i class="wave" aria-hidden="true"></i></button>
       <button class="nitem" data-go="agents" type="button"><span class="ico"><i class="aperture" aria-hidden="true"></i><i class="brk" aria-hidden="true"></i><svg class="glyph ix ix--agent" viewBox="0 0 24 24" aria-hidden="true"><path class="ix-cresL" d="M9.5 4.4a9.4 9.4 0 0 0 0 15.2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/><path class="ix-cresR" d="M14.5 4.4a9.4 9.4 0 0 1 0 15.2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/><circle class="ix-core" cx="12" cy="12" r="2.25" fill="currentColor"/></svg></span><span class="lab">Agents</span><i class="wave" aria-hidden="true"></i></button>
       <button class="nitem" data-go="loops" type="button"><span class="ico"><i class="aperture" aria-hidden="true"></i><i class="brk" aria-hidden="true"></i><svg class="glyph ix ix--loop" viewBox="0 0 24 24" aria-hidden="true"><path class="ix-lem" d="M12 12c-1.95-3.45-3.85-5.05-5.75-5.05a4.45 4.45 0 0 0 0 10.1c1.9 0 3.8-1.6 5.75-5.05 1.95-3.45 3.85-5.05 5.75-5.05a4.45 4.45 0 0 1 0 10.1c-1.9 0-3.8-1.6-5.75-5.05Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path class="ix-trace" d="M12 12c-1.95-3.45-3.85-5.05-5.75-5.05a4.45 4.45 0 0 0 0 10.1c1.9 0 3.8-1.6 5.75-5.05 1.95-3.45 3.85-5.05 5.75-5.05a4.45 4.45 0 0 1 0 10.1c-1.9 0-3.8-1.6-5.75-5.05Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg></span><span class="lab">Loops</span><i class="wave" aria-hidden="true"></i></button>
-      <button class="nitem" data-go="corpus" type="button"><span class="ico"><i class="aperture" aria-hidden="true"></i><i class="brk" aria-hidden="true"></i><svg class="glyph ix ix--corpus" viewBox="0 0 24 24" aria-hidden="true"><circle class="ix-core" cx="12" cy="12" r="1.9" fill="currentColor"/><path class="ix-r1" d="M12 7.4a4.6 4.6 0 0 1 0 9.2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path class="ix-r2" d="M12 4.2a7.8 7.8 0 0 1 0 15.6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path class="ix-r3" d="M12 1.6a10.4 10.4 0 0 1 0 20.8" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.4"/><path class="ix-r1b" d="M12 7.4a4.6 4.6 0 0 0 0 9.2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" opacity=".42"/><path class="ix-r2b" d="M12 4.2a7.8 7.8 0 0 0 0 15.6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" opacity=".3"/></svg></span><span class="lab">Corpus</span><i class="wave" aria-hidden="true"></i></button>
+      <button class="nitem" data-go="corpus" type="button"><span class="ico"><i class="aperture" aria-hidden="true"></i><i class="brk" aria-hidden="true"></i><svg class="glyph ix ix--corpus" viewBox="0 0 24 24" aria-hidden="true"><circle class="ix-halo" cx="12" cy="12" r="9.4" fill="none" stroke="currentColor" stroke-width=".9" opacity=".26"/><g class="ix-flares"><path class="ix-fl" d="M12 8.9C14.4 6.6 14.7 3.3 11.4 .5 12.1 3.3 10.1 5.2 10.0 6.6C9.95 7.5 11 8.5 12 8.9Z" fill="currentColor" style="--rot:0deg;--fd:0s"/><path class="ix-fl" d="M12 8.9C14.4 6.6 14.7 3.3 11.4 .5 12.1 3.3 10.1 5.2 10.0 6.6C9.95 7.5 11 8.5 12 8.9Z" fill="currentColor" style="--rot:90deg;--fd:.65s"/><path class="ix-fl" d="M12 8.9C14.4 6.6 14.7 3.3 11.4 .5 12.1 3.3 10.1 5.2 10.0 6.6C9.95 7.5 11 8.5 12 8.9Z" fill="currentColor" style="--rot:180deg;--fd:1.3s"/><path class="ix-fl" d="M12 8.9C14.4 6.6 14.7 3.3 11.4 .5 12.1 3.3 10.1 5.2 10.0 6.6C9.95 7.5 11 8.5 12 8.9Z" fill="currentColor" style="--rot:270deg;--fd:1.95s"/></g><g class="ix-flares2"><path class="ix-fl2" d="M12 9.4C13.5 7.9 13.7 5.7 11.6 3.9 12.1 5.7 10.8 6.9 10.75 7.8C10.72 8.4 11.4 9.1 12 9.4Z" fill="currentColor" style="--rot:45deg;--fd:.32s"/><path class="ix-fl2" d="M12 9.4C13.5 7.9 13.7 5.7 11.6 3.9 12.1 5.7 10.8 6.9 10.75 7.8C10.72 8.4 11.4 9.1 12 9.4Z" fill="currentColor" style="--rot:135deg;--fd:.97s"/><path class="ix-fl2" d="M12 9.4C13.5 7.9 13.7 5.7 11.6 3.9 12.1 5.7 10.8 6.9 10.75 7.8C10.72 8.4 11.4 9.1 12 9.4Z" fill="currentColor" style="--rot:225deg;--fd:1.62s"/><path class="ix-fl2" d="M12 9.4C13.5 7.9 13.7 5.7 11.6 3.9 12.1 5.7 10.8 6.9 10.75 7.8C10.72 8.4 11.4 9.1 12 9.4Z" fill="currentColor" style="--rot:315deg;--fd:2.27s"/></g><circle class="ix-soul" cx="12" cy="12" r="3.6" fill="currentColor"/><circle class="ix-spark" cx="12" cy="12" r="1.6" fill="currentColor" opacity=".55"/></svg></span><span class="lab">Corpus</span><i class="wave" aria-hidden="true"></i></button>
     </div>
     <div class="railfoot">
       <div class="wallet"><svg class="glyph"><use href="#g-bolt"/></svg><span id="dashBal">128.4 DASH</span></div>
@@ -1584,14 +1684,14 @@ html[data-mode="lux"]{--votus:#7c4dd8}
 
 <!-- ========== mobile tab bar ========== -->
 <nav class="tabbar" aria-label="App">
+  <div class="navskin" aria-hidden="true"></div>
+  <div class="liquid" aria-hidden="true"><i class="blob"></i><i class="drop"></i></div>
   <div class="tconduit" aria-hidden="true"></div>
-  <div class="ttrail" id="tabTrail" aria-hidden="true"></div>
-  <div class="tspark" id="tabSpark" aria-hidden="true"></div>
   <button class="nitem on" data-go="market" type="button"><span class="ico"><i class="aperture" aria-hidden="true"></i><i class="brk" aria-hidden="true"></i><svg class="glyph ix ix--market" viewBox="0 0 24 24" aria-hidden="true"><circle class="ix-ring" cx="12" cy="12" r="9.1" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><g class="ix-orbit"><circle cx="12" cy="6.5" r="1.45" fill="currentColor"/><circle cx="16.76" cy="14.75" r="1.45" fill="currentColor"/><circle cx="7.24" cy="14.75" r="1.45" fill="currentColor"/></g><circle class="ix-core" cx="12" cy="12" r="2" fill="currentColor"/></svg></span><span class="lab">Market</span><i class="wave" aria-hidden="true"></i></button>
   <button class="nitem" data-go="models" type="button"><span class="ico"><i class="aperture" aria-hidden="true"></i><i class="brk" aria-hidden="true"></i><svg class="glyph ix ix--model" viewBox="0 0 24 24" aria-hidden="true"><path class="ix-hex" d="M12 3.1 19.7 7.55v8.9L12 20.9 4.3 16.45v-8.9Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path class="ix-leg ix-leg1" d="M12 11.4V5.2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path class="ix-leg ix-leg2" d="M12.7 12.5 18 15.6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path class="ix-leg ix-leg3" d="M11.3 12.5 6 15.6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><circle class="ix-core" cx="12" cy="12" r="2.05" fill="currentColor"/></svg></span><span class="lab">!MOTUS</span><i class="wave" aria-hidden="true"></i></button>
   <button class="nitem" data-go="agents" type="button"><span class="ico"><i class="aperture" aria-hidden="true"></i><i class="brk" aria-hidden="true"></i><svg class="glyph ix ix--agent" viewBox="0 0 24 24" aria-hidden="true"><path class="ix-cresL" d="M9.5 4.4a9.4 9.4 0 0 0 0 15.2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/><path class="ix-cresR" d="M14.5 4.4a9.4 9.4 0 0 1 0 15.2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/><circle class="ix-core" cx="12" cy="12" r="2.25" fill="currentColor"/></svg></span><span class="lab">Agents</span><i class="wave" aria-hidden="true"></i></button>
   <button class="nitem" data-go="loops" type="button"><span class="ico"><i class="aperture" aria-hidden="true"></i><i class="brk" aria-hidden="true"></i><svg class="glyph ix ix--loop" viewBox="0 0 24 24" aria-hidden="true"><path class="ix-lem" d="M12 12c-1.95-3.45-3.85-5.05-5.75-5.05a4.45 4.45 0 0 0 0 10.1c1.9 0 3.8-1.6 5.75-5.05 1.95-3.45 3.85-5.05 5.75-5.05a4.45 4.45 0 0 1 0 10.1c-1.9 0-3.8-1.6-5.75-5.05Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path class="ix-trace" d="M12 12c-1.95-3.45-3.85-5.05-5.75-5.05a4.45 4.45 0 0 0 0 10.1c1.9 0 3.8-1.6 5.75-5.05 1.95-3.45 3.85-5.05 5.75-5.05a4.45 4.45 0 0 1 0 10.1c-1.9 0-3.8-1.6-5.75-5.05Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg></span><span class="lab">Loops</span><i class="wave" aria-hidden="true"></i></button>
-  <button class="nitem" data-go="corpus" type="button"><span class="ico"><i class="aperture" aria-hidden="true"></i><i class="brk" aria-hidden="true"></i><svg class="glyph ix ix--corpus" viewBox="0 0 24 24" aria-hidden="true"><circle class="ix-core" cx="12" cy="12" r="1.9" fill="currentColor"/><path class="ix-r1" d="M12 7.4a4.6 4.6 0 0 1 0 9.2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path class="ix-r2" d="M12 4.2a7.8 7.8 0 0 1 0 15.6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path class="ix-r3" d="M12 1.6a10.4 10.4 0 0 1 0 20.8" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.4"/><path class="ix-r1b" d="M12 7.4a4.6 4.6 0 0 0 0 9.2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" opacity=".42"/><path class="ix-r2b" d="M12 4.2a7.8 7.8 0 0 0 0 15.6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" opacity=".3"/></svg></span><span class="lab">Corpus</span><i class="wave" aria-hidden="true"></i></button>
+  <button class="nitem" data-go="corpus" type="button"><span class="ico"><i class="aperture" aria-hidden="true"></i><i class="brk" aria-hidden="true"></i><svg class="glyph ix ix--corpus" viewBox="0 0 24 24" aria-hidden="true"><circle class="ix-halo" cx="12" cy="12" r="9.4" fill="none" stroke="currentColor" stroke-width=".9" opacity=".26"/><g class="ix-flares"><path class="ix-fl" d="M12 8.9C14.4 6.6 14.7 3.3 11.4 .5 12.1 3.3 10.1 5.2 10.0 6.6C9.95 7.5 11 8.5 12 8.9Z" fill="currentColor" style="--rot:0deg;--fd:0s"/><path class="ix-fl" d="M12 8.9C14.4 6.6 14.7 3.3 11.4 .5 12.1 3.3 10.1 5.2 10.0 6.6C9.95 7.5 11 8.5 12 8.9Z" fill="currentColor" style="--rot:90deg;--fd:.65s"/><path class="ix-fl" d="M12 8.9C14.4 6.6 14.7 3.3 11.4 .5 12.1 3.3 10.1 5.2 10.0 6.6C9.95 7.5 11 8.5 12 8.9Z" fill="currentColor" style="--rot:180deg;--fd:1.3s"/><path class="ix-fl" d="M12 8.9C14.4 6.6 14.7 3.3 11.4 .5 12.1 3.3 10.1 5.2 10.0 6.6C9.95 7.5 11 8.5 12 8.9Z" fill="currentColor" style="--rot:270deg;--fd:1.95s"/></g><g class="ix-flares2"><path class="ix-fl2" d="M12 9.4C13.5 7.9 13.7 5.7 11.6 3.9 12.1 5.7 10.8 6.9 10.75 7.8C10.72 8.4 11.4 9.1 12 9.4Z" fill="currentColor" style="--rot:45deg;--fd:.32s"/><path class="ix-fl2" d="M12 9.4C13.5 7.9 13.7 5.7 11.6 3.9 12.1 5.7 10.8 6.9 10.75 7.8C10.72 8.4 11.4 9.1 12 9.4Z" fill="currentColor" style="--rot:135deg;--fd:.97s"/><path class="ix-fl2" d="M12 9.4C13.5 7.9 13.7 5.7 11.6 3.9 12.1 5.7 10.8 6.9 10.75 7.8C10.72 8.4 11.4 9.1 12 9.4Z" fill="currentColor" style="--rot:225deg;--fd:1.62s"/><path class="ix-fl2" d="M12 9.4C13.5 7.9 13.7 5.7 11.6 3.9 12.1 5.7 10.8 6.9 10.75 7.8C10.72 8.4 11.4 9.1 12 9.4Z" fill="currentColor" style="--rot:315deg;--fd:2.27s"/></g><circle class="ix-soul" cx="12" cy="12" r="3.6" fill="currentColor"/><circle class="ix-spark" cx="12" cy="12" r="1.6" fill="currentColor" opacity=".55"/></svg></span><span class="lab">Corpus</span><i class="wave" aria-hidden="true"></i></button>
 </nav>
 
 <!-- ========== THE FOCUS SHEET ========== -->
@@ -1773,6 +1873,46 @@ html[data-mode="lux"]{--votus:#7c4dd8}
   /* The old "this device's receipts" preview is gone — the real record is the
      MotusCorpus, which draws from the live account. This just refreshes it. */
   function drawReceipts(){ drawCorpusLog(); }   /* kept: older call sites still ask for it */
+
+  /* ═══════ THE LIQUID — dark matter that flows to where you are going ═══════
+     Position is MEASURED from the live layout every time, so the mass lands
+     dead centre on the mark at any width, in either nav, and after any reflow. */
+  function flowLiquid(name,instant){
+    [['.railbar','--by','top','height'],['.tabbar','--bx','left','width']]
+      .forEach(function(cfg){
+        var nav=document.querySelector(cfg[0]);if(!nav)return;
+        var liq=nav.querySelector('.liquid');if(!liq)return;
+        var item=nav.querySelector('.nitem[data-go="'+name+'"]');if(!item)return;
+        var ico=item.querySelector('.ico')||item;
+        /* measure against the LIQUID's own box, not the nav's — on the rail the
+           layer lives inside .rails-wrap, which starts below the brand, and
+           measuring the nav put the mass 177px below its mark */
+        var nr=liq.getBoundingClientRect(),ir=ico.getBoundingClientRect();
+        var blob=liq.querySelector('.blob'),drop=liq.querySelector('.drop');
+        if(!blob.getBoundingClientRect().width)return;
+        var isY=cfg[2]==='top';
+        var centre=isY?(ir.top-nr.top+ir.height/2):(ir.left-nr.left+ir.width/2);
+        var bSize=isY?blob.offsetHeight:blob.offsetWidth,
+            dSize=isY?drop.offsetHeight:drop.offsetWidth;
+        var bBase=parseFloat(getComputedStyle(blob)[cfg[2]])||0,
+            dBase=parseFloat(getComputedStyle(drop)[cfg[2]])||0;
+        if(instant){liq.style.transition='none';blob.style.transition='none';drop.style.transition='none'}
+        blob.style.setProperty(cfg[1],(centre-bSize/2-bBase)+'px');
+        drop.style.setProperty(cfg[1],(centre-dSize/2-dBase)+'px');
+        liq.classList.add('live');
+        if(instant){void liq.offsetWidth;
+          liq.style.transition='';blob.style.transition='';drop.style.transition=''}
+        else{liq.classList.remove('flowing');void liq.offsetWidth;
+          liq.classList.add('flowing');
+          setTimeout(function(){liq.classList.remove('flowing')},820)}
+      });
+  }
+  window.__flowLiquid=flowLiquid;
+  /* the mass must re-find its mark whenever the layout moves under it */
+  addEventListener('resize',function(){
+    var on=document.querySelector('.nitem.on');
+    if(on)flowLiquid(on.getAttribute('data-go'),true);
+  },{passive:true});
 
   /* ═══════ THE LOOPS, IN MOTION ═══════
      A loop that isn't turning is just a diagram. These run only while they are
@@ -2775,47 +2915,10 @@ html[data-mode="lux"]{--votus:#7c4dd8}
     });
   });
 
-  /* ---------- THE CONDUIT — the light travels to where you're going ---------- */
-  function fireConduit(name,instant){
-    /* vertical rail */
-    var wrap=document.getElementById('railsWrap');
-    if(wrap&&wrap.offsetParent!==null){
-      var btn=wrap.querySelector('[data-go="'+name+'"]'),
-          spark=document.getElementById('railSpark'),
-          trail=document.getElementById('railTrail'),
-          wr=wrap.getBoundingClientRect(),br=btn.getBoundingClientRect(),
-          to=Math.round(br.top-wr.top+br.height/2-5.5),
-          from=parseFloat(spark.getAttribute('data-y'));
-      if(!instant&&!isNaN(from)&&Math.abs(to-from)>2){
-        var a=Math.min(from,to)+5.5,b=Math.max(from,to)+5.5;
-        trail.style.top=a+'px';trail.style.height=(b-a)+'px';
-        trail.classList.add('fire');
-        setTimeout(function(){trail.classList.remove('fire')},300);
-      }
-      if(instant)spark.style.transition='none';
-      spark.style.top=to+'px';spark.setAttribute('data-y',to);
-      if(instant)requestAnimationFrame(function(){spark.style.transition=''});
-    }
-    /* horizontal tab bar */
-    var bar=document.querySelector('.tabbar');
-    if(bar&&getComputedStyle(bar).display!=='none'){
-      var tb=bar.querySelector('[data-go="'+name+'"]'),
-          ts=document.getElementById('tabSpark'),
-          tt=document.getElementById('tabTrail'),
-          barR=bar.getBoundingClientRect(),tbR=tb.getBoundingClientRect(),
-          tox=Math.round(tbR.left-barR.left+tbR.width/2-5),
-          fromx=parseFloat(ts.getAttribute('data-x'));
-      if(!instant&&!isNaN(fromx)&&Math.abs(tox-fromx)>2){
-        var la=Math.min(fromx,tox)+5,lb=Math.max(fromx,tox)+5;
-        tt.style.left=la+'px';tt.style.width=(lb-la)+'px';
-        tt.classList.add('fire');
-        setTimeout(function(){tt.classList.remove('fire')},300);
-      }
-      if(instant)ts.style.transition='none';
-      ts.style.left=tox+'px';ts.setAttribute('data-x',tox);
-      if(instant)requestAnimationFrame(function(){ts.style.transition=''});
-    }
-  }
+  /* The travelling spark and its trail are retired: the liquid mass now shows
+     where you are and how you got there, and two travelling indicators competing
+     in one bar just read as a loose artifact. flowLiquid() is the whole thing. */
+  function fireConduit(){}
 
   /* ---------- screens ---------- */
   var screens={market:1,models:1,agents:1,loops:1,corpus:1};
@@ -2835,6 +2938,7 @@ html[data-mode="lux"]{--votus:#7c4dd8}
     if(wp){wp.classList.remove('fire');void wp.offsetWidth;wp.classList.add('fire');
       setTimeout(function(){wp.classList.remove('fire')},560)}
     fireConduit(name);
+    if(window.__flowLiquid)window.__flowLiquid(name);
     try{history.replaceState(null,'','#'+name)}catch(e){}
     window.scrollTo({top:0,behavior:'instant' in window?'instant':'auto'});
   }
@@ -2848,8 +2952,14 @@ html[data-mode="lux"]{--votus:#7c4dd8}
   var cT;window.addEventListener('resize',function(){
     clearTimeout(cT);cT=setTimeout(function(){
       var cur=document.querySelector('.nitem.on');
-      if(cur)fireConduit(cur.getAttribute('data-go'),true);
+      if(cur){fireConduit(cur.getAttribute('data-go'),true);
+        if(window.__flowLiquid)window.__flowLiquid(cur.getAttribute('data-go'),true)}
     },180)});
+  /* the mass takes its opening position without animating in from nowhere */
+  requestAnimationFrame(function(){
+    var cur=document.querySelector('.nitem.on');
+    if(cur&&window.__flowLiquid)window.__flowLiquid(cur.getAttribute('data-go'),true);
+  });
 
   /* ---------- search — moves, movers, and the offers inside them ---------- */
   var q=document.getElementById('q');
