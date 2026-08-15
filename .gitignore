@@ -1,0 +1,32 @@
+# ── Nothing operational belongs in the public repository ──
+# See docs/RELEASING.md. This file is a backstop, not the mechanism:
+# the public tree is built from an explicit include list, because a deny
+# list silently ships the file you forgot to think about.
+
+# deployment identifiers
+.vercel/
+.netlify/
+
+# secrets, in every shape they arrive in
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+secrets.json
+credentials.json
+
+# tooling and OS noise
+node_modules/
+.DS_Store
+Thumbs.db
+desktop.ini
+*:Zone.Identifier
+*.log
+.cache/
+.idea/
+.vscode/
+*.swp
+*~

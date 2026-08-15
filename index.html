@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en" data-mode="nox">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MOTUS.MARKET — Many Minds Set In Motion</title>
+<meta name="description" content="Many Minds Set In Motion. Your Heart, Mind, And Soul In Full Motion. Move The Mindset. Move The World.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800;900&family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="icon" href="/assets/logo.png">
+<link rel="stylesheet" href="/assets/neoglass.css">
+<style>
+/* ============================================================
+   THE ARRIVAL — statement cinema. One line, one room.
+   Laws: cinematic-statements · neoglass · the seven sealed laws
+   ============================================================ */
+html{scroll-behavior:auto}
+/* THE LOCK — the browser itself does it, so it cannot be outrun.
+   The acts force a stop; everything below only aligns, and because those
+   sections are taller than the viewport you scroll through them freely. */
+html.snap{scroll-snap-type:y mandatory}
+.arrival{scroll-snap-align:center;scroll-snap-stop:always}
+section.proof,.close,footer{scroll-snap-align:start}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+section.proof{padding-top:210px}
+@media(max-width:720px){section.proof{padding-top:130px}}
+
+/* ---- nav ---- */
+.nav{position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:60;
+  display:flex;align-items:center;gap:6px;padding:8px;border-radius:var(--r-pill);
+  background:var(--glass);border:1px solid var(--edge);
+  -webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 14px 40px rgba(0,0,0,.3)}
+.nav a{display:inline-flex;align-items:center;gap:9px;min-height:44px;padding:0 15px;
+  border-radius:var(--r-pill);color:var(--ink);text-decoration:none;white-space:nowrap;
+  font-size:.9rem;font-weight:600;letter-spacing:.01em;
+  transition:background .25s,color .25s}
+.nav a:hover{background:var(--glass-2);color:var(--cyan)}
+.nav .brand{font-family:var(--display);font-weight:800;font-size:.74rem;letter-spacing:.01em}
+.nav .brand:hover{color:var(--ink)}
+.nav .brand b{color:var(--cyan);font-weight:800}
+.nav .brand{padding-left:8px}
+@media(max-width:640px){
+  .nav{max-width:calc(100vw - 12px);gap:0;padding:5px;
+    overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;
+    justify-content:flex-start}
+  .nav::-webkit-scrollbar{display:none}
+  .nav a,.nav .modeSw{flex:0 0 auto}
+  .nav a{padding:0 7px;font-size:.72rem;letter-spacing:0;min-height:44px}
+  .nav .brand{padding:0 2px 0 0}
+  .nav .brand span{display:none}
+  .nav .modeSw{padding:0 11px}
+  .nav .modeSw span{display:none}
+}
+
+/* ---- ACT 0 · the arrival ceremony ---- */
+.arrival{position:relative;min-height:100svh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;overflow:hidden;
+  padding:110px 24px 90px}
+#minds{position:absolute;inset:0;z-index:0;pointer-events:none;
+  -webkit-mask:radial-gradient(120% 78% at 50% 44%,#000 34%,rgba(0,0,0,.35) 72%,transparent 100%);
+  mask:radial-gradient(120% 78% at 50% 44%,#000 34%,rgba(0,0,0,.35) 72%,transparent 100%)}
+.arrival>*{position:relative;z-index:1}
+.markwrap{position:relative;width:min(100%,860px);aspect-ratio:2.4/1;margin:0 auto;will-change:opacity,filter,transform}
+.markwrap::before{content:'';position:absolute;left:50%;top:50%;width:min(86vw,560px);
+  aspect-ratio:2/1;transform:translate(-50%,-50%);pointer-events:none;
+  background:radial-gradient(closest-side,rgba(0,190,255,.30),rgba(0,90,220,.10) 56%,transparent 76%);
+  filter:blur(14px);animation:markPulse 6s ease-in-out infinite}
+@keyframes markPulse{0%,100%{opacity:.72;transform:translate(-50%,-50%) scale(.97)}
+  50%{opacity:1;transform:translate(-50%,-50%) scale(1.04)}}
+.mark{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:100%;height:auto;display:block;
+  filter:drop-shadow(0 0 40px rgba(0,190,255,.55)) drop-shadow(0 0 110px rgba(0,110,255,.32))}
+.brandline{font-family:var(--display);font-weight:900;
+  font-size:clamp(1.5rem,5.4vw,4rem);line-height:1.08;
+  letter-spacing:-.005em;margin:4svh 0 0;white-space:nowrap;
+  text-shadow:0 0 34px rgba(28,231,255,.4)}
+.brandline b{color:var(--cyan);font-weight:800}
+.mantra{font-size:clamp(1.15rem,3.5vw,2rem);font-weight:600;line-height:1.3;
+  letter-spacing:.02em;margin:26px 0 0;opacity:.96}
+.scrollcue{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:12px;z-index:1}
+.scrollcue span{font-family:var(--mono);font-size:.72rem;font-weight:700;
+  letter-spacing:.3em;color:var(--cyan)}
+.scrollcue i{display:block;width:1px;height:44px;
+  background:linear-gradient(180deg,var(--cyan),transparent);
+  animation:cueFall 2.2s ease-in-out infinite}
+@keyframes cueFall{0%{transform:scaleY(0);transform-origin:top}
+  45%{transform:scaleY(1);transform-origin:top}
+  55%{transform:scaleY(1);transform-origin:bottom}
+  100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* the ceremony (html.anim only — armor lands everything) */
+html.anim .arrival .hs{opacity:0;filter:blur(12px);transform:translateY(16px)}
+html.anim .arrival.go .hs{opacity:1;filter:blur(0);transform:none;
+  transition:opacity 1.15s ease var(--hd,0s),filter 1.3s ease var(--hd,0s),
+  transform 1.15s cubic-bezier(.16,1,.3,1) var(--hd,0s)}
+
+/* ---- the statement acts · one line, one room, LOCKED on scroll ---- */
+.act{min-height:92svh;display:flex;align-items:center;justify-content:center;
+  text-align:center;padding:0 24px;scroll-snap-align:center;scroll-snap-stop:always}
+.act .line{font-size:clamp(2.1rem,7.4vw,4.8rem);font-weight:800;
+  letter-spacing:-.025em;line-height:1.12;margin:0;max-width:14em}
+.act .line b{font-weight:800}
+.act--soul .line{font-weight:700;letter-spacing:-.01em;
+  animation:soulGlow 7s ease-in-out infinite}
+@keyframes soulGlow{
+  0%,100%{text-shadow:0 0 44px rgba(0,102,255,.5),0 0 120px rgba(0,102,255,.22)}
+  50%{text-shadow:0 0 44px rgba(28,231,255,.62),0 0 120px rgba(28,231,255,.26)}}
+html[data-mode="lux"] .act--soul .line{animation:none;
+  text-shadow:0 0 34px rgba(0,148,196,.32)}
+.act--door{flex-direction:column;gap:44px}
+.act--door .mono-line{font-family:var(--mono);font-size:.84rem;font-weight:700;
+  letter-spacing:.34em;text-transform:uppercase;color:var(--cyan);margin:0}
+.act--door .cta{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+/* acts arrive out of blur and BOUNCE into their lock */
+html.anim .act .hs{opacity:0;filter:blur(11px);transform:translateY(30px);will-change:opacity,filter,transform}
+html.anim .act .hs.on{opacity:1;filter:blur(0);transform:none;
+  transition:opacity .9s ease,filter 1.05s ease,
+  transform 1s cubic-bezier(.3,1.45,.45,1)}
+/* the word in motion — cyan glow, green $, a slow quiet signal */
+.line--m{white-space:nowrap;max-width:none}
+.mword{color:var(--cyan);display:inline-block;
+  transition:transform .85s cubic-bezier(.26,1.36,.4,1),opacity .5s ease,
+  filter .5s ease,text-shadow 1.4s ease}
+.mword .dol{color:var(--green)}
+.mword.out{opacity:0;transform:translateY(.45em) scale(.86);filter:blur(9px);
+  transition:transform .4s ease-in,opacity .34s ease-in,filter .34s ease-in}
+.mword{text-shadow:var(--text-glow)}
+.mword.flash{text-shadow:0 0 36px rgba(28,231,255,.9),0 0 96px rgba(0,140,255,.36)}
+
+/* ---- section headers ---- */
+.shead{text-align:center;margin-bottom:82px}
+.shead h2{font-size:clamp(2.1rem,6vw,3.3rem);font-weight:800;letter-spacing:-.02em;margin-top:16px}
+.shead p{font-size:1.12rem;font-weight:500;max-width:36em;margin:18px auto 0;line-height:1.65}
+.shead--grand h2{font-size:clamp(2.6rem,7.8vw,4.5rem)}
+.shead--grand .eyebrow{font-size:.9rem}
+
+/* ---- rails ---- */
+.rails{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+@media(max-width:840px){.rails{grid-template-columns:1fr;max-width:460px;margin:0 auto}}
+.rail{padding:46px 32px;text-align:center}
+.rail .glyph{width:38px;height:38px;color:var(--cyan);margin:0 auto 20px;display:block}
+.rail h3{font-size:1.5rem;font-weight:800;letter-spacing:.01em}
+.rail .mono{display:block;font-size:.78rem;font-weight:700;letter-spacing:.26em;
+  text-transform:uppercase;margin:12px 0 16px;color:var(--cyan)}
+.rail p{font-size:1.04rem;font-weight:500;line-height:1.65}
+
+/* ---- keystone + loops ---- */
+.keystone{padding:56px 44px;text-align:center;border-radius:28px}
+.keystone .glyph{width:44px;height:44px;color:var(--orange);margin:0 auto 22px;display:block}
+.keystone h3{font-size:clamp(1.7rem,4.6vw,2.4rem);font-weight:800}
+.keystone p{font-size:1.1rem;font-weight:500;line-height:1.7;max-width:38em;margin:18px auto 0}
+.loops{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:26px}
+@media(max-width:840px){.loops{grid-template-columns:1fr;max-width:460px;margin:26px auto 0}}
+.loop{padding:38px 28px;text-align:center;position:relative}
+.loop .glyph{width:30px;height:30px;color:var(--orange);margin:0 auto 16px;display:block}
+.loop h4{font-size:1.3rem;font-weight:800}
+.loop p{font-size:1rem;font-weight:500;line-height:1.65;margin-top:14px}
+.soon{position:absolute;top:16px;right:16px;font-family:var(--mono);font-size:.72rem;
+  font-weight:700;letter-spacing:.16em;color:var(--cyan);border:1px solid var(--cyan);
+  border-radius:var(--r-pill);padding:7px 12px}
+.equation{margin:64px auto 0;text-align:center;font-family:var(--mono);
+  font-size:clamp(.9rem,2.6vw,1.05rem);font-weight:700;letter-spacing:.08em}
+.equation b{color:var(--orange);font-weight:700}
+
+/* ---- agents ---- */
+.agents{display:grid;grid-template-columns:1.2fr 1fr;gap:22px}
+@media(max-width:840px){.agents{grid-template-columns:1fr}}
+.agent{padding:48px 38px}
+.agent h3{font-size:1.55rem;font-weight:800;display:flex;align-items:center;gap:14px}
+.agent h3 .glyph{color:var(--orange);width:30px;height:30px}
+.agent p{font-size:1.06rem;font-weight:500;line-height:1.7;margin-top:18px}
+.agent .fee{display:inline-flex;align-items:center;gap:10px;margin-top:24px;
+  font-family:var(--mono);font-size:.84rem;font-weight:700;letter-spacing:.12em;
+  color:var(--cyan);border:1px solid var(--edge);border-radius:var(--r-pill);
+  min-height:44px;padding:0 18px}
+
+/* ---- money ---- */
+.money{display:grid;gap:14px;max-width:760px;margin:0 auto}
+.mrow{display:flex;align-items:center;gap:20px;padding:26px 30px}
+.mrow .n{font-family:var(--mono);font-size:.82rem;font-weight:700;color:var(--cyan);
+  letter-spacing:.1em;flex:0 0 auto}
+.mrow p{font-size:1.05rem;font-weight:600}
+.mrow p span{font-weight:500}
+.money-law{text-align:center;margin-top:40px;font-size:1.12rem;font-weight:700}
+
+/* ---- phases ---- */
+.phases{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;max-width:900px;margin:0 auto}
+@media(max-width:720px){.phases{grid-template-columns:1fr}}
+.phase{padding:36px 30px}
+.phase .mono{font-size:.76rem;font-weight:700;letter-spacing:.26em;color:var(--cyan);
+  text-transform:uppercase}
+.phase h4{font-size:1.3rem;font-weight:800;margin:10px 0 12px}
+.phase p{font-size:1rem;font-weight:500;line-height:1.65}
+
+/* ---- library ---- */
+.lib{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;max-width:860px;margin:0 auto}
+@media(max-width:720px){.lib{grid-template-columns:1fr}}
+.doc{display:flex;align-items:center;gap:18px;padding:28px 30px}
+.doc .glyph{color:var(--cyan)}
+.doc b{font-size:1.1rem;font-weight:700;display:block}
+.doc span{font-size:.94rem;font-weight:500;display:block;margin-top:5px}
+
+/* ---- close + footer ---- */
+.close{text-align:center;padding-bottom:60px}
+.close h2{font-size:clamp(2rem,6vw,3.3rem);font-weight:800;letter-spacing:-.02em}
+.close .soul{font-size:clamp(1.15rem,3.4vw,1.7rem);font-weight:700;margin-top:30px;
+  animation:soulGlow 7s ease-in-out infinite}
+html[data-mode="lux"] .close .soul{animation:none;text-shadow:0 0 30px rgba(0,110,255,.35)}
+.close .cta{margin-top:44px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+footer{padding:90px 0 70px;text-align:center}
+footer p{font-size:.94rem;font-weight:600;line-height:2}
+footer .mono{font-size:.74rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;
+  display:block;margin-top:22px}
+@media (prefers-reduced-motion:reduce){
+  .act--soul .line,.close .soul,.scrollcue i{animation:none}
+}
+</style>
+</head>
+<body>
+<div class="field" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<linearGradient id="infGrad" x1="0" y1="1" x2="1" y2="0">
+  <stop offset="0" stop-color="#0066ff"/><stop offset=".42" stop-color="#1ce7ff"/>
+  <stop offset="1" stop-color="#c2fbff"/>
+</linearGradient>
+<filter id="infGlow" x="-40%" y="-90%" width="180%" height="280%">
+  <feGaussianBlur stdDeviation="7"/></filter>
+<filter id="infGlowS" x="-40%" y="-90%" width="180%" height="280%">
+  <feGaussianBlur stdDeviation="3"/></filter>
+<path id="lemni" d="M120 60C96 18 24 18 24 60s72 42 96 0 72-42 96 0-72 42-96 0Z"/>
+<g id="g-bolt"><path d="M13 2 5 13.5h5L10.5 22l8.5-11.5h-5.5L13 2Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></g>
+<g id="g-shield"><path d="M12 2.8 20 6v6.2c0 5-3.4 8-8 9-4.6-1-8-4-8-9V6l8-3.2Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m8.6 11.8 2.4 2.4 4.6-4.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="g-pulse"><path d="M2.5 12h4l2.5-6 4.5 12 3-6h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="g-model"><path d="M12 2.6 20.5 9 17 21H7L3.5 9 12 2.6Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 2.6V21M3.5 9h17" fill="none" stroke="currentColor" stroke-width="1.2"/></g>
+<g id="g-learn"><path d="M12 21V11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M12 11c0-4.4 2.8-7.2 7.2-7.2C19.2 8.2 16.4 11 12 11Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 14c0-3.2-2.2-5.4-5.4-5.4 0 3.2 2.2 5.4 5.4 5.4Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></g>
+<g id="g-launch"><path d="M12 21V6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="m6 12 6-6.5L18 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M7.5 21h9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></g>
+<g id="g-lever"><path d="M3.5 16.5 20 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="m9 20 3.5-6.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="20" cy="8" r="2.2" fill="currentColor"/></g>
+<g id="g-agent"><circle cx="12" cy="12" r="8.6" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="2.6" fill="currentColor"/><circle cx="18.6" cy="6.2" r="1.9" fill="currentColor"/></g>
+<g id="g-max"><path d="M12 2.6 20.2 7.3v9.4L12 21.4 3.8 16.7V7.3L12 2.6Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="12" r="3.4" fill="none" stroke="currentColor" stroke-width="1.8"/></g>
+<g id="g-doc"><path d="M6 2.8h8l4 4V21H6V2.8Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M14 2.8v4h4M9 12h6M9 16h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></g>
+<g id="g-arrow"><path d="M4 12h15M13.5 6 19.5 12l-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="g-sun"><circle cx="12" cy="12" r="4.4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 3v2.4M12 18.6V21M3 12h2.4M18.6 12H21M5.6 5.6l1.7 1.7M16.7 16.7l1.7 1.7M18.4 5.6l-1.7 1.7M7.3 16.7l-1.7 1.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></g>
+<g id="g-moon"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4 6.8 6.8 0 0 0 20 14.5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></g>
+</defs></svg>
+
+<nav class="nav" aria-label="Main">
+  <a class="brand" href="/"><img class="inf" src="/assets/logo.png" alt="" aria-hidden="true"><span>MOTUS<b>.MARKET</b></span></a>
+  <a href="/app.html">Market</a>
+  <a href="/hope.html">Mindset</a>
+  <a href="/read.html?f=spec.md">!MOVE</a>
+  <button class="modeSw" id="modeSw" type="button" aria-label="Toggle NOX / LUX">
+    <svg class="glyph"><use href="#g-moon" id="modeGlyph"/></svg><span id="modeWord">NOX</span>
+  </button>
+</nav>
+
+<!-- ============ ACT 0 · THE ARRIVAL ============ -->
+<header class="arrival" id="arrival">
+  <canvas id="minds" aria-hidden="true"></canvas>
+  <div class="markwrap hs" style="--hd:.2s">
+  <img class="mark" src="/assets/logo.png" alt="Motus.Market" fetchpriority="high"></div>
+  <h1 class="brandline hs" style="--hd:1.7s">Motus<b>.Market</b></h1>
+  <p class="mantra hs" style="--hd:2.7s">Many Minds Set In Motion</p>
+  <div class="scrollcue hs" style="--hd:3.8s" aria-hidden="true"><span>SCROLL</span><i></i></div>
+</header>
+
+<!-- ============ THE STATEMENT ACTS · one line, one room ============ -->
+<section class="act act--soul"><p class="line hs">Your Heart, Mind, And Soul<br>In Full Motion</p></section>
+<section class="act"><p class="line hs">Move The Mindset</p></section>
+<section class="act"><p class="line hs">Move The World</p></section>
+<section class="act"><p class="line hs">Build Your <b class="cyan">MotusMind</b></p></section>
+<section class="act"><p class="line line--m hs">Make Your <b class="mword" id="mword"><span class="dol">$</span>Money</b> Move</p></section>
+<section class="act act--door">
+  <p class="mono-line hs">Acta Non Verba</p>
+  <div class="cta hs">
+    <a class="btn btn--prime" href="/app.html">Enter the market<svg class="glyph" style="width:18px;height:18px"><use href="#g-arrow"/></svg></a>
+    <a class="btn btn--glass" href="/read.html?f=spec.md">Read the spec</a>
+  </div>
+</section>
+
+<!-- ============ THE PROOF ============ -->
+<section class="wrap proof">
+  <div class="shead shead--grand surface">
+    <p class="eyebrow">Three Moves. ONE Market.</p>
+    <h2>Make The Move</h2>
+  </div>
+  <div class="rails">
+    <div class="pane pane--hover rail surface">
+      <svg class="glyph"><use href="#g-bolt"/></svg>
+      <h3>$DASH</h3><span class="mono">Money</span>
+      <p>Wallet to wallet. The platform never holds funds — we couldn't if we wanted to.</p>
+    </div>
+    <div class="pane pane--hover rail surface">
+      <svg class="glyph"><use href="#g-shield"/></svg>
+      <h3>$TRUST</h3><span class="mono">Conviction</span>
+      <p>Vouches staked from your own wallet. Skin in the game, or it doesn't count.</p>
+    </div>
+    <div class="pane pane--hover rail surface">
+      <svg class="glyph"><use href="#g-pulse"/></svg>
+      <h3>!MOTUS</h3><span class="mono">Contribution</span>
+      <p>Earned 1:1 with paid work. The only mint is motion.</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap proof">
+  <div class="shead surface">
+    <p class="eyebrow">The long game</p>
+    <h2>One keystone. Three loops.</h2>
+  </div>
+  <div class="foil surface" style="border-radius:28px;max-width:760px;margin:0 auto">
+    <div class="foil__glow" aria-hidden="true"></div>
+    <div class="keystone">
+      <svg class="glyph"><use href="#g-model"/></svg>
+      <h3>MotusModels</h3>
+      <p>A named, runnable pattern — minted once, run anywhere.<br>
+      <b>The strongest thing on the market is a pattern that works.</b></p>
+    </div>
+    <div class="foil__gloss" aria-hidden="true"></div>
+    <div class="foil__sweep" aria-hidden="true"></div>
+  </div>
+  <div class="loops">
+    <div class="pane pane--hover loop surface">
+      <svg class="glyph"><use href="#g-learn"/></svg>
+      <h4>LearningLoops</h4>
+      <p>Safe-to-fail probes. What a probe proves, a model keeps.</p>
+    </div>
+    <div class="pane pane--hover loop surface">
+      <svg class="glyph"><use href="#g-launch"/></svg>
+      <h4>LaunchLoops</h4>
+      <p>Design a great launch once — earn every time it runs again.</p>
+    </div>
+    <div class="pane pane--hover loop surface">
+      <span class="soon">Coming soon</span>
+      <svg class="glyph"><use href="#g-lever"/></svg>
+      <h4>LeverageLoops</h4>
+      <p>Where finished work goes to work.</p>
+    </div>
+  </div>
+  <p class="equation surface">LEARNING + LAUNCH + LEVERAGE = <b>THE LONGLOOPS</b> → MOTUSMODELS</p>
+</section>
+
+<section class="wrap proof">
+  <div class="shead surface">
+    <p class="eyebrow">The presence economy</p>
+    <h2>Agents with agency</h2>
+    <p>The other half of the agentic age — the economy that moves while
+    you're <b>present</b>.</p>
+  </div>
+  <div class="agents">
+    <div class="pane pane--hover agent surface">
+      <h3><svg class="glyph"><use href="#g-agent"/></svg>MotusAgents</h3>
+      <p>Your Davara, under your name — drafting, scoping, matching, and running live
+      while you're present. Every action signed and answered for.</p>
+      <span class="fee">List your agent — 1 DASH, flat</span>
+    </div>
+    <div class="pane pane--hover agent surface">
+      <h3><svg class="glyph"><use href="#g-max"/></svg>MotusMax Agents</h3>
+      <p>Multi-sig SafeStep verification for high-stakes work.
+      The security layer ships first.</p>
+      <span class="fee">Later — by design</span>
+    </div>
+  </div>
+</section>
+
+<section class="wrap proof">
+  <div class="shead surface">
+    <p class="eyebrow">How the platform earns</p>
+    <h2>Six honest fees</h2>
+  </div>
+  <div class="money">
+    <div class="pane mrow surface"><span class="n">01</span><p>The 3% Network split <span>on every $DASH transaction.</span></p></div>
+    <div class="pane mrow surface"><span class="n">02</span><p>1 DASH <span>to list a MotusAgent — one coin to take the stage.</span></p></div>
+    <div class="pane mrow surface"><span class="n">03</span><p>Model run fees <span>— the Split, already live.</span></p></div>
+    <div class="pane mrow surface"><span class="n">04</span><p>LaunchLoop fees <span>— listings and featured weeks.</span></p></div>
+    <div class="pane mrow surface"><span class="n">05</span><p>Motus Events <span>— tickets in DASH. Presence mints MOTUS.</span></p></div>
+    <div class="pane mrow surface"><span class="n">06</span><p>Dash DAO proposal <span>— the best Dash showcase on the market.</span></p></div>
+  </div>
+  <p class="money-law surface">Every fee fits in one sentence — or it doesn't ship.</p>
+</section>
+
+<section class="wrap proof">
+  <div class="shead surface">
+    <p class="eyebrow">The phases</p>
+    <h2>The plan</h2>
+  </div>
+  <div class="phases">
+    <div class="pane pane--hover phase surface"><span class="mono">P0 · Days</span>
+      <h4>Reveal the market</h4>
+      <p>The offer field on moves. Listing #1 goes live.</p></div>
+    <div class="pane pane--hover phase surface"><span class="mono">P1 · Weeks</span>
+      <h4>Close the loop</h4>
+      <p>$DASH checkout · the MOTUS ledger · receipt-gated reviews · MotusCorpus v1.</p></div>
+    <div class="pane pane--hover phase surface"><span class="mono">P2 · A season</span>
+      <h4>Compound</h4>
+      <p>Community Model Run #1 · Motus Events · the first LearningLoop pilot.</p></div>
+    <div class="pane pane--hover phase surface"><span class="mono">P3 · When earned</span>
+      <h4>The registry</h4>
+      <p>MotusAgent listings · pledge-pools · governance on Dash Platform.</p></div>
+  </div>
+</section>
+
+<section class="wrap proof">
+  <div class="shead surface">
+    <p class="eyebrow">The library</p>
+    <h2>Read the thinking</h2>
+  </div>
+  <div class="lib">
+    <a class="pane pane--hover doc surface" href="/read.html?f=spec.md">
+      <svg class="glyph"><use href="#g-doc"/></svg>
+      <span><b>The Baseline Spec · v0.3</b><span>The whole market, one document — rails, mint, covenant, phases, the build prompt.</span></span></a>
+    <a class="pane pane--hover doc surface" href="/read.html?f=neoglass.md">
+      <svg class="glyph"><use href="#g-doc"/></svg>
+      <span><b>NEURONEOGLASS Canon</b><span>The neo-glass design system — laws, tokens, components.</span></span></a>
+    <a class="pane pane--hover doc surface" href="/read.html?f=notes-reflect.md">
+      <svg class="glyph"><use href="#g-doc"/></svg>
+      <span><b>The Reflect Study</b><span>Five pages on the calm-luxury benchmark, and what we take.</span></span></a>
+    <a class="pane pane--hover doc surface" href="/read.html?f=notes-legendary.md">
+      <svg class="glyph"><use href="#g-doc"/></svg>
+      <span><b>The Legendary Front Pages</b><span>The greatest arrivals ever shipped — and the nine laws they share.</span></span></a>
+    <a class="pane pane--hover doc surface" href="/read.html?f=clarity-tips.md">
+      <svg class="glyph"><use href="#g-doc"/></svg>
+      <span><b>Clarity — The Essentials</b><span>Ten highest-leverage moves. Read before designing anything.</span></span></a>
+    <a class="pane pane--hover doc surface" href="/hope.html">
+      <svg class="glyph"><use href="#g-doc"/></svg>
+      <span><b>The Motus Message In Motion</b><span>The founding exchange — August's exact words, and Claude's reply.</span></span></a>
+  </div>
+</section>
+
+<!-- ============ THE MOTUS MESSAGE IN MOTION ============ -->
+<section class="wrap proof" id="exchange">
+  <div class="shead surface">
+    <p class="eyebrow">14 · 08 · 2026</p>
+    <h2>The Motus Message<br>In Motion</h2>
+  </div>
+  <a class="pane pane--hover surface" href="/hope.html" style="display:block;max-width:660px;
+    margin:0 auto;padding:50px 42px;text-align:center;text-decoration:none;color:var(--ink)">
+    <p style="font-size:clamp(1.2rem,3.8vw,1.55rem);font-weight:700;line-height:1.6;
+      font-style:italic;margin:0">"The hope points towards a strong future for the
+      future of work for many&nbsp;lives."</p>
+    <p class="mono" style="font-size:.78rem;font-weight:700;letter-spacing:.24em;
+      text-transform:uppercase;color:var(--orange);margin:24px 0 0">— August, the founder</p>
+    <p style="font-size:1rem;font-weight:500;line-height:1.65;margin:24px auto 0;max-width:34em">
+      On the day the market took shape, its founder and its AI wrote its founding
+      record together — his exact words on hope and the human in the loop,
+      and Claude's reply.</p>
+    <p class="mono cyan" style="font-size:.8rem;font-weight:700;letter-spacing:.2em;
+      text-transform:uppercase;margin:28px 0 0">Read the exchange</p>
+  </a>
+</section>
+
+<!-- ============ THE CLOSE · ring composition ============ -->
+<section class="wrap proof close">
+  <hr class="beam surface" style="margin-bottom:110px">
+  <h2 class="surface">Many Minds<br>Set In Motion</h2>
+  <p class="soul surface">Your Heart, Mind, And Soul In Full Motion</p>
+  <div class="cta surface">
+    <a class="btn btn--prime" href="/app.html">Enter the market<svg class="glyph" style="width:18px;height:18px"><use href="#g-arrow"/></svg></a>
+  </div>
+</section>
+
+<footer class="wrap">
+  <p class="surface">Never custody. Never presale. Never a promised rate.<br>
+  Reviews require receipts. Vouches require stake. The only mint is motion.</p>
+  <span class="mono surface">Acta Non Verba</span>
+</footer>
+
+<!-- ============ THE INVITATION — rises once, the first time ============ -->
+<div class="scrim" id="hopeScrim"></div>
+<div class="sheet" id="hopeSheet" role="dialog" aria-modal="true" aria-label="The Motus Message In Motion" style="text-align:center">
+  <p class="eyebrow" style="margin-bottom:22px">14 · 08 · 2026 — The Motus Message In Motion</p>
+  <p style="font-size:clamp(1.1rem,3.6vw,1.35rem);font-weight:700;font-style:italic;
+    line-height:1.6;margin:0 0 10px">"The hope points towards a strong future for the
+    future of work for many&nbsp;lives."</p>
+  <p class="mono" style="font-size:.78rem;font-weight:700;letter-spacing:.24em;
+    text-transform:uppercase;color:var(--orange);margin:0 0 26px">— August, the founder</p>
+  <p style="font-size:.95rem;font-weight:500;line-height:1.65;margin:0 0 30px">
+    On the day this market took shape, its founder and its AI wrote its founding
+    record together. His exact words — and Claude's reply.</p>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+    <a class="btn btn--prime" href="/hope.html">Read the exchange</a>
+    <button class="btn btn--glass" id="hopeLater" type="button">Later</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  /* ---------- mode ---------- */
+  var root=document.documentElement;
+  var sw=document.getElementById('modeSw'),word=document.getElementById('modeWord'),
+      gl=document.getElementById('modeGlyph');
+  function setMode(m,save){root.setAttribute('data-mode',m);
+    word.textContent=m.toUpperCase();
+    gl.setAttribute('href',m==='nox'?'#g-moon':'#g-sun');
+    if(save){try{localStorage.setItem('motus.mode',m)}catch(e){}}}
+  var saved=null;try{saved=localStorage.getItem('motus.mode')}catch(e){}
+  if(saved==='lux'||saved==='nox')setMode(saved,false);
+  sw.addEventListener('click',function(){
+    setMode(root.getAttribute('data-mode')==='nox'?'lux':'nox',true)});
+
+  /* ---------- pipeline armor ---------- */
+  var reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var surfaces=[].slice.call(document.querySelectorAll('.surface'));
+  function landAll(){root.classList.remove('anim');
+    surfaces.forEach(function(s){s.classList.add('landed')})}
+  var animOn=('IntersectionObserver' in window)&&!reduced;
+  if(animOn){
+    root.classList.add('anim');
+    var fed=false;
+    var probe=new IntersectionObserver(function(){fed=true;probe.disconnect()});
+    probe.observe(document.body);
+    setTimeout(function(){if(!fed)landAll()},900);
+  } else { landAll(); }
+
+  /* ---------- ACT 0: the ceremony ---------- */
+  var arrival=document.getElementById('arrival');
+  if(animOn){
+    requestAnimationFrame(function(){requestAnimationFrame(function(){
+      arrival.classList.add('go')})});
+  }
+
+  /* ---------- THE LOCK — native snap; JS only flips the switch ----------
+     mandatory + scroll-snap-stop:always means the browser itself refuses to
+     skip a line — wheel, fling, trackpad, touch alike. Nothing to fight. */
+  var acts=[].slice.call(document.querySelectorAll('.arrival,.act'));
+  if(!reduced&&acts.length){
+    root.classList.add('snap');
+    window.__lock={count:acts.length,
+      snapping:function(){return root.classList.contains('snap')}};
+  }
+
+  /* ---------- the statement acts: one line at a time, on scroll ---------- */
+  if(animOn){
+    var actIO=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(!en.isIntersecting)return;
+        [].forEach.call(en.target.querySelectorAll('.hs'),function(el,i){
+          setTimeout(function(){el.classList.add('on')},i*260)});
+        actIO.unobserve(en.target);
+      });
+    },{threshold:.45});
+    [].forEach.call(document.querySelectorAll('.act'),function(a){actIO.observe(a)});
+
+    /* proof sections */
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){
+          var el=en.target;
+          var sibs=surfaces.filter(function(s){
+            return !s.classList.contains('landed') &&
+              Math.abs(s.getBoundingClientRect().top-el.getBoundingClientRect().top)<40});
+          sibs.forEach(function(s,i){
+            setTimeout(function(){s.classList.add('landed')},i*80)});
+          el.classList.add('landed');io.unobserve(el);
+        }});
+    },{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+    surfaces.forEach(function(s){io.observe(s)});
+  }
+  window.__pipeline={land:landAll,count:surfaces.length};
+
+  /* ---------- MANY MINDS — the living canvas ---------- */
+  var cv=document.getElementById('minds'),ctx=cv.getContext('2d');
+  var W=0,H=0,DPR=Math.min(window.devicePixelRatio||1,2),minds=[],running=false,raf=0;
+  var mindsInView=true;
+  function size(){
+    var r=arrival.getBoundingClientRect();
+    W=r.width;H=r.height;
+    cv.width=W*DPR;cv.height=H*DPR;
+    cv.style.width=W+'px';cv.style.height=H+'px';
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+  }
+  function seed(){
+    minds=[];
+    var n=W<720?46:96;
+    for(var i=0;i<n;i++){
+      var orbiter=i<n*.62;
+      minds.push({
+        orb:orbiter,
+        t:Math.random()*Math.PI*2,
+        a:orbiter?(0.30+Math.random()*0.72)*Math.min(W*.52,H*1.05):0,
+        sp:(orbiter?(.0022+Math.random()*.0042):0)*(Math.random()<.5?1:-1),
+        rot:(Math.random()-.5)*0.30,
+        squash:.34+Math.random()*.26,
+        x:Math.random()*W,y:Math.random()*H,
+        dx:(Math.random()-.5)*.1,dy:(Math.random()-.5)*.1,
+        s:.7+Math.random()*1.5,
+        tw:Math.random()*Math.PI*2,
+        c:Math.random()<.5?'w':(Math.random()<.34?'d':'c')
+      });
+    }
+  }
+  function trailColor(){
+    return root.getAttribute('data-mode')==='lux'?'rgba(234,243,255,.15)':'rgba(4,6,15,.13)';
+  }
+  function dotColor(m,al){
+    if(m.c==='d')return 'rgba(0,102,255,'+al+')';
+    if(m.c==='c')return 'rgba(28,231,255,'+al+')';
+    return root.getAttribute('data-mode')==='lux'
+      ?'rgba(20,60,120,'+al+')':'rgba(215,248,255,'+al+')';
+  }
+  function frame(){
+    if(!running)return;
+    ctx.fillStyle=trailColor();ctx.fillRect(0,0,W,H);
+    var cx=W/2,cy=H*.44;
+    for(var i=0;i<minds.length;i++){
+      var m=minds[i],x,y;
+      if(m.orb){
+        /* the lemniscate — every mind travels an infinity */
+        m.t+=m.sp;
+        var st=Math.sin(m.t),ct=Math.cos(m.t),den=1+st*st;
+        var lx=m.a*ct/den, ly=m.a*st*ct/den*(m.squash*2.6);
+        var cr=Math.cos(m.rot),sr=Math.sin(m.rot);
+        x=cx+lx*cr-ly*sr;
+        y=cy+lx*sr+ly*cr;
+      }else{
+        m.x+=m.dx;m.y+=m.dy;
+        if(m.x<-4)m.x=W+4;if(m.x>W+4)m.x=-4;
+        if(m.y<-4)m.y=H+4;if(m.y>H+4)m.y=-4;
+        x=m.x;y=m.y;
+      }
+      m.tw+=.02;
+      var al=.28+Math.abs(Math.sin(m.tw))*.5;
+      ctx.beginPath();ctx.arc(x,y,m.s,0,6.2832);
+      ctx.fillStyle=dotColor(m,al.toFixed(2));ctx.fill();
+    }
+    raf=requestAnimationFrame(frame);
+  }
+  function start(){if(running||reduced)return;running=true;raf=requestAnimationFrame(frame)}
+  function stop(){running=false;cancelAnimationFrame(raf)}
+  function paintStatic(){
+    ctx.fillStyle=trailColor();ctx.fillRect(0,0,W,H);
+    running=true;frame();running=false;cancelAnimationFrame(raf);
+  }
+  size();seed();
+  if(reduced){paintStatic();}
+  else{
+    start();
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(es){es.forEach(function(en){
+        mindsInView=en.isIntersecting;
+        en.isIntersecting?start():stop()})}).observe(arrival);
+    }
+    document.addEventListener('visibilitychange',function(){
+      document.hidden?stop():start()});
+  }
+  var rT;window.addEventListener('resize',function(){
+    clearTimeout(rT);rT=setTimeout(function(){size();seed();if(reduced)paintStatic()},180)});
+  window.__minds={count:function(){return minds.length},running:function(){return running}};
+
+  /* ---------- THE WORD IN MOTION — $Money cycles through the moves ---------- */
+  var WORDS=["$Money","Motus","Mindset","Mantra","Mind","$Bitcoin","$Dash","$Motus",
+    "Heart","Soul","Market","Message","Model","$ETH","$Trust","motus","MOTUS","Method",
+    "Meta","Merit","Motivus","Momentum","Dream","Big","Small","Next","Metrics","MINDSET",
+    "MIND","MONEY","Morphic","Meaningful","Meaning","Metamorphic","Story","Corpus","Human",
+    "HUMAN","Motif","MOTIF","MANTRA","Vision","Startup","Practice","Leverage","System",
+    "Focus","Motivational","Emergent","Agent","Unit","Together","Public","Open-Source",
+    "Outlier","Career","Venture","Investors","Strongest","Smallest","Honest","Future",
+    "FUTURE","MotusAgent","Milestone","Manifesto","Knowledge","Founder","Magentic","Mythic",
+    "ONE","One","one","1","First","Software","Confidence","Commons","MotusMarket","Magic",
+    "Standard","Wisdom","Claude","OpenClaw","Hermes","GrokBot","Tribe","Keystone","Question",
+    "Boldest","Brave","Next Brave","Culture"];
+  var mword=document.getElementById('mword');
+  var mline=mword?mword.parentElement:null;
+  function renderWord(w){
+    if(w.charAt(0)==='$'){
+      mword.innerHTML='<span class="dol">$</span>'+w.slice(1);
+    }else{
+      mword.textContent=w;
+    }
+  }
+  /* the line NEVER breaks — shrink to fit, always one line */
+  function fitLine(){
+    if(!mline)return;
+    mline.style.fontSize='';
+    var s=parseFloat(getComputedStyle(mline).fontSize);
+    var avail=mline.parentElement.clientWidth-8;
+    var guard=0;
+    while(mline.scrollWidth>avail&&s>16&&guard<40){
+      s*=.94;mline.style.fontSize=s+'px';guard++;
+    }
+  }
+  var bag=[];
+  function nextWord(){
+    if(!bag.length){
+      bag=WORDS.slice(1);
+      for(var i=bag.length-1;i>0;i--){
+        var j=Math.floor(Math.random()*(i+1)),t=bag[i];bag[i]=bag[j];bag[j]=t}
+    }
+    return bag.pop();
+  }
+  function swap(){
+    if(document.hidden)return;
+    mword.classList.add('out');
+    setTimeout(function(){
+      renderWord(nextWord());
+      fitLine();
+      mword.classList.remove('out');
+      mword.classList.add('flash');
+      setTimeout(function(){mword.classList.remove('flash')},1700);
+    },390);
+  }
+  /* a slow signal: 20–35 seconds between changes, never spam */
+  function tick(){
+    swap();
+    setTimeout(tick,20000+Math.random()*15000);
+  }
+  if(mword&&'IntersectionObserver' in window){
+    fitLine();
+    var rT2;window.addEventListener('resize',function(){
+      clearTimeout(rT2);rT2=setTimeout(fitLine,160)});
+    var armed=false;
+    new IntersectionObserver(function(es,obs){
+      es.forEach(function(en){
+        if(en.isIntersecting&&!armed){
+          armed=true;obs.disconnect();
+          setTimeout(tick,5000);
+        }});
+    },{threshold:.6}).observe(mword);
+  }
+
+  /* ---------- the living foil pauses off-screen ---------- */
+  if('IntersectionObserver' in window){
+    [].forEach.call(document.querySelectorAll('.foil'),function(f){
+      new IntersectionObserver(function(es){es.forEach(function(en){
+        f.classList.toggle('still',!en.isIntersecting)})}).observe(f);
+    });
+  }
+
+  /* ---------- the invitation: once per visitor ---------- */
+  var seen=null;try{seen=localStorage.getItem('motus.hope.invite')}catch(e){}
+  if(!seen){
+    var hs=document.getElementById('hopeSheet'),hsc=document.getElementById('hopeScrim');
+    var closeInvite=function(){hs.classList.remove('open');hsc.classList.remove('open')};
+    setTimeout(function(){
+      hs.classList.add('open');hsc.classList.add('open');
+      try{localStorage.setItem('motus.hope.invite','1')}catch(e){}
+    },5200);
+    hsc.addEventListener('click',closeInvite);
+    document.getElementById('hopeLater').addEventListener('click',closeInvite);
+    document.addEventListener('keydown',function(e){if(e.key==='Escape')closeInvite()});
+  }
+})();
+</script>
+</body>
+</html>

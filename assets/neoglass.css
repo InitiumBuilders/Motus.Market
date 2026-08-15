@@ -1,0 +1,249 @@
+/* ============================================================
+   NEURONEOGLASS — THE INFINITY EDITION
+   Canon: /neoglass.md · rebuilt 2026-08-14 around the ∞ mark
+   Colors extracted from the logo: electric blue-cyan, royal
+   depth, white-hot core. Light is the material. Glow is native.
+   ============================================================ */
+
+:root, html[data-mode="nox"]{
+  --bg:#04060f;                     /* deeper void — the mark needs black space */
+  --bg-2:#080d1c;
+  --ink:#ffffff;
+  --glass:rgba(255,255,255,.045);
+  --glass-2:rgba(255,255,255,.09);
+  --edge:rgba(120,220,255,.16);     /* edges carry the cyan now */
+  --edge-hi:rgba(140,235,255,.45);
+  --blur:blur(22px) saturate(180%);
+  --violet:#6f5cff; --violet-2:#9b8cff;
+  /* ---- THE LOGO PALETTE ---- */
+  --cyan:#1ce7ff;                   /* the mark's electric cyan */
+  --cyan-hot:#c2fbff;               /* the white-hot core */
+  --cyan-deep:#0066ff;              /* the royal-blue depth */
+  --cyan-ink:#01121f;               /* text ON solid cyan */
+  --cyan-glow:0 0 22px rgba(28,231,255,.55), 0 0 62px rgba(0,110,255,.28);
+  --text-glow:0 0 18px rgba(28,231,255,.5), 0 0 46px rgba(0,120,255,.22);
+  --orange:#ff8c2e;
+  --green:#2fd66b;
+  --pane-shadow:inset 0 1px 0 rgba(160,240,255,.14), 0 24px 64px rgba(0,0,0,.55);
+  --aura:radial-gradient(closest-side,rgba(0,180,255,.42),rgba(0,90,220,.12) 58%,transparent 74%);
+  --rainbow-glass:conic-gradient(from 210deg,
+    #ff3b30 0 12.5%,#ff9500 0 25%,#ffcc00 0 37.5%,#34c759 0 50%,
+    #32ade6 0 62.5%,#007aff 0 75%,#af52de 0 87.5%,#ff2d55 0 100%);
+  --font:'Sora',system-ui,sans-serif;
+  --display:'Orbitron','Sora',system-ui,sans-serif;   /* the statement face */
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --r-pane:24px; --r-ctl:18px; --r-pill:999px;
+  --ease-out:cubic-bezier(.16,1,.3,1);          /* decisive, then dead still */
+  --ease-spring:cubic-bezier(.3,1.45,.45,1);    /* one overshoot, no wobble */
+}
+html[data-mode="lux"]{
+  --bg:#eaf3ff;
+  --bg-2:#f2f7ff;
+  --ink:#0b2340;
+  --glass:rgba(255,255,255,.6);
+  --glass-2:rgba(255,255,255,.85);
+  --edge:rgba(255,255,255,.92);
+  --edge-hi:rgba(0,150,220,.4);
+  --blur:blur(18px) saturate(165%);
+  --cyan:#0094c4; --cyan-hot:#00b4ff; --cyan-deep:#0055cc;
+  --cyan-ink:#ffffff;
+  --cyan-glow:0 0 20px rgba(0,148,196,.32);
+  --text-glow:0 0 16px rgba(0,148,196,.22);
+  --green:#0e9b4a; --orange:#f97316;
+  --violet:#6f5cff; --violet-2:#8b7cff;
+  --pane-shadow:inset 0 1px 0 rgba(255,255,255,.95), 0 18px 46px rgba(20,90,180,.16);
+  --aura:radial-gradient(closest-side,rgba(0,160,255,.24),transparent 72%);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{font-size:17px;scroll-behavior:smooth}
+body{
+  font-family:var(--font);color:var(--ink);background:var(--bg);
+  min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;
+  transition:background .5s ease,color .5s ease;
+}
+/* THE FIELD — the void the mark burns through */
+.field{position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:
+    radial-gradient(58vw 54vw at 16% -10%,rgba(0,130,255,.20),transparent 64%),
+    radial-gradient(46vw 46vw at 88% 28%,rgba(28,231,255,.10),transparent 68%),
+    radial-gradient(64vw 48vw at 50% 114%,rgba(90,70,255,.16),transparent 70%),
+    var(--bg);
+  transition:background .5s ease;}
+html[data-mode="lux"] .field{
+  background:
+    radial-gradient(58vw 52vw at 14% -8%,rgba(0,170,255,.28),transparent 66%),
+    radial-gradient(48vw 44vw at 90% 26%,rgba(120,100,255,.18),transparent 70%),
+    linear-gradient(150deg,#e2eeff,#eae6ff 46%,#dff4ff);}
+.grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* ---------- THE MARK — August's logo, exactly as made ----------
+   The PNG is square with transparent margins; the visible mark is
+   ~96% wide × ~42% tall. Size by width, collapse the dead space. */
+.brand img.inf,.railbar .brand img.inf{
+  width:92px;height:92px;object-fit:contain;flex:0 0 auto;
+  display:inline-block;vertical-align:middle;
+  margin:-29px 14px -29px 0;      /* never negative on X — it escapes the pill */
+  filter:drop-shadow(0 0 7px rgba(0,190,255,.6)) drop-shadow(0 0 18px rgba(0,120,255,.3))}
+.railbar .brand img.inf{width:214px;height:214px;display:block;
+  margin:-80px auto -70px auto}
+@media(max-width:640px){.brand img.inf{width:52px;height:52px;
+  margin:-5px 3px -5px 0;
+  filter:drop-shadow(0 0 5px rgba(0,190,255,.55)) drop-shadow(0 0 10px rgba(0,120,255,.28))}}
+/* the very small phones: destinations win, the mark lives in the page itself */
+@media(max-width:404px){.bar .brand img.inf{display:none}
+  .bar .brand{display:none}}
+
+/* ---------- THE INFINITY MARK ---------- */
+.inf{display:block}
+.inf .ribbon{fill:none;stroke-linecap:round}
+.inf .core{fill:none;stroke:var(--cyan-hot);stroke-linecap:round;opacity:.95}
+.inf .halo{fill:none;stroke:var(--cyan);opacity:.5}
+.inf .orbit{fill:none;stroke:var(--cyan);opacity:.7}
+.inf .bead{fill:var(--cyan-hot)}
+html[data-mode="lux"] .inf .core{stroke:#ffffff}
+
+/* ---------- THE PANE ---------- */
+.pane{
+  backface-visibility:hidden;
+  background:var(--glass);
+  -webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);
+  border:1px solid var(--edge);border-radius:var(--r-pane);
+  box-shadow:var(--pane-shadow);
+  transition:transform .35s cubic-bezier(.16,1,.3,1),border-color .35s,
+    background .35s,box-shadow .4s;}
+a.pane{display:block;color:inherit;text-decoration:none}
+.pane--hover{position:relative}
+.pane--hover::before{content:'';position:absolute;inset:0;border-radius:inherit;
+  pointer-events:none;opacity:0;transition:opacity .5s ease;
+  background:radial-gradient(66% 48% at 50% 0%,rgba(0,180,255,.16),transparent 74%)}
+.pane--hover:hover::before{opacity:1}
+.pane--hover:hover{transform:translateY(-3px);border-color:var(--edge-hi);
+  background:var(--glass-2);box-shadow:var(--pane-shadow),0 0 44px rgba(0,170,255,.16)}
+
+/* ---------- THE BEAM ---------- */
+.beam{height:1px;border:0;width:min(560px,72%);margin:0 auto;
+  background:linear-gradient(90deg,transparent,var(--cyan),transparent);
+  box-shadow:0 0 16px rgba(28,231,255,.5)}
+html[data-mode="lux"] .beam{box-shadow:0 0 12px rgba(0,148,196,.35)}
+
+/* ---------- BUTTONS & PILLS (≥44px targets) ---------- */
+.btn{backface-visibility:hidden;display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  min-height:52px;padding:0 30px;border-radius:var(--r-ctl);cursor:pointer;
+  font-family:var(--font);font-size:1rem;font-weight:700;letter-spacing:.01em;
+  border:1px solid transparent;text-decoration:none;position:relative;
+  transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .3s,background .3s;}
+.btn:active{transform:translateY(1px) scale(.99)}
+.btn--prime{color:var(--cyan-ink);box-shadow:var(--cyan-glow);
+  background:linear-gradient(135deg,var(--cyan-hot),var(--cyan) 46%,var(--cyan-deep))}
+.btn--prime:hover{transform:translateY(-2px);
+  box-shadow:0 0 34px rgba(28,231,255,.7),0 0 90px rgba(0,110,255,.35)}
+.btn--glass{background:var(--glass);color:var(--ink);border-color:var(--edge);
+  -webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur)}
+.btn--glass:hover{border-color:var(--cyan);transform:translateY(-2px);
+  box-shadow:0 0 26px rgba(28,231,255,.22)}
+.pill{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 20px;
+  border-radius:var(--r-pill);background:var(--glass);border:1px solid var(--edge);
+  -webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);
+  font-family:var(--mono);font-size:.78rem;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink);cursor:pointer;text-decoration:none;
+  transition:border-color .3s,box-shadow .3s,transform .25s}
+.pill:hover{border-color:var(--cyan)}
+.pill.on{border-color:var(--cyan);color:var(--cyan);text-shadow:var(--text-glow);
+  box-shadow:0 0 0 1px var(--cyan) inset,var(--cyan-glow)}
+
+/* ---------- TYPE — cyan always glows now ---------- */
+.eyebrow{font-family:var(--mono);font-size:.8rem;font-weight:700;letter-spacing:.3em;
+  text-transform:uppercase;color:var(--cyan);text-shadow:var(--text-glow)}
+.display{font-weight:800;line-height:1.04;letter-spacing:-.02em}
+.mono{font-family:var(--mono)}
+.orange{color:var(--orange)}
+.cyan{color:var(--cyan);text-shadow:var(--text-glow)}
+
+/* ---------- THE ECLIPSE ---------- */
+.eclipse{position:relative;border-radius:50%;aspect-ratio:1}
+.eclipse::before{content:'';position:absolute;inset:-26%;border-radius:50%;
+  background:var(--aura);filter:blur(8px);animation:breathe 5.5s ease-in-out infinite}
+.eclipse__core{position:absolute;inset:0;border-radius:50%;
+  background:radial-gradient(circle at 50% 40%,#0a1c4a 0 58%,#061230 78%,#04091f 100%)}
+html[data-mode="lux"] .eclipse__core{background:radial-gradient(circle at 50% 40%,#bcd8ff 0 58%,#a4c6f8 78%,#8fb6ee 100%)}
+.eclipse__rim{position:absolute;inset:-3px;border-radius:50%;
+  background:conic-gradient(from 180deg,transparent 0 10%,var(--cyan-deep) 28%,var(--cyan-hot) 50%,var(--cyan) 70%,transparent 90%);
+  -webkit-mask:radial-gradient(circle,transparent calc(50% - 4px),#000 calc(50% - 3px));
+  mask:radial-gradient(circle,transparent calc(50% - 4px),#000 calc(50% - 3px));
+  animation:revolve 30s linear infinite}
+@keyframes revolve{to{transform:rotate(360deg)}}
+@keyframes breathe{0%,100%{opacity:.78}50%{opacity:1}}
+
+/* ---------- THE FOIL — the sacred rainbow, alive ---------- */
+.foil{position:relative}
+.foil::before{content:'';position:absolute;inset:-3px;border-radius:inherit;z-index:-1;
+  background:var(--rainbow-glass)}
+.foil::after{content:'';position:absolute;inset:0;border-radius:inherit;z-index:-1;
+  background:var(--bg-2)}
+html[data-mode="lux"] .foil::after{background:#f2f7ff}
+.foil__gloss{position:absolute;inset:-3px;border-radius:inherit;pointer-events:none;
+  background:linear-gradient(115deg,rgba(255,255,255,.5) 0 8%,transparent 16%);
+  -webkit-mask:linear-gradient(#000,#000) content-box exclude,linear-gradient(#000,#000);
+  mask:linear-gradient(#000,#000) content-box exclude,linear-gradient(#000,#000);
+  padding:3px}
+.foil__glow{position:absolute;inset:-4px;border-radius:inherit;z-index:-2;
+  background:var(--rainbow-glass);filter:blur(28px);
+  animation:foilBreathe 5.5s ease-in-out infinite}
+@keyframes foilBreathe{0%,100%{opacity:.24}50%{opacity:.52}}
+.foil__sweep{position:absolute;inset:0;border-radius:inherit;overflow:hidden;
+  pointer-events:none;z-index:2}
+.foil__sweep::before{content:'';position:absolute;top:-34%;bottom:-34%;left:0;width:30%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.13) 50%,transparent);
+  animation:foilSweep 6.4s cubic-bezier(.55,.1,.3,.9) infinite}
+@keyframes foilSweep{0%{transform:skewX(-16deg) translateX(-140%)}
+  58%,100%{transform:skewX(-16deg) translateX(560%)}}
+.foil.still .foil__glow,.foil.still .foil__sweep::before{animation-play-state:paused}
+
+/* ---------- GLYPHS ---------- */
+.glyph{width:24px;height:24px;flex:0 0 auto}
+
+/* ---------- MOTION ARMOR ---------- */
+html.anim .surface{opacity:0;transform:translateY(14px)}
+html.anim .surface.landed{opacity:1;transform:none;
+  transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
+@media (prefers-reduced-motion:reduce){
+  .eclipse__rim,.eclipse::before,.foil__glow,.foil__sweep::before{animation:none}
+  html.anim .surface{opacity:1;transform:none}
+}
+
+/* ---------- MODE TOGGLE ---------- */
+.modeSw{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 16px;
+  border-radius:var(--r-pill);background:var(--glass);border:1px solid var(--edge);
+  -webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);cursor:pointer;
+  color:var(--ink);font-family:var(--mono);font-size:.74rem;font-weight:700;
+  letter-spacing:.2em;transition:border-color .3s,box-shadow .3s}
+.modeSw:hover{border-color:var(--cyan);box-shadow:0 0 20px rgba(28,231,255,.22)}
+.modeSw .glyph{width:18px;height:18px}
+
+/* ---------- FOCUS SHEET ---------- */
+.scrim{position:fixed;inset:0;z-index:80;background:rgba(4,6,15,.45);
+  -webkit-backdrop-filter:blur(14px) saturate(140%);backdrop-filter:blur(14px) saturate(140%);
+  opacity:0;pointer-events:none;transition:opacity .35s}
+html[data-mode="lux"] .scrim{background:rgba(200,215,240,.4)}
+.scrim.open{opacity:1;pointer-events:auto}
+.sheet{position:fixed;z-index:90;left:50%;bottom:0;transform:translate(-50%,105%);
+  width:min(560px,calc(100vw - 24px));max-height:86vh;overflow:auto;
+  background:var(--glass-2);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);
+  border:1px solid var(--edge-hi);border-bottom:none;border-radius:28px 28px 0 0;
+  box-shadow:var(--pane-shadow),0 -10px 60px rgba(0,140,255,.14);padding:34px 30px 42px;
+  visibility:hidden;transition:transform .45s cubic-bezier(.16,1,.3,1),visibility 0s .45s}
+.sheet.open{transform:translate(-50%,0);visibility:visible;transition:transform .45s cubic-bezier(.16,1,.3,1)}
+
+@media(max-width:640px){
+  .bar{max-width:calc(100vw - 12px);gap:0;padding:5px;
+    overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;
+    justify-content:flex-start}
+  .bar::-webkit-scrollbar{display:none}
+  .bar a,.bar button{flex:0 0 auto;padding:0 9px;font-size:.76rem;letter-spacing:0}
+  .bar .modeSw{padding:0 10px}
+  .bar .brand span,.bar .modeSw span{display:none}
+  .bar .brand{padding:0 2px 0 0}
+}
+::selection{background:rgba(28,231,255,.35)}
