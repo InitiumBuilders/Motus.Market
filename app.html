@@ -315,7 +315,12 @@
 .ferroedge{position:absolute;left:0;right:0;bottom:0;top:-32px;
   width:100%;height:calc(100% + 32px);pointer-events:none;z-index:-1;
   overflow:visible;filter:drop-shadow(0 14px 34px rgba(0,0,0,.65))}
-.ff-body{-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur)}
+/* NO backdrop-filter here, deliberately. The body's fill (#ffBody) is three
+   FULLY OPAQUE stops — nothing behind it was ever visible through it, so the
+   blur produced no pixels anyone could see. And because this path's `d` is
+   rewritten every frame by the rAF loop, the browser re-sampled and re-blurred
+   that whole strip EVERY FRAME, forever, for nothing. That standing cost is
+   what turned any large repaint behind the bar into a visible flash. */
 /* the iridescence is a FRESNEL effect: it lives on the rim at grazing angles,
    never floating inside the black body */
 .ff-rim{mix-blend-mode:screen}
@@ -410,18 +415,11 @@
 @keyframes warpIn{
   0%{opacity:0;transform:translateY(14px)}
   100%{opacity:1;transform:none}}
-.warpline{position:fixed;left:236px;right:0;top:0;bottom:0;z-index:40;
-  pointer-events:none;opacity:0;overflow:hidden}
-.warpline.fire{animation:warpFlash .5s ease-out both}
-.warpline i{position:absolute;left:-30%;height:1px;width:60%;
-  background:linear-gradient(90deg,transparent,var(--cyan),transparent)}
-.warpline.fire i{animation:warpStreak .52s cubic-bezier(.2,.85,.25,1) both}
-@keyframes warpFlash{0%{opacity:1}100%{opacity:0}}
-@keyframes warpStreak{
-  0%{transform:translateX(-40%) scaleX(.2);opacity:0}
-  30%{opacity:.9}
-  100%{transform:translateX(180%) scaleX(1.6);opacity:0}}
-@media(max-width:900px){.warpline{left:0}}
+/* THE WARP STREAKS ARE GONE. A full-screen `position:fixed` overlay flashing
+   its opacity on every single tab change — 375x812, on the main thread, sitting
+   directly behind a bar that was blurring its backdrop. It was decoration that
+   cost a whole-viewport repaint per navigation, and the liquid mass is already
+   the indicator: a third travelling light in one bar reads as an artifact. */
 .railfoot{margin-top:auto;display:flex;flex-direction:column;gap:12px;padding:0 4px}
 .wallet{display:flex;align-items:center;gap:12px;min-height:48px;padding:0 14px;
   border-radius:var(--r-ctl);border:1px solid var(--edge);font-family:var(--mono);
@@ -449,7 +447,13 @@
 
 /* ---- screens ---- */
 .screen{display:none}
-.screen.on{display:block;animation:warpIn .62s var(--ease-out)}
+/* The arrival animates the screen's HEADER, never the screen. `.screen` is up
+   to 339x9959px — 3.4 megapixels — and animating opacity+transform on it put a
+   layer that size on the main thread on every navigation. The header is ~1% of
+   that area and carries the whole gesture: the title arrives, the content is
+   simply already there. */
+.screen.on{display:block}
+.screen.on .sh{animation:warpIn .5s var(--ease-out)}
 .sh{margin-bottom:44px}
 .sh h1{font-family:var(--display);font-size:clamp(1.15rem,2.6vw,1.6rem);font-weight:800;letter-spacing:.005em}
 .sh p{font-size:1.04rem;font-weight:500;margin-top:14px;max-width:34em;line-height:1.65}
@@ -1916,10 +1920,6 @@ html[data-mode="lux"]{--votus:#7c4dd8}
   <p class="paynote" id="payNote"></p>
 </div>
 
-<div class="warpline" id="warp" aria-hidden="true">
-  <i style="top:18%"></i><i style="top:34%"></i><i style="top:47%"></i>
-  <i style="top:61%"></i><i style="top:76%"></i><i style="top:88%"></i>
-</div>
 
 
 
@@ -3467,10 +3467,6 @@ html[data-mode="lux"]{--votus:#7c4dd8}
     jumpTop();
     [].forEach.call(document.querySelectorAll('.nitem'),function(b){
       b.classList.toggle('on',b.getAttribute('data-go')===name)});
-    /* warp streaks across the deck */
-    var wp=document.getElementById('warp');
-    if(wp){wp.classList.remove('fire');void wp.offsetWidth;wp.classList.add('fire');
-      setTimeout(function(){wp.classList.remove('fire')},560)}
     if(window.__flowLiquid)window.__flowLiquid(name);
     if(window.__ferro)window.__ferro.remeasure();   /* the field follows you */
     /* a tab change is the exact moment the browser decides to show its chrome
