@@ -76,11 +76,104 @@
 @keyframes brandBreathe{
   0%,100%{text-shadow:0 0 12px rgba(28,231,255,.28);opacity:.94}
   50%{text-shadow:0 0 22px rgba(28,231,255,.7),0 0 46px rgba(0,140,255,.3);opacity:1}}
+/* ═══════════════════════════════════════════════════════════════
+   THE INSTRUMENT SET — five marks, each one a sentence.
+
+     MARKET   three offers orbiting INSIDE the move's ring
+     !MOTUS   the keystone, and the three legs every run pays
+     AGENTS   two minds facing, meeting on one point
+     LOOPS    the lemniscate, and a light that returns
+     CORPUS   a record grows in rings, a season laid down at a time
+
+   At rest they are still and legible. Selected, each one performs
+   its own verb — no shared wobble, no generic glow.
+   ═══════════════════════════════════════════════════════════════ */
+.ico{position:relative;display:grid;place-items:center;
+  width:46px;height:46px;flex:0 0 auto;border-radius:var(--r-md)}
+.ix{width:34px;height:34px;overflow:visible;display:block;
+  transition:transform .5s var(--ease-spring),filter .5s var(--ease-out)}
+.ix--big{width:44px;height:44px;color:var(--orange);margin:0 auto 18px}
+.ix *{transform-origin:12px 12px}
+.ix-core{transition:r .45s var(--ease-spring)}
+
+/* ── the aperture: a ring that snaps shut around the destination ── */
+.aperture{position:absolute;inset:4px;border-radius:50%;pointer-events:none;
+  border:1.5px solid var(--cyan);opacity:0;transform:scale(1.75);
+  box-shadow:0 0 18px -2px rgba(28,231,255,.7),inset 0 0 14px -4px rgba(28,231,255,.55)}
+/* ── and the four brackets that confirm the lock ── */
+.brk{position:absolute;inset:1px;pointer-events:none;opacity:0;border-radius:var(--r-sm);
+  background:
+    linear-gradient(var(--cyan),var(--cyan)) 0 0/7px 1.5px no-repeat,
+    linear-gradient(var(--cyan),var(--cyan)) 0 0/1.5px 7px no-repeat,
+    linear-gradient(var(--cyan),var(--cyan)) 100% 0/7px 1.5px no-repeat,
+    linear-gradient(var(--cyan),var(--cyan)) 100% 0/1.5px 7px no-repeat,
+    linear-gradient(var(--cyan),var(--cyan)) 0 100%/7px 1.5px no-repeat,
+    linear-gradient(var(--cyan),var(--cyan)) 0 100%/1.5px 7px no-repeat,
+    linear-gradient(var(--cyan),var(--cyan)) 100% 100%/7px 1.5px no-repeat,
+    linear-gradient(var(--cyan),var(--cyan)) 100% 100%/1.5px 7px no-repeat;
+  filter:drop-shadow(0 0 6px rgba(28,231,255,.8))}
+
+.nitem.on .aperture{animation:lockShut .62s cubic-bezier(.22,1.3,.32,1) forwards}
+.nitem.on .brk{animation:brkIn .62s var(--ease-out) .1s forwards}
+@keyframes lockShut{
+  0%{opacity:0;transform:scale(1.75)}
+  55%{opacity:1;transform:scale(.93)}
+  100%{opacity:.85;transform:scale(1)}}
+@keyframes brkIn{
+  0%{opacity:0;transform:scale(1.4)}
+  60%{opacity:1;transform:scale(.97)}
+  100%{opacity:.9;transform:scale(1)}}
+
+/* ── arrival: the mark takes the impact, then holds dead still ── */
+.nitem.on .ix{animation:markLand .62s cubic-bezier(.22,1.35,.32,1)}
+@keyframes markLand{
+  0%{transform:scale(.72) rotate(-14deg)}
+  52%{transform:scale(1.2) rotate(4deg)}
+  100%{transform:scale(1) rotate(0)}}
+
+/* ── each mark performs ITS OWN verb once it is home ── */
+.nitem.on .ix--market .ix-orbit{animation:ixSpin 14s linear infinite}
+.nitem.on .ix--market .ix-ring{animation:ixBreathe 4.6s ease-in-out infinite}
+@keyframes ixSpin{to{transform:rotate(360deg)}}
+@keyframes ixBreathe{0%,100%{opacity:.75}50%{opacity:1}}
+
+.nitem.on .ix--model .ix-leg{animation:ixLeg 3.6s ease-in-out infinite}
+.nitem.on .ix--model .ix-leg2{animation-delay:.32s}
+.nitem.on .ix--model .ix-leg3{animation-delay:.64s}
+@keyframes ixLeg{0%,70%,100%{opacity:.5}22%{opacity:1}}
+
+.nitem.on .ix--agent .ix-cresL{animation:ixMeetL 4.2s ease-in-out infinite}
+.nitem.on .ix--agent .ix-cresR{animation:ixMeetR 4.2s ease-in-out infinite}
+.nitem.on .ix--agent .ix-core{animation:ixPulse 4.2s ease-in-out infinite}
+@keyframes ixMeetL{0%,100%{transform:translateX(0)}50%{transform:translateX(1.4px)}}
+@keyframes ixMeetR{0%,100%{transform:translateX(0)}50%{transform:translateX(-1.4px)}}
+@keyframes ixPulse{0%,100%{opacity:.72}50%{opacity:1}}
+
+/* the light runs the whole lemniscate and comes back to where it began */
+.ix--loop .ix-trace{stroke-dasharray:9 62;stroke-dashoffset:0;opacity:0}
+.nitem.on .ix--loop .ix-trace{opacity:1;animation:ixTrace 3.4s linear infinite}
+@keyframes ixTrace{to{stroke-dashoffset:-71}}
+
+.nitem.on .ix--corpus .ix-r1{animation:ixRing 4.8s ease-in-out infinite}
+.nitem.on .ix--corpus .ix-r2{animation:ixRing 4.8s ease-in-out infinite .5s}
+.nitem.on .ix--corpus .ix-r3{animation:ixRing 4.8s ease-in-out infinite 1s}
+@keyframes ixRing{0%,72%,100%{opacity:.42}26%{opacity:1}}
+
 /* ---- THE CONDUIT — light travels between destinations ---- */
 .rails-wrap{position:relative;display:flex;flex-direction:column;gap:6px}
+/* THE SPINE IS ALIVE. A slow charge runs the rail even at rest, so the
+   navigation reads as a system with current in it rather than a list. */
 .conduit{position:absolute;left:27px;top:10px;bottom:10px;width:1px;
   background:linear-gradient(180deg,transparent,rgba(28,231,255,.22) 12%,
-    rgba(28,231,255,.22) 88%,transparent);pointer-events:none}
+    rgba(28,231,255,.22) 88%,transparent);pointer-events:none;overflow:hidden}
+.conduit::after{content:'';position:absolute;left:-1px;width:3px;height:64px;
+  border-radius:var(--r-pill);
+  background:linear-gradient(180deg,transparent,rgba(28,231,255,.75),transparent);
+  filter:blur(1px);animation:spineCharge 7.5s cubic-bezier(.6,0,.4,1) infinite}
+@keyframes spineCharge{
+  0%{top:-70px;opacity:0}12%{opacity:.9}
+  70%{opacity:.9}82%{top:100%;opacity:0}100%{top:100%;opacity:0}}
+@media(prefers-reduced-motion:reduce){.conduit::after{animation:none;opacity:0}}
 .trail{position:absolute;left:25.5px;width:4px;border-radius:3px;opacity:0;
   background:linear-gradient(180deg,transparent,var(--cyan),transparent);
   filter:blur(1.5px);pointer-events:none;transition:opacity .5s ease}
@@ -96,15 +189,29 @@
   text-align:left;width:100%;letter-spacing:.005em;
   transition:background .3s var(--ease-out),color .3s,letter-spacing .35s var(--ease-out),
     border-color .3s,box-shadow .35s}
-.nitem .glyph{width:30px;height:30px;transition:transform .45s var(--ease-spring),
-  color .3s,filter .35s}
+.nitem .glyph{transition:transform .45s var(--ease-spring),color .3s,filter .35s}
 .nitem:hover{background:var(--glass-2);letter-spacing:.03em}
-.nitem:hover .glyph{transform:scale(1.12) rotate(-4deg)}
+.nitem:hover .ix{transform:scale(1.1)}
+.nitem:hover .aperture{opacity:.3;transform:scale(1.12);
+  transition:opacity .4s var(--ease-out),transform .4s var(--ease-out)}
 .nitem.on{background:var(--glass-2);border-color:var(--edge-hi);letter-spacing:.03em;
   box-shadow:0 0 26px rgba(28,231,255,.13)}
-.nitem.on .glyph{color:var(--cyan);transform:scale(1.22);
-  filter:drop-shadow(0 0 10px var(--cyan)) drop-shadow(0 0 22px rgba(28,231,255,.5))}
-.nitem.on span{color:var(--cyan);text-shadow:var(--text-glow)}
+.nitem.on .ix{color:var(--cyan);
+  filter:drop-shadow(0 0 9px var(--cyan)) drop-shadow(0 0 20px rgba(28,231,255,.45))}
+.nitem.on .ix-core{r:2.6}
+/* the label arrives a beat AFTER the mark — the eye lands, then reads */
+.nitem .lab{display:inline-block;
+  transition:color .3s,text-shadow .3s,transform .5s var(--ease-out)}
+.nitem.on .lab{color:var(--cyan);text-shadow:var(--text-glow);
+  animation:labArrive .55s var(--ease-out) .12s both}
+@keyframes labArrive{
+  0%{opacity:.35;transform:translateX(-7px)}
+  100%{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){
+  .nitem.on .aperture,.nitem.on .brk,.nitem.on .ix,.nitem.on .lab,
+  .nitem.on .ix *{animation:none!important}
+  .nitem.on .aperture{opacity:.85;transform:scale(1)}
+  .nitem.on .brk{opacity:.9}}
 
 /* ---- THE LOCK-IN: the icon bulges, a shockwave leaves it ---- */
 @keyframes bulge{
@@ -119,8 +226,6 @@
   62%{transform:scale(1.62)}
   80%{transform:scale(1.94)}
   100%{transform:scale(1.78)}}
-.nitem.lock .glyph{animation:bulge .72s cubic-bezier(.3,1.3,.4,1) both}
-.nitem.lock .glyph--inf{animation:bulgeInf .72s cubic-bezier(.3,1.3,.4,1) both}
 .wave{position:absolute;left:42px;top:50%;width:16px;height:16px;margin:-8px 0 0 -8px;
   border-radius:50%;border:1.5px solid var(--cyan);opacity:0;pointer-events:none}
 .tabbar .wave{left:50%;top:38%}
@@ -427,11 +532,11 @@ html[data-mode="lux"] .avatar{background:radial-gradient(circle at 34% 30%,#4aa8
 .o-node{fill:var(--cyan);filter:drop-shadow(0 0 8px rgba(28,231,255,.9))}
 .orbit--lever .o-ring{stroke:rgba(255,140,46,.3)}
 .orbit--lever .o-node{fill:var(--orange);filter:drop-shadow(0 0 8px rgba(255,140,46,.9))}
-.o-lab{font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--cyan);text-shadow:var(--text-glow);opacity:0;transition:opacity .4s;
-  white-space:nowrap;position:absolute;top:72px;left:50%;transform:translateX(-50%)}
-.orbit:hover .o-lab,.orbit:focus-visible .o-lab{opacity:1}
-.orbit--lever .o-lab{color:var(--orange);text-shadow:0 0 16px rgba(255,140,46,.5)}
+/* The period is already stated in the meta row below, in full size. A floating
+   duplicate could only survive by shrinking under the 12px floor, so it goes —
+   the orbit keeps the meaning in its aria-label for anyone who needs it. */
+.o-lab{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);
+  white-space:nowrap}
 .orbit:hover svg{animation-duration:calc(var(--rev,9s) / 3)}
 /* stepping a turn — click the orbit and the four beats fire in order */
 .lbbeats>div{transition:border-color .45s var(--ease-out),transform .45s var(--ease-out),
@@ -444,9 +549,7 @@ html[data-mode="lux"] .avatar{background:radial-gradient(circle at 34% 30%,#4aa8
   box-shadow:0 0 34px -6px rgba(255,140,46,.6)}
 /* touch has no hover, and the period is already stated in the meta row below —
    so the orbit's floating label is desktop-only rather than a stray overflow */
-@media(max-width:900px){.orbit{width:58px}.orbit svg{width:50px;height:50px}
-  .o-lab{display:none}}
-@media(hover:none){.o-lab{display:none}}
+@media(max-width:900px){.orbit{width:58px}.orbit svg{width:50px;height:50px}}
 @media(prefers-reduced-motion:reduce){
   .circuit.turning .comet,.circuit.turning .beat,.orbit svg,
   .loopTest::before,.dvcompass::before{animation:none}
@@ -554,12 +657,15 @@ html[data-mode="lux"] .avatar{background:radial-gradient(circle at 34% 30%,#4aa8
 /* ================= THE CORPUS — the mover, live ================= */
 .cs{margin-bottom:30px}
 .phero{position:relative;overflow:hidden;padding:0 0 30px;margin-bottom:26px}
+/* The banner's TOP corners are clipped by .phero's own radius + overflow:hidden,
+   and its bottom edge is an internal seam flowing into the card — not an exposed
+   corner. Rounding that bottom made the banner look like it was floating loose
+   inside its own card, so it stays flush on purpose. */
 .pbanner{height:132px;position:relative;overflow:hidden;
-  border-radius:var(--r-pane) var(--r-pane) var(--r-lg) var(--r-lg);
   background:linear-gradient(115deg,var(--g1,#1ce7ff),var(--g2,#0066ff))}
-.pbanner::after{content:'';position:absolute;inset:0;border-radius:inherit;
+.pbanner::after{content:'';position:absolute;inset:0;
   background:radial-gradient(120% 140% at 50% -20%,transparent,rgba(4,6,15,.86))}
-.pbanner i{position:absolute;inset:0;opacity:.5;border-radius:inherit;
+.pbanner i{position:absolute;inset:0;opacity:.5;
   background:radial-gradient(closest-side,rgba(255,255,255,.5),transparent 70%);
   animation:breathe 6s ease-in-out infinite}
 .phead{display:flex;align-items:flex-end;gap:20px;padding:0 30px;margin-top:-46px;
@@ -876,15 +982,7 @@ html[data-mode="lux"]{--votus:#7c4dd8}
   letter-spacing:.1em;color:var(--cyan);min-height:22px}
 
 /* the mark rides the same slot as every other glyph — scaled, not shifted */
-.glyph--inf{width:30px;height:30px;object-fit:contain;margin:0;
-  transform:scale(1.72);transform-origin:center;
-  filter:drop-shadow(0 0 8px rgba(28,231,255,.75))}
-.nitem:hover .glyph--inf{transform:scale(1.78) rotate(-3deg)}
-.nitem.on .glyph--inf{transform:scale(1.78);
-  filter:drop-shadow(0 0 11px var(--cyan)) brightness(1.14)}
-.tabbar .glyph--inf{transform:scale(1.6)}
-.tabbar .nitem.on .glyph--inf{transform:scale(1.74)}
-
+.nitem:hover .nitem.on .tabbar .tabbar .nitem.on 
 /* ---- the horizontal conduit (mobile) ---- */
 .tconduit{position:absolute;left:16px;right:16px;top:6px;height:1px;pointer-events:none;
   background:linear-gradient(90deg,transparent,rgba(28,231,255,.24),transparent)}
@@ -903,19 +1001,45 @@ html[data-mode="lux"]{--votus:#7c4dd8}
 @media(max-width:900px){
   .shell{grid-template-columns:1fr}
   .railbar{display:none}
-  .main{padding:18px 16px 140px}
-  .sh{margin-bottom:26px}
-  .offer,.model{padding:24px 22px}
-  .grid{gap:16px}
+  /* the bar grew with the new marks — the page keeps real clearance under it,
+     and every band gets more room to breathe on a small screen */
+  .main{padding:20px 18px 168px}
+  .sh{margin-bottom:34px}
+  .sh--row{flex-direction:column;align-items:stretch;gap:18px}
+  .sh--row .engage{width:100%;justify-content:center}
+  .offer,.model{padding:26px 22px}
+  .grid{gap:18px}
+  .bandhead{margin-top:56px}
+  .lawpane--loop,.lawpane--moat,.splitpane,.skillpane{padding:32px 22px}
+  .anatomy{padding:30px 20px}
+  .loopband{padding:32px 22px;margin-top:26px}
+  .dvhero{padding:34px 22px}
+  .mecard{padding:26px 22px}
+  .keypane--big{padding:34px 22px}
   .tabbar{display:flex;position:fixed;left:12px;right:12px;bottom:12px;z-index:70;
     gap:4px;padding:8px;border-radius:26px;background:var(--glass-2);
     -webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);
     border:1px solid var(--edge-hi);box-shadow:var(--pane-shadow)}
-  .tabbar .nitem{flex-direction:column;gap:5px;min-height:58px;justify-content:center;
+  .tabbar .nitem{flex-direction:column;gap:3px;min-height:66px;justify-content:center;
     padding:0;font-size:.72rem;font-family:var(--mono);font-weight:700;
-    letter-spacing:.06em;text-transform:uppercase;flex:1;border-radius:18px}
-  .tabbar .nitem .glyph{width:27px;height:27px}
+    letter-spacing:.06em;text-transform:uppercase;flex:1 1 0;min-width:0;
+    border-radius:var(--r-md)}
+  /* every mark occupies the SAME optical box, so no destination shouts */
+  .tabbar .nitem .ico{width:40px;height:40px}
+  .tabbar .nitem .ix{width:32px;height:32px}
+  .tabbar .nitem .lab{font-size:.72rem;line-height:1;white-space:nowrap;
+    max-width:100%;overflow:hidden;text-overflow:ellipsis;text-align:center}
   .tabbar .nitem:hover,.tabbar .nitem.on{letter-spacing:.06em}
+  .tabbar .nitem.on .lab{animation:none}
+  /* a tighter arrival on the end tabs, so the aperture can never reach past
+     the bar on the narrowest screens */
+  .tabbar .aperture{inset:3px}
+  .tabbar .brk{inset:0}
+  .tabbar .nitem.on .aperture{animation-name:lockShutTight}
+  @keyframes lockShutTight{
+    0%{opacity:0;transform:scale(1.42)}
+    55%{opacity:1;transform:scale(.94)}
+    100%{opacity:.85;transform:scale(1)}}
   .topbar{margin-bottom:30px}
   .stat{display:none}
   .stat.c2{display:flex}
@@ -959,11 +1083,11 @@ html[data-mode="lux"]{--votus:#7c4dd8}
       <div class="conduit" aria-hidden="true"></div>
       <div class="trail" id="railTrail" aria-hidden="true"></div>
       <div class="spark" id="railSpark" aria-hidden="true"></div>
-      <button class="nitem on" data-go="market" type="button"><svg class="glyph"><use href="#g-market"/></svg><span>Market</span><i class="wave" aria-hidden="true"></i></button>
-      <button class="nitem" data-go="models" type="button"><svg class="glyph"><use href="#g-model"/></svg><span>!MOTUS</span><i class="wave" aria-hidden="true"></i></button>
-      <button class="nitem" data-go="agents" type="button"><svg class="glyph"><use href="#g-agent"/></svg><span>Agents</span><i class="wave" aria-hidden="true"></i></button>
-      <button class="nitem" data-go="loops" type="button"><img class="glyph glyph--inf" src="/assets/logo.png" alt="" aria-hidden="true"><span>Loops</span><i class="wave" aria-hidden="true"></i></button>
-      <button class="nitem" data-go="corpus" type="button"><svg class="glyph"><use href="#g-corpus"/></svg><span>Corpus</span><i class="wave" aria-hidden="true"></i></button>
+      <button class="nitem on" data-go="market" type="button"><span class="ico"><i class="aperture" aria-hidden="true"></i><i class="brk" aria-hidden="true"></i><svg class="glyph ix ix--market" viewBox="0 0 24 24" aria-hidden="true"><circle class="ix-ring" cx="12" cy="12" r="9.1" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><g class="ix-orbit"><circle cx="12" cy="6.5" r="1.45" fill="currentColor"/><circle cx="16.76" cy="14.75" r="1.45" fill="currentColor"/><circle cx="7.24" cy="14.75" r="1.45" fill="currentColor"/></g><circle class="ix-core" cx="12" cy="12" r="2" fill="currentColor"/></svg></span><span class="lab">Market</span><i class="wave" aria-hidden="true"></i></button>
+      <button class="nitem" data-go="models" type="button"><span class="ico"><i class="aperture" aria-hidden="true"></i><i class="brk" aria-hidden="true"></i><svg class="glyph ix ix--model" viewBox="0 0 24 24" aria-hidden="true"><path class="ix-hex" d="M12 3.1 19.7 7.55v8.9L12 20.9 4.3 16.45v-8.9Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path class="ix-leg ix-leg1" d="M12 11.4V5.2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path class="ix-leg ix-leg2" d="M12.7 12.5 18 15.6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path class="ix-leg ix-leg3" d="M11.3 12.5 6 15.6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><circle class="ix-core" cx="12" cy="12" r="2.05" fill="currentColor"/></svg></span><span class="lab">!MOTUS</span><i class="wave" aria-hidden="true"></i></button>
+      <button class="nitem" data-go="agents" type="button"><span class="ico"><i class="aperture" aria-hidden="true"></i><i class="brk" aria-hidden="true"></i><svg class="glyph ix ix--agent" viewBox="0 0 24 24" aria-hidden="true"><path class="ix-cresL" d="M9.5 4.4a9.4 9.4 0 0 0 0 15.2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/><path class="ix-cresR" d="M14.5 4.4a9.4 9.4 0 0 1 0 15.2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/><circle class="ix-core" cx="12" cy="12" r="2.25" fill="currentColor"/></svg></span><span class="lab">Agents</span><i class="wave" aria-hidden="true"></i></button>
+      <button class="nitem" data-go="loops" type="button"><span class="ico"><i class="aperture" aria-hidden="true"></i><i class="brk" aria-hidden="true"></i><svg class="glyph ix ix--loop" viewBox="0 0 24 24" aria-hidden="true"><path class="ix-lem" d="M12 12c-1.95-3.45-3.85-5.05-5.75-5.05a4.45 4.45 0 0 0 0 10.1c1.9 0 3.8-1.6 5.75-5.05 1.95-3.45 3.85-5.05 5.75-5.05a4.45 4.45 0 0 1 0 10.1c-1.9 0-3.8-1.6-5.75-5.05Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path class="ix-trace" d="M12 12c-1.95-3.45-3.85-5.05-5.75-5.05a4.45 4.45 0 0 0 0 10.1c1.9 0 3.8-1.6 5.75-5.05 1.95-3.45 3.85-5.05 5.75-5.05a4.45 4.45 0 0 1 0 10.1c-1.9 0-3.8-1.6-5.75-5.05Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg></span><span class="lab">Loops</span><i class="wave" aria-hidden="true"></i></button>
+      <button class="nitem" data-go="corpus" type="button"><span class="ico"><i class="aperture" aria-hidden="true"></i><i class="brk" aria-hidden="true"></i><svg class="glyph ix ix--corpus" viewBox="0 0 24 24" aria-hidden="true"><circle class="ix-core" cx="12" cy="12" r="1.9" fill="currentColor"/><path class="ix-r1" d="M12 7.4a4.6 4.6 0 0 1 0 9.2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path class="ix-r2" d="M12 4.2a7.8 7.8 0 0 1 0 15.6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path class="ix-r3" d="M12 1.6a10.4 10.4 0 0 1 0 20.8" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.4"/><path class="ix-r1b" d="M12 7.4a4.6 4.6 0 0 0 0 9.2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" opacity=".42"/><path class="ix-r2b" d="M12 4.2a7.8 7.8 0 0 0 0 15.6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" opacity=".3"/></svg></span><span class="lab">Corpus</span><i class="wave" aria-hidden="true"></i></button>
     </div>
     <div class="railfoot">
       <div class="wallet"><svg class="glyph"><use href="#g-bolt"/></svg><span id="dashBal">128.4 DASH</span></div>
@@ -1398,7 +1522,7 @@ html[data-mode="lux"]{--votus:#7c4dd8}
       <!-- ---------- THE KEYSTONE ---------- -->
       <p class="bandhead" style="margin-top:88px">The keystone</p>
       <div class="pane keypane keypane--big">
-        <svg class="glyph"><use href="#g-model"/></svg>
+        <svg class="glyph ix ix--model ix--big" viewBox="0 0 24 24" aria-hidden="true"><path class="ix-hex" d="M12 3.1 19.7 7.55v8.9L12 20.9 4.3 16.45v-8.9Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path class="ix-leg ix-leg1" d="M12 11.4V5.2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path class="ix-leg ix-leg2" d="M12.7 12.5 18 15.6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path class="ix-leg ix-leg3" d="M11.3 12.5 6 15.6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><circle class="ix-core" cx="12" cy="12" r="2.05" fill="currentColor"/></svg>
         <h2>MotusModels</h2>
         <p>It is not a fourth loop. It is what makes the other three survive.</p>
         <p>A loop that is never crystallized dies with the person who turned it. The insight
@@ -1463,11 +1587,11 @@ html[data-mode="lux"]{--votus:#7c4dd8}
   <div class="tconduit" aria-hidden="true"></div>
   <div class="ttrail" id="tabTrail" aria-hidden="true"></div>
   <div class="tspark" id="tabSpark" aria-hidden="true"></div>
-  <button class="nitem on" data-go="market" type="button"><svg class="glyph"><use href="#g-market"/></svg><span>Market</span><i class="wave" aria-hidden="true"></i></button>
-  <button class="nitem" data-go="models" type="button"><svg class="glyph"><use href="#g-model"/></svg><span>!MOTUS</span><i class="wave" aria-hidden="true"></i></button>
-  <button class="nitem" data-go="agents" type="button"><svg class="glyph"><use href="#g-agent"/></svg><span>Agents</span><i class="wave" aria-hidden="true"></i></button>
-  <button class="nitem" data-go="loops" type="button"><img class="glyph glyph--inf" src="/assets/logo.png" alt="" aria-hidden="true"><span>Loops</span><i class="wave" aria-hidden="true"></i></button>
-  <button class="nitem" data-go="corpus" type="button"><svg class="glyph"><use href="#g-corpus"/></svg><span>Corpus</span><i class="wave" aria-hidden="true"></i></button>
+  <button class="nitem on" data-go="market" type="button"><span class="ico"><i class="aperture" aria-hidden="true"></i><i class="brk" aria-hidden="true"></i><svg class="glyph ix ix--market" viewBox="0 0 24 24" aria-hidden="true"><circle class="ix-ring" cx="12" cy="12" r="9.1" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><g class="ix-orbit"><circle cx="12" cy="6.5" r="1.45" fill="currentColor"/><circle cx="16.76" cy="14.75" r="1.45" fill="currentColor"/><circle cx="7.24" cy="14.75" r="1.45" fill="currentColor"/></g><circle class="ix-core" cx="12" cy="12" r="2" fill="currentColor"/></svg></span><span class="lab">Market</span><i class="wave" aria-hidden="true"></i></button>
+  <button class="nitem" data-go="models" type="button"><span class="ico"><i class="aperture" aria-hidden="true"></i><i class="brk" aria-hidden="true"></i><svg class="glyph ix ix--model" viewBox="0 0 24 24" aria-hidden="true"><path class="ix-hex" d="M12 3.1 19.7 7.55v8.9L12 20.9 4.3 16.45v-8.9Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path class="ix-leg ix-leg1" d="M12 11.4V5.2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path class="ix-leg ix-leg2" d="M12.7 12.5 18 15.6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path class="ix-leg ix-leg3" d="M11.3 12.5 6 15.6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><circle class="ix-core" cx="12" cy="12" r="2.05" fill="currentColor"/></svg></span><span class="lab">!MOTUS</span><i class="wave" aria-hidden="true"></i></button>
+  <button class="nitem" data-go="agents" type="button"><span class="ico"><i class="aperture" aria-hidden="true"></i><i class="brk" aria-hidden="true"></i><svg class="glyph ix ix--agent" viewBox="0 0 24 24" aria-hidden="true"><path class="ix-cresL" d="M9.5 4.4a9.4 9.4 0 0 0 0 15.2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/><path class="ix-cresR" d="M14.5 4.4a9.4 9.4 0 0 1 0 15.2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/><circle class="ix-core" cx="12" cy="12" r="2.25" fill="currentColor"/></svg></span><span class="lab">Agents</span><i class="wave" aria-hidden="true"></i></button>
+  <button class="nitem" data-go="loops" type="button"><span class="ico"><i class="aperture" aria-hidden="true"></i><i class="brk" aria-hidden="true"></i><svg class="glyph ix ix--loop" viewBox="0 0 24 24" aria-hidden="true"><path class="ix-lem" d="M12 12c-1.95-3.45-3.85-5.05-5.75-5.05a4.45 4.45 0 0 0 0 10.1c1.9 0 3.8-1.6 5.75-5.05 1.95-3.45 3.85-5.05 5.75-5.05a4.45 4.45 0 0 1 0 10.1c-1.9 0-3.8-1.6-5.75-5.05Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path class="ix-trace" d="M12 12c-1.95-3.45-3.85-5.05-5.75-5.05a4.45 4.45 0 0 0 0 10.1c1.9 0 3.8-1.6 5.75-5.05 1.95-3.45 3.85-5.05 5.75-5.05a4.45 4.45 0 0 1 0 10.1c-1.9 0-3.8-1.6-5.75-5.05Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg></span><span class="lab">Loops</span><i class="wave" aria-hidden="true"></i></button>
+  <button class="nitem" data-go="corpus" type="button"><span class="ico"><i class="aperture" aria-hidden="true"></i><i class="brk" aria-hidden="true"></i><svg class="glyph ix ix--corpus" viewBox="0 0 24 24" aria-hidden="true"><circle class="ix-core" cx="12" cy="12" r="1.9" fill="currentColor"/><path class="ix-r1" d="M12 7.4a4.6 4.6 0 0 1 0 9.2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path class="ix-r2" d="M12 4.2a7.8 7.8 0 0 1 0 15.6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path class="ix-r3" d="M12 1.6a10.4 10.4 0 0 1 0 20.8" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.4"/><path class="ix-r1b" d="M12 7.4a4.6 4.6 0 0 0 0 9.2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" opacity=".42"/><path class="ix-r2b" d="M12 4.2a7.8 7.8 0 0 0 0 15.6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" opacity=".3"/></svg></span><span class="lab">Corpus</span><i class="wave" aria-hidden="true"></i></button>
 </nav>
 
 <!-- ========== THE FOCUS SHEET ========== -->
