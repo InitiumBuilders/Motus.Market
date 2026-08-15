@@ -89,40 +89,44 @@
    its own verb — no shared wobble, no generic glow.
    ═══════════════════════════════════════════════════════════════ */
 .ico{position:relative;display:grid;place-items:center;
-  width:46px;height:46px;flex:0 0 auto;border-radius:var(--r-md)}
+  width:46px;height:46px;flex:0 0 auto;background:none;border:none}
 .ix{width:34px;height:34px;overflow:visible;display:block;
   transition:transform .5s var(--ease-spring),filter .5s var(--ease-out)}
 .ix--big{width:44px;height:44px;color:var(--orange);margin:0 auto 18px}
 .ix *{transform-origin:12px 12px}
 .ix-core{transition:r .45s var(--ease-spring)}
 
-/* ── the aperture: a ring that snaps shut around the destination ── */
-.aperture{position:absolute;inset:4px;border-radius:50%;pointer-events:none;
-  border:1.5px solid var(--cyan);opacity:0;transform:scale(1.75);
-  box-shadow:0 0 18px -2px rgba(28,231,255,.7),inset 0 0 14px -4px rgba(28,231,255,.55)}
-/* ── and the four brackets that confirm the lock ── */
-.brk{position:absolute;inset:1px;pointer-events:none;opacity:0;border-radius:var(--r-sm);
-  background:
-    linear-gradient(var(--cyan),var(--cyan)) 0 0/7px 1.5px no-repeat,
-    linear-gradient(var(--cyan),var(--cyan)) 0 0/1.5px 7px no-repeat,
-    linear-gradient(var(--cyan),var(--cyan)) 100% 0/7px 1.5px no-repeat,
-    linear-gradient(var(--cyan),var(--cyan)) 100% 0/1.5px 7px no-repeat,
-    linear-gradient(var(--cyan),var(--cyan)) 0 100%/7px 1.5px no-repeat,
-    linear-gradient(var(--cyan),var(--cyan)) 0 100%/1.5px 7px no-repeat,
-    linear-gradient(var(--cyan),var(--cyan)) 100% 100%/7px 1.5px no-repeat,
-    linear-gradient(var(--cyan),var(--cyan)) 100% 100%/1.5px 7px no-repeat;
-  filter:drop-shadow(0 0 6px rgba(28,231,255,.8))}
+/* ── COLOUR IS THE SIGNAL ──
+   Every mark carries its own gradient. At rest it is drained to monochrome;
+   in the destination you are actually in, it BLOOMS into its own colour.
+   Corpus is exempt — it burns in full spectrum always, the one coloured mark.
+   No ring, no brackets, no box: the liquid alone says where you are. */
+.ix{filter:grayscale(1) brightness(1.7) contrast(.9);
+  transition:filter .6s var(--ease-out),transform .5s var(--ease-spring)}
+.nitem:hover .ix{filter:grayscale(.4) brightness(1.25)}
+.nitem.on .ix{filter:grayscale(0) brightness(1.04)
+  drop-shadow(0 0 8px var(--sig,rgba(28,231,255,.9)))
+  drop-shadow(0 0 20px var(--sig2,rgba(28,231,255,.45)))}
+.nitem[data-go="market"]{--sig:rgba(28,231,255,.9);--sig2:rgba(0,110,255,.5)}
+.nitem[data-go="models"]{--sig:rgba(255,140,46,.9);--sig2:rgba(255,90,31,.45)}
+.nitem[data-go="agents"]{--sig:rgba(167,139,250,.9);--sig2:rgba(125,211,252,.5)}
+.nitem[data-go="loops"]{--sig:rgba(28,231,255,.9);--sig2:rgba(0,102,255,.5)}
+.nitem[data-go="corpus"]{--sig:rgba(255,154,60,.85);--sig2:rgba(139,92,246,.5)}
+/* the soul never dims */
+.ix--corpus{filter:drop-shadow(0 0 5px rgba(255,154,60,.35))!important}
+.nitem.on .ix--corpus,.nitem:hover .ix--corpus{
+  filter:drop-shadow(0 0 9px rgba(255,154,60,.8))
+         drop-shadow(0 0 20px rgba(28,231,255,.5))
+         drop-shadow(0 0 40px rgba(139,92,246,.45))!important}
 
-.nitem.on .aperture{animation:lockShut .62s cubic-bezier(.22,1.3,.32,1) forwards}
-.nitem.on .brk{animation:brkIn .62s var(--ease-out) .1s forwards}
-@keyframes lockShut{
-  0%{opacity:0;transform:scale(1.75)}
-  55%{opacity:1;transform:scale(.93)}
-  100%{opacity:.85;transform:scale(1)}}
-@keyframes brkIn{
-  0%{opacity:0;transform:scale(1.4)}
-  60%{opacity:1;transform:scale(.97)}
-  100%{opacity:.9;transform:scale(1)}}
+/* ── Davara's own mark: her crescents breathe, her core pulses ── */
+.dv-cresL,.dv-cresR,.dv-hex,.dv-core{transform-origin:256px 256px}
+.dv-cresL,.dv-cresR{animation:dvBreathe 8s ease-in-out infinite}
+.dv-cresR{animation-delay:-4s}
+.nitem.on .dv-core{animation:dvCore 3.2s ease-in-out infinite}
+.nitem.on .dv-hex{animation:dvBreathe 5.4s ease-in-out infinite}
+@keyframes dvBreathe{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+@keyframes dvCore{0%,100%{opacity:.82;transform:scale(1)}50%{opacity:1;transform:scale(1.16)}}
 
 /* ── arrival: the mark takes the impact, then holds dead still ── */
 .nitem.on .ix{animation:markLand .62s cubic-bezier(.22,1.35,.32,1)}
@@ -159,8 +163,14 @@
    Counter-rotation is what stops it reading as a spinning wheel and starts
    it reading as something combusting. It burns quietly at rest and takes
    a real breath when you arrive. */
-.ix--corpus .ix-fl{opacity:.62}
-.ix--corpus .ix-fl2{opacity:.42}
+/* every tongue its own hue, so the SPECTRUM ITSELF turns around the core */
+.ix--corpus .ix-fl,.ix--corpus .ix-fl2{fill:hsl(var(--hue,30) 96% 63%)}
+.ix--corpus .ix-fl{opacity:.82}
+.ix--corpus .ix-fl2{opacity:.6}
+.ix--corpus .ix-aura{animation:orbHalo 16s linear infinite,auraSwell 6.5s ease-in-out infinite}
+.ix--corpus .ix-glow{animation:glowSwell 2.6s ease-in-out infinite}
+@keyframes auraSwell{0%,100%{opacity:.24;stroke-width:3}50%{opacity:.5;stroke-width:4.2}}
+@keyframes glowSwell{0%,100%{opacity:.2;r:4.6}50%{opacity:.42;r:5.7}}
 .ix--corpus .ix-flares{animation:orbTurn 11s linear infinite}
 .ix--corpus .ix-flares2{animation:orbTurnBack 7.5s linear infinite}
 /* rotate() and scaleY() must live in the SAME transform, or the rotation is
@@ -275,14 +285,12 @@
 .nitem .glyph{transition:transform .45s var(--ease-spring),color .3s,filter .35s}
 .nitem:hover{background:var(--glass-2);letter-spacing:.03em}
 .nitem:hover .ix{transform:scale(1.1)}
-.nitem:hover .aperture{opacity:.3;transform:scale(1.12);
-  transition:opacity .4s var(--ease-out),transform .4s var(--ease-out)}
 /* the liquid IS the indicator now — the item keeps no pill of its own */
 .nitem{position:relative;z-index:1}
 .nitem.on{background:none;border-color:transparent;letter-spacing:.03em}
 .nitem:hover{background:rgba(255,255,255,.045)}
-.nitem.on .ix{color:var(--cyan);
-  filter:drop-shadow(0 0 9px var(--cyan)) drop-shadow(0 0 20px rgba(28,231,255,.45))}
+/* the colour bloom lives with the COLOUR IS THE SIGNAL block above — a second
+   filter here overrode every destination's own hue back to cyan */
 .nitem.on .ix-core{r:2.6}
 /* the label arrives a beat AFTER the mark — the eye lands, then reads */
 .nitem .lab{display:inline-block;
@@ -293,10 +301,9 @@
   0%{opacity:.35;transform:translateX(-7px)}
   100%{opacity:1;transform:none}}
 @media(prefers-reduced-motion:reduce){
-  .nitem.on .aperture,.nitem.on .brk,.nitem.on .ix,.nitem.on .lab,
+  .nitem.on .ix,.nitem.on .lab,
   .nitem.on .ix *{animation:none!important}
-  .nitem.on .aperture{opacity:.85;transform:scale(1)}
-  .nitem.on .brk{opacity:.9}}
+}
 
 /* ---- THE LOCK-IN: the icon bulges, a shockwave leaves it ---- */
 @keyframes bulge{
@@ -1118,16 +1125,7 @@ html[data-mode="lux"]{--votus:#7c4dd8}
     max-width:100%;overflow:hidden;text-overflow:ellipsis;text-align:center}
   .tabbar .nitem:hover,.tabbar .nitem.on{letter-spacing:.06em}
   .tabbar .nitem.on .lab{animation:none}
-  /* a tighter arrival on the end tabs, so the aperture can never reach past
-     the bar on the narrowest screens */
-  .tabbar .aperture{inset:3px}
-  .tabbar .brk{inset:0}
-  .tabbar .nitem.on .aperture{animation-name:lockShutTight}
-  @keyframes lockShutTight{
-    0%{opacity:0;transform:scale(1.42)}
-    55%{opacity:1;transform:scale(.94)}
-    100%{opacity:.85;transform:scale(1)}}
-  .topbar{margin-bottom:30px}
+            .topbar{margin-bottom:30px}
   .stat{display:none}
   .stat.c2{display:flex}
 }
@@ -1138,6 +1136,33 @@ html[data-mode="lux"]{--votus:#7c4dd8}
 <div class="grain" aria-hidden="true"></div>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<filter id="fxAura" x="-70%" y="-70%" width="240%" height="240%">
+  <feGaussianBlur stdDeviation="1.6"/>
+</filter>
+
+<linearGradient id="gxMarket" x1="0" y1="0" x2="1" y2="1">
+  <stop offset="0" stop-color="#c2fbff"/><stop offset=".5" stop-color="#1ce7ff"/><stop offset="1" stop-color="#0066ff"/>
+</linearGradient>
+<linearGradient id="gxModel" x1="0" y1="0" x2="1" y2="1">
+  <stop offset="0" stop-color="#ffd9a8"/><stop offset=".5" stop-color="#ff8c2e"/><stop offset="1" stop-color="#ff5a1f"/>
+</linearGradient>
+<linearGradient id="gxDavara" x1="0" y1="0" x2="1" y2="1">
+  <stop offset="0" stop-color="#7dd3fc"/><stop offset=".55" stop-color="#a78bfa"/><stop offset="1" stop-color="#8b5cf6"/>
+</linearGradient>
+<linearGradient id="gxLoop" x1="0" y1="1" x2="1" y2="0">
+  <stop offset="0" stop-color="#0066ff"/><stop offset=".45" stop-color="#1ce7ff"/><stop offset="1" stop-color="#c2fbff"/>
+</linearGradient>
+<radialGradient id="gxSoul" cx="50%" cy="50%" r="50%">
+  <stop offset="0" stop-color="#ffffff"/><stop offset=".45" stop-color="#fff2b8"/>
+  <stop offset="1" stop-color="#ff9a3c"/>
+</radialGradient>
+<linearGradient id="gxHalo" x1="0" y1="0" x2="1" y2="1">
+  <stop offset="0" stop-color="#ff3b6b"/><stop offset=".18" stop-color="#ff9f1c"/>
+  <stop offset=".36" stop-color="#ffe066"/><stop offset=".54" stop-color="#4ade80"/>
+  <stop offset=".72" stop-color="#1ce7ff"/><stop offset=".88" stop-color="#8b5cf6"/>
+  <stop offset="1" stop-color="#ff3b6b"/>
+</linearGradient>
+
 <filter id="goo" x="-60%" y="-60%" width="220%" height="220%" color-interpolation-filters="sRGB">
   <feGaussianBlur in="SourceGraphic" stdDeviation="7" result="blur"/>
   <feColorMatrix in="blur" type="matrix"
@@ -1183,11 +1208,11 @@ html[data-mode="lux"]{--votus:#7c4dd8}
       <div class="liquid" aria-hidden="true"><i class="blob"></i><i class="drop"></i></div>
       
       
-      <button class="nitem on" data-go="market" type="button"><span class="ico"><i class="aperture" aria-hidden="true"></i><i class="brk" aria-hidden="true"></i><svg class="glyph ix ix--market" viewBox="0 0 24 24" aria-hidden="true"><circle class="ix-ring" cx="12" cy="12" r="9.1" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><g class="ix-orbit"><circle cx="12" cy="6.5" r="1.45" fill="currentColor"/><circle cx="16.76" cy="14.75" r="1.45" fill="currentColor"/><circle cx="7.24" cy="14.75" r="1.45" fill="currentColor"/></g><circle class="ix-core" cx="12" cy="12" r="2" fill="currentColor"/></svg></span><span class="lab">Market</span><i class="wave" aria-hidden="true"></i></button>
-      <button class="nitem" data-go="models" type="button"><span class="ico"><i class="aperture" aria-hidden="true"></i><i class="brk" aria-hidden="true"></i><svg class="glyph ix ix--model" viewBox="0 0 24 24" aria-hidden="true"><path class="ix-hex" d="M12 3.1 19.7 7.55v8.9L12 20.9 4.3 16.45v-8.9Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path class="ix-leg ix-leg1" d="M12 11.4V5.2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path class="ix-leg ix-leg2" d="M12.7 12.5 18 15.6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path class="ix-leg ix-leg3" d="M11.3 12.5 6 15.6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><circle class="ix-core" cx="12" cy="12" r="2.05" fill="currentColor"/></svg></span><span class="lab">!MOTUS</span><i class="wave" aria-hidden="true"></i></button>
-      <button class="nitem" data-go="agents" type="button"><span class="ico"><i class="aperture" aria-hidden="true"></i><i class="brk" aria-hidden="true"></i><svg class="glyph ix ix--agent" viewBox="0 0 24 24" aria-hidden="true"><path class="ix-cresL" d="M9.5 4.4a9.4 9.4 0 0 0 0 15.2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/><path class="ix-cresR" d="M14.5 4.4a9.4 9.4 0 0 1 0 15.2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/><circle class="ix-core" cx="12" cy="12" r="2.25" fill="currentColor"/></svg></span><span class="lab">Agents</span><i class="wave" aria-hidden="true"></i></button>
-      <button class="nitem" data-go="loops" type="button"><span class="ico"><i class="aperture" aria-hidden="true"></i><i class="brk" aria-hidden="true"></i><svg class="glyph ix ix--loop" viewBox="0 0 24 24" aria-hidden="true"><path class="ix-lem" d="M12 12c-1.95-3.45-3.85-5.05-5.75-5.05a4.45 4.45 0 0 0 0 10.1c1.9 0 3.8-1.6 5.75-5.05 1.95-3.45 3.85-5.05 5.75-5.05a4.45 4.45 0 0 1 0 10.1c-1.9 0-3.8-1.6-5.75-5.05Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path class="ix-trace" d="M12 12c-1.95-3.45-3.85-5.05-5.75-5.05a4.45 4.45 0 0 0 0 10.1c1.9 0 3.8-1.6 5.75-5.05 1.95-3.45 3.85-5.05 5.75-5.05a4.45 4.45 0 0 1 0 10.1c-1.9 0-3.8-1.6-5.75-5.05Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg></span><span class="lab">Loops</span><i class="wave" aria-hidden="true"></i></button>
-      <button class="nitem" data-go="corpus" type="button"><span class="ico"><i class="aperture" aria-hidden="true"></i><i class="brk" aria-hidden="true"></i><svg class="glyph ix ix--corpus" viewBox="0 0 24 24" aria-hidden="true"><circle class="ix-halo" cx="12" cy="12" r="9.4" fill="none" stroke="currentColor" stroke-width=".9" opacity=".26"/><g class="ix-flares"><path class="ix-fl" d="M12 8.9C14.4 6.6 14.7 3.3 11.4 .5 12.1 3.3 10.1 5.2 10.0 6.6C9.95 7.5 11 8.5 12 8.9Z" fill="currentColor" style="--rot:0deg;--fd:0s"/><path class="ix-fl" d="M12 8.9C14.4 6.6 14.7 3.3 11.4 .5 12.1 3.3 10.1 5.2 10.0 6.6C9.95 7.5 11 8.5 12 8.9Z" fill="currentColor" style="--rot:90deg;--fd:.65s"/><path class="ix-fl" d="M12 8.9C14.4 6.6 14.7 3.3 11.4 .5 12.1 3.3 10.1 5.2 10.0 6.6C9.95 7.5 11 8.5 12 8.9Z" fill="currentColor" style="--rot:180deg;--fd:1.3s"/><path class="ix-fl" d="M12 8.9C14.4 6.6 14.7 3.3 11.4 .5 12.1 3.3 10.1 5.2 10.0 6.6C9.95 7.5 11 8.5 12 8.9Z" fill="currentColor" style="--rot:270deg;--fd:1.95s"/></g><g class="ix-flares2"><path class="ix-fl2" d="M12 9.4C13.5 7.9 13.7 5.7 11.6 3.9 12.1 5.7 10.8 6.9 10.75 7.8C10.72 8.4 11.4 9.1 12 9.4Z" fill="currentColor" style="--rot:45deg;--fd:.32s"/><path class="ix-fl2" d="M12 9.4C13.5 7.9 13.7 5.7 11.6 3.9 12.1 5.7 10.8 6.9 10.75 7.8C10.72 8.4 11.4 9.1 12 9.4Z" fill="currentColor" style="--rot:135deg;--fd:.97s"/><path class="ix-fl2" d="M12 9.4C13.5 7.9 13.7 5.7 11.6 3.9 12.1 5.7 10.8 6.9 10.75 7.8C10.72 8.4 11.4 9.1 12 9.4Z" fill="currentColor" style="--rot:225deg;--fd:1.62s"/><path class="ix-fl2" d="M12 9.4C13.5 7.9 13.7 5.7 11.6 3.9 12.1 5.7 10.8 6.9 10.75 7.8C10.72 8.4 11.4 9.1 12 9.4Z" fill="currentColor" style="--rot:315deg;--fd:2.27s"/></g><circle class="ix-soul" cx="12" cy="12" r="3.6" fill="currentColor"/><circle class="ix-spark" cx="12" cy="12" r="1.6" fill="currentColor" opacity=".55"/></svg></span><span class="lab">Corpus</span><i class="wave" aria-hidden="true"></i></button>
+      <button class="nitem on" data-go="market" type="button"><span class="ico"><svg class="glyph ix ix--market" viewBox="0 0 24 24" aria-hidden="true"><circle class="ix-ring" cx="12" cy="12" r="9.1" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="url(#gxMarket)" stroke-width="1.6"/><g class="ix-orbit" fill="url(#gxMarket)"><circle cx="12" cy="6.5" r="1.5"/><circle cx="16.76" cy="14.75" r="1.5"/><circle cx="7.24" cy="14.75" r="1.5"/></g><circle class="ix-core" cx="12" cy="12" r="2.1" fill="url(#gxMarket)"/></svg></span><span class="lab">Market</span><i class="wave" aria-hidden="true"></i></button>
+      <button class="nitem" data-go="models" type="button"><span class="ico"><svg class="glyph ix ix--model" viewBox="0 0 24 24" aria-hidden="true"><path class="ix-hex" d="M12 3.1 19.7 7.55v8.9L12 20.9 4.3 16.45v-8.9Z" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="url(#gxModel)" stroke-width="1.6"/><path class="ix-leg ix-leg1" d="M12 11.4V5.2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="url(#gxModel)" stroke-width="1.6"/><path class="ix-leg ix-leg2" d="M12.7 12.5 18 15.6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="url(#gxModel)" stroke-width="1.6"/><path class="ix-leg ix-leg3" d="M11.3 12.5 6 15.6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="url(#gxModel)" stroke-width="1.6"/><circle class="ix-core" cx="12" cy="12" r="2.15" fill="url(#gxModel)"/></svg></span><span class="lab">!MOTUS</span><i class="wave" aria-hidden="true"></i></button>
+      <button class="nitem" data-go="agents" type="button"><span class="ico"><svg class="glyph ix ix--agent" viewBox="0 0 512 512" aria-hidden="true"><path class="dv-cresL" d="M 208 52 A 232 232 0 0 0 208 460 A 158 204 0 0 1 208 52 Z" fill="none" stroke="url(#gxDavara)" stroke-width="30" stroke-linecap="round"/><path class="dv-cresR" d="M 304 52 A 232 232 0 0 1 304 460 A 158 204 0 0 0 304 52 Z" fill="none" stroke="url(#gxDavara)" stroke-width="30" stroke-linecap="round"/><path class="dv-hex" d="M256 206 L300 231 L300 281 L256 306 L212 281 L212 231 Z" fill="rgba(196,181,253,.26)" stroke="#e9d5ff" stroke-width="22" stroke-linejoin="round"/><circle class="dv-core" cx="256" cy="256" r="38" fill="#f5f3ff"/></svg></span><span class="lab">Agents</span><i class="wave" aria-hidden="true"></i></button>
+      <button class="nitem" data-go="loops" type="button"><span class="ico"><svg class="glyph ix ix--loop" viewBox="0 0 24 24" aria-hidden="true"><path class="ix-lem" d="M12 12c-1.95-3.45-3.85-5.05-5.75-5.05a4.45 4.45 0 0 0 0 10.1c1.9 0 3.8-1.6 5.75-5.05 1.95-3.45 3.85-5.05 5.75-5.05a4.45 4.45 0 0 1 0 10.1c-1.9 0-3.8-1.6-5.75-5.05Z" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="url(#gxLoop)" stroke-width="1.6"/><path class="ix-trace" d="M12 12c-1.95-3.45-3.85-5.05-5.75-5.05a4.45 4.45 0 0 0 0 10.1c1.9 0 3.8-1.6 5.75-5.05 1.95-3.45 3.85-5.05 5.75-5.05a4.45 4.45 0 0 1 0 10.1c-1.9 0-3.8-1.6-5.75-5.05Z" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="#c2fbff" stroke-width="2.1"/></svg></span><span class="lab">Loops</span><i class="wave" aria-hidden="true"></i></button>
+      <button class="nitem" data-go="corpus" type="button"><span class="ico"><svg class="glyph ix ix--corpus" viewBox="0 0 24 24" aria-hidden="true"><circle class="ix-aura" cx="12" cy="12" r="8.2" fill="none" stroke="url(#gxHalo)" stroke-width="3.4" opacity=".34" filter="url(#fxAura)"/><g class="ix-flares"><path class="ix-fl" d="M12 8.6C14.55 6.2 15.0 2.6 11.3 .55 12.2 3.2 9.8 5.0 9.7 6.5C9.6 7.5 10.9 8.3 12 8.6Z" style="--rot:0deg;--fd:0.00s;--hue:0"/><path class="ix-fl" d="M12 8.6C14.55 6.2 15.0 2.6 11.3 .55 12.2 3.2 9.8 5.0 9.7 6.5C9.6 7.5 10.9 8.3 12 8.6Z" style="--rot:60deg;--fd:0.42s;--hue:60"/><path class="ix-fl" d="M12 8.6C14.55 6.2 15.0 2.6 11.3 .55 12.2 3.2 9.8 5.0 9.7 6.5C9.6 7.5 10.9 8.3 12 8.6Z" style="--rot:120deg;--fd:0.84s;--hue:120"/><path class="ix-fl" d="M12 8.6C14.55 6.2 15.0 2.6 11.3 .55 12.2 3.2 9.8 5.0 9.7 6.5C9.6 7.5 10.9 8.3 12 8.6Z" style="--rot:180deg;--fd:1.26s;--hue:180"/><path class="ix-fl" d="M12 8.6C14.55 6.2 15.0 2.6 11.3 .55 12.2 3.2 9.8 5.0 9.7 6.5C9.6 7.5 10.9 8.3 12 8.6Z" style="--rot:240deg;--fd:1.68s;--hue:240"/><path class="ix-fl" d="M12 8.6C14.55 6.2 15.0 2.6 11.3 .55 12.2 3.2 9.8 5.0 9.7 6.5C9.6 7.5 10.9 8.3 12 8.6Z" style="--rot:300deg;--fd:2.10s;--hue:300"/></g><g class="ix-flares2"><path class="ix-fl2" d="M12 9.2C13.7 7.5 13.95 5.0 11.6 3.15 12.2 5.0 10.6 6.3 10.5 7.3C10.45 8.0 11.3 8.9 12 9.2Z" style="--rot:30deg;--fd:0.21s;--hue:30"/><path class="ix-fl2" d="M12 9.2C13.7 7.5 13.95 5.0 11.6 3.15 12.2 5.0 10.6 6.3 10.5 7.3C10.45 8.0 11.3 8.9 12 9.2Z" style="--rot:90deg;--fd:0.63s;--hue:90"/><path class="ix-fl2" d="M12 9.2C13.7 7.5 13.95 5.0 11.6 3.15 12.2 5.0 10.6 6.3 10.5 7.3C10.45 8.0 11.3 8.9 12 9.2Z" style="--rot:150deg;--fd:1.05s;--hue:150"/><path class="ix-fl2" d="M12 9.2C13.7 7.5 13.95 5.0 11.6 3.15 12.2 5.0 10.6 6.3 10.5 7.3C10.45 8.0 11.3 8.9 12 9.2Z" style="--rot:210deg;--fd:1.47s;--hue:210"/><path class="ix-fl2" d="M12 9.2C13.7 7.5 13.95 5.0 11.6 3.15 12.2 5.0 10.6 6.3 10.5 7.3C10.45 8.0 11.3 8.9 12 9.2Z" style="--rot:270deg;--fd:1.89s;--hue:270"/><path class="ix-fl2" d="M12 9.2C13.7 7.5 13.95 5.0 11.6 3.15 12.2 5.0 10.6 6.3 10.5 7.3C10.45 8.0 11.3 8.9 12 9.2Z" style="--rot:330deg;--fd:2.31s;--hue:330"/></g><circle class="ix-glow" cx="12" cy="12" r="5" fill="url(#gxSoul)" opacity=".28" filter="url(#fxAura)"/><circle class="ix-soul" cx="12" cy="12" r="3.4" fill="url(#gxSoul)"/><circle class="ix-spark" cx="12" cy="12" r="1.5" fill="#fff" opacity=".92"/></svg></span><span class="lab">Corpus</span><i class="wave" aria-hidden="true"></i></button>
     </div>
     <div class="railfoot">
       <div class="wallet"><svg class="glyph"><use href="#g-bolt"/></svg><span id="dashBal">128.4 DASH</span></div>
@@ -1622,7 +1647,7 @@ html[data-mode="lux"]{--votus:#7c4dd8}
       <!-- ---------- THE KEYSTONE ---------- -->
       <p class="bandhead" style="margin-top:88px">The keystone</p>
       <div class="pane keypane keypane--big">
-        <svg class="glyph ix ix--model ix--big" viewBox="0 0 24 24" aria-hidden="true"><path class="ix-hex" d="M12 3.1 19.7 7.55v8.9L12 20.9 4.3 16.45v-8.9Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path class="ix-leg ix-leg1" d="M12 11.4V5.2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path class="ix-leg ix-leg2" d="M12.7 12.5 18 15.6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path class="ix-leg ix-leg3" d="M11.3 12.5 6 15.6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><circle class="ix-core" cx="12" cy="12" r="2.05" fill="currentColor"/></svg>
+        <svg class="glyph ix ix--model ix--big" viewBox="0 0 24 24" aria-hidden="true"><path class="ix-hex" d="M12 3.1 19.7 7.55v8.9L12 20.9 4.3 16.45v-8.9Z" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="url(#gxModel)" stroke-width="1.6"/><path class="ix-leg ix-leg1" d="M12 11.4V5.2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="url(#gxModel)" stroke-width="1.6"/><path class="ix-leg ix-leg2" d="M12.7 12.5 18 15.6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="url(#gxModel)" stroke-width="1.6"/><path class="ix-leg ix-leg3" d="M11.3 12.5 6 15.6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="url(#gxModel)" stroke-width="1.6"/><circle class="ix-core" cx="12" cy="12" r="2.15" fill="url(#gxModel)"/></svg>
         <h2>MotusModels</h2>
         <p>It is not a fourth loop. It is what makes the other three survive.</p>
         <p>A loop that is never crystallized dies with the person who turned it. The insight
@@ -1687,11 +1712,11 @@ html[data-mode="lux"]{--votus:#7c4dd8}
   <div class="navskin" aria-hidden="true"></div>
   <div class="liquid" aria-hidden="true"><i class="blob"></i><i class="drop"></i></div>
   <div class="tconduit" aria-hidden="true"></div>
-  <button class="nitem on" data-go="market" type="button"><span class="ico"><i class="aperture" aria-hidden="true"></i><i class="brk" aria-hidden="true"></i><svg class="glyph ix ix--market" viewBox="0 0 24 24" aria-hidden="true"><circle class="ix-ring" cx="12" cy="12" r="9.1" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><g class="ix-orbit"><circle cx="12" cy="6.5" r="1.45" fill="currentColor"/><circle cx="16.76" cy="14.75" r="1.45" fill="currentColor"/><circle cx="7.24" cy="14.75" r="1.45" fill="currentColor"/></g><circle class="ix-core" cx="12" cy="12" r="2" fill="currentColor"/></svg></span><span class="lab">Market</span><i class="wave" aria-hidden="true"></i></button>
-  <button class="nitem" data-go="models" type="button"><span class="ico"><i class="aperture" aria-hidden="true"></i><i class="brk" aria-hidden="true"></i><svg class="glyph ix ix--model" viewBox="0 0 24 24" aria-hidden="true"><path class="ix-hex" d="M12 3.1 19.7 7.55v8.9L12 20.9 4.3 16.45v-8.9Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path class="ix-leg ix-leg1" d="M12 11.4V5.2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path class="ix-leg ix-leg2" d="M12.7 12.5 18 15.6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path class="ix-leg ix-leg3" d="M11.3 12.5 6 15.6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><circle class="ix-core" cx="12" cy="12" r="2.05" fill="currentColor"/></svg></span><span class="lab">!MOTUS</span><i class="wave" aria-hidden="true"></i></button>
-  <button class="nitem" data-go="agents" type="button"><span class="ico"><i class="aperture" aria-hidden="true"></i><i class="brk" aria-hidden="true"></i><svg class="glyph ix ix--agent" viewBox="0 0 24 24" aria-hidden="true"><path class="ix-cresL" d="M9.5 4.4a9.4 9.4 0 0 0 0 15.2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/><path class="ix-cresR" d="M14.5 4.4a9.4 9.4 0 0 1 0 15.2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/><circle class="ix-core" cx="12" cy="12" r="2.25" fill="currentColor"/></svg></span><span class="lab">Agents</span><i class="wave" aria-hidden="true"></i></button>
-  <button class="nitem" data-go="loops" type="button"><span class="ico"><i class="aperture" aria-hidden="true"></i><i class="brk" aria-hidden="true"></i><svg class="glyph ix ix--loop" viewBox="0 0 24 24" aria-hidden="true"><path class="ix-lem" d="M12 12c-1.95-3.45-3.85-5.05-5.75-5.05a4.45 4.45 0 0 0 0 10.1c1.9 0 3.8-1.6 5.75-5.05 1.95-3.45 3.85-5.05 5.75-5.05a4.45 4.45 0 0 1 0 10.1c-1.9 0-3.8-1.6-5.75-5.05Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path class="ix-trace" d="M12 12c-1.95-3.45-3.85-5.05-5.75-5.05a4.45 4.45 0 0 0 0 10.1c1.9 0 3.8-1.6 5.75-5.05 1.95-3.45 3.85-5.05 5.75-5.05a4.45 4.45 0 0 1 0 10.1c-1.9 0-3.8-1.6-5.75-5.05Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg></span><span class="lab">Loops</span><i class="wave" aria-hidden="true"></i></button>
-  <button class="nitem" data-go="corpus" type="button"><span class="ico"><i class="aperture" aria-hidden="true"></i><i class="brk" aria-hidden="true"></i><svg class="glyph ix ix--corpus" viewBox="0 0 24 24" aria-hidden="true"><circle class="ix-halo" cx="12" cy="12" r="9.4" fill="none" stroke="currentColor" stroke-width=".9" opacity=".26"/><g class="ix-flares"><path class="ix-fl" d="M12 8.9C14.4 6.6 14.7 3.3 11.4 .5 12.1 3.3 10.1 5.2 10.0 6.6C9.95 7.5 11 8.5 12 8.9Z" fill="currentColor" style="--rot:0deg;--fd:0s"/><path class="ix-fl" d="M12 8.9C14.4 6.6 14.7 3.3 11.4 .5 12.1 3.3 10.1 5.2 10.0 6.6C9.95 7.5 11 8.5 12 8.9Z" fill="currentColor" style="--rot:90deg;--fd:.65s"/><path class="ix-fl" d="M12 8.9C14.4 6.6 14.7 3.3 11.4 .5 12.1 3.3 10.1 5.2 10.0 6.6C9.95 7.5 11 8.5 12 8.9Z" fill="currentColor" style="--rot:180deg;--fd:1.3s"/><path class="ix-fl" d="M12 8.9C14.4 6.6 14.7 3.3 11.4 .5 12.1 3.3 10.1 5.2 10.0 6.6C9.95 7.5 11 8.5 12 8.9Z" fill="currentColor" style="--rot:270deg;--fd:1.95s"/></g><g class="ix-flares2"><path class="ix-fl2" d="M12 9.4C13.5 7.9 13.7 5.7 11.6 3.9 12.1 5.7 10.8 6.9 10.75 7.8C10.72 8.4 11.4 9.1 12 9.4Z" fill="currentColor" style="--rot:45deg;--fd:.32s"/><path class="ix-fl2" d="M12 9.4C13.5 7.9 13.7 5.7 11.6 3.9 12.1 5.7 10.8 6.9 10.75 7.8C10.72 8.4 11.4 9.1 12 9.4Z" fill="currentColor" style="--rot:135deg;--fd:.97s"/><path class="ix-fl2" d="M12 9.4C13.5 7.9 13.7 5.7 11.6 3.9 12.1 5.7 10.8 6.9 10.75 7.8C10.72 8.4 11.4 9.1 12 9.4Z" fill="currentColor" style="--rot:225deg;--fd:1.62s"/><path class="ix-fl2" d="M12 9.4C13.5 7.9 13.7 5.7 11.6 3.9 12.1 5.7 10.8 6.9 10.75 7.8C10.72 8.4 11.4 9.1 12 9.4Z" fill="currentColor" style="--rot:315deg;--fd:2.27s"/></g><circle class="ix-soul" cx="12" cy="12" r="3.6" fill="currentColor"/><circle class="ix-spark" cx="12" cy="12" r="1.6" fill="currentColor" opacity=".55"/></svg></span><span class="lab">Corpus</span><i class="wave" aria-hidden="true"></i></button>
+  <button class="nitem on" data-go="market" type="button"><span class="ico"><svg class="glyph ix ix--market" viewBox="0 0 24 24" aria-hidden="true"><circle class="ix-ring" cx="12" cy="12" r="9.1" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="url(#gxMarket)" stroke-width="1.6"/><g class="ix-orbit" fill="url(#gxMarket)"><circle cx="12" cy="6.5" r="1.5"/><circle cx="16.76" cy="14.75" r="1.5"/><circle cx="7.24" cy="14.75" r="1.5"/></g><circle class="ix-core" cx="12" cy="12" r="2.1" fill="url(#gxMarket)"/></svg></span><span class="lab">Market</span><i class="wave" aria-hidden="true"></i></button>
+  <button class="nitem" data-go="models" type="button"><span class="ico"><svg class="glyph ix ix--model" viewBox="0 0 24 24" aria-hidden="true"><path class="ix-hex" d="M12 3.1 19.7 7.55v8.9L12 20.9 4.3 16.45v-8.9Z" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="url(#gxModel)" stroke-width="1.6"/><path class="ix-leg ix-leg1" d="M12 11.4V5.2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="url(#gxModel)" stroke-width="1.6"/><path class="ix-leg ix-leg2" d="M12.7 12.5 18 15.6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="url(#gxModel)" stroke-width="1.6"/><path class="ix-leg ix-leg3" d="M11.3 12.5 6 15.6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="url(#gxModel)" stroke-width="1.6"/><circle class="ix-core" cx="12" cy="12" r="2.15" fill="url(#gxModel)"/></svg></span><span class="lab">!MOTUS</span><i class="wave" aria-hidden="true"></i></button>
+  <button class="nitem" data-go="agents" type="button"><span class="ico"><svg class="glyph ix ix--agent" viewBox="0 0 512 512" aria-hidden="true"><path class="dv-cresL" d="M 208 52 A 232 232 0 0 0 208 460 A 158 204 0 0 1 208 52 Z" fill="none" stroke="url(#gxDavara)" stroke-width="30" stroke-linecap="round"/><path class="dv-cresR" d="M 304 52 A 232 232 0 0 1 304 460 A 158 204 0 0 0 304 52 Z" fill="none" stroke="url(#gxDavara)" stroke-width="30" stroke-linecap="round"/><path class="dv-hex" d="M256 206 L300 231 L300 281 L256 306 L212 281 L212 231 Z" fill="rgba(196,181,253,.26)" stroke="#e9d5ff" stroke-width="22" stroke-linejoin="round"/><circle class="dv-core" cx="256" cy="256" r="38" fill="#f5f3ff"/></svg></span><span class="lab">Agents</span><i class="wave" aria-hidden="true"></i></button>
+  <button class="nitem" data-go="loops" type="button"><span class="ico"><svg class="glyph ix ix--loop" viewBox="0 0 24 24" aria-hidden="true"><path class="ix-lem" d="M12 12c-1.95-3.45-3.85-5.05-5.75-5.05a4.45 4.45 0 0 0 0 10.1c1.9 0 3.8-1.6 5.75-5.05 1.95-3.45 3.85-5.05 5.75-5.05a4.45 4.45 0 0 1 0 10.1c-1.9 0-3.8-1.6-5.75-5.05Z" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="url(#gxLoop)" stroke-width="1.6"/><path class="ix-trace" d="M12 12c-1.95-3.45-3.85-5.05-5.75-5.05a4.45 4.45 0 0 0 0 10.1c1.9 0 3.8-1.6 5.75-5.05 1.95-3.45 3.85-5.05 5.75-5.05a4.45 4.45 0 0 1 0 10.1c-1.9 0-3.8-1.6-5.75-5.05Z" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="#c2fbff" stroke-width="2.1"/></svg></span><span class="lab">Loops</span><i class="wave" aria-hidden="true"></i></button>
+  <button class="nitem" data-go="corpus" type="button"><span class="ico"><svg class="glyph ix ix--corpus" viewBox="0 0 24 24" aria-hidden="true"><circle class="ix-aura" cx="12" cy="12" r="8.2" fill="none" stroke="url(#gxHalo)" stroke-width="3.4" opacity=".34" filter="url(#fxAura)"/><g class="ix-flares"><path class="ix-fl" d="M12 8.6C14.55 6.2 15.0 2.6 11.3 .55 12.2 3.2 9.8 5.0 9.7 6.5C9.6 7.5 10.9 8.3 12 8.6Z" style="--rot:0deg;--fd:0.00s;--hue:0"/><path class="ix-fl" d="M12 8.6C14.55 6.2 15.0 2.6 11.3 .55 12.2 3.2 9.8 5.0 9.7 6.5C9.6 7.5 10.9 8.3 12 8.6Z" style="--rot:60deg;--fd:0.42s;--hue:60"/><path class="ix-fl" d="M12 8.6C14.55 6.2 15.0 2.6 11.3 .55 12.2 3.2 9.8 5.0 9.7 6.5C9.6 7.5 10.9 8.3 12 8.6Z" style="--rot:120deg;--fd:0.84s;--hue:120"/><path class="ix-fl" d="M12 8.6C14.55 6.2 15.0 2.6 11.3 .55 12.2 3.2 9.8 5.0 9.7 6.5C9.6 7.5 10.9 8.3 12 8.6Z" style="--rot:180deg;--fd:1.26s;--hue:180"/><path class="ix-fl" d="M12 8.6C14.55 6.2 15.0 2.6 11.3 .55 12.2 3.2 9.8 5.0 9.7 6.5C9.6 7.5 10.9 8.3 12 8.6Z" style="--rot:240deg;--fd:1.68s;--hue:240"/><path class="ix-fl" d="M12 8.6C14.55 6.2 15.0 2.6 11.3 .55 12.2 3.2 9.8 5.0 9.7 6.5C9.6 7.5 10.9 8.3 12 8.6Z" style="--rot:300deg;--fd:2.10s;--hue:300"/></g><g class="ix-flares2"><path class="ix-fl2" d="M12 9.2C13.7 7.5 13.95 5.0 11.6 3.15 12.2 5.0 10.6 6.3 10.5 7.3C10.45 8.0 11.3 8.9 12 9.2Z" style="--rot:30deg;--fd:0.21s;--hue:30"/><path class="ix-fl2" d="M12 9.2C13.7 7.5 13.95 5.0 11.6 3.15 12.2 5.0 10.6 6.3 10.5 7.3C10.45 8.0 11.3 8.9 12 9.2Z" style="--rot:90deg;--fd:0.63s;--hue:90"/><path class="ix-fl2" d="M12 9.2C13.7 7.5 13.95 5.0 11.6 3.15 12.2 5.0 10.6 6.3 10.5 7.3C10.45 8.0 11.3 8.9 12 9.2Z" style="--rot:150deg;--fd:1.05s;--hue:150"/><path class="ix-fl2" d="M12 9.2C13.7 7.5 13.95 5.0 11.6 3.15 12.2 5.0 10.6 6.3 10.5 7.3C10.45 8.0 11.3 8.9 12 9.2Z" style="--rot:210deg;--fd:1.47s;--hue:210"/><path class="ix-fl2" d="M12 9.2C13.7 7.5 13.95 5.0 11.6 3.15 12.2 5.0 10.6 6.3 10.5 7.3C10.45 8.0 11.3 8.9 12 9.2Z" style="--rot:270deg;--fd:1.89s;--hue:270"/><path class="ix-fl2" d="M12 9.2C13.7 7.5 13.95 5.0 11.6 3.15 12.2 5.0 10.6 6.3 10.5 7.3C10.45 8.0 11.3 8.9 12 9.2Z" style="--rot:330deg;--fd:2.31s;--hue:330"/></g><circle class="ix-glow" cx="12" cy="12" r="5" fill="url(#gxSoul)" opacity=".28" filter="url(#fxAura)"/><circle class="ix-soul" cx="12" cy="12" r="3.4" fill="url(#gxSoul)"/><circle class="ix-spark" cx="12" cy="12" r="1.5" fill="#fff" opacity=".92"/></svg></span><span class="lab">Corpus</span><i class="wave" aria-hidden="true"></i></button>
 </nav>
 
 <!-- ========== THE FOCUS SHEET ========== -->
