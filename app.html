@@ -1909,8 +1909,9 @@ html[data-mode="lux"]{--votus:#7c4dd8}
         <b class="cyan">MotusMoves.US</b>.</p></div>
         <button class="engage" id="signBtn" type="button" style="min-height:52px">Sign in</button></div>
 
-      <div id="mecard"></div>
+      <div id="ckpis"></div>
 
+      <div id="mecard"></div>
 
       <div id="cprofile"></div>
 
@@ -2494,6 +2495,36 @@ html[data-mode="lux"]{--votus:#7c4dd8}
       + (mass ? '' : '; nothing recorded yet'));
     window.__prism = {mass:mass, k:+k.toFixed(3), spread:+SPREAD.toFixed(3),
       moves:moves, models:models, runs:runs, done:done, logged:logged};
+
+    /* THE RECORD, read by the very numbers that bend the prism in the nav.
+       One record, two readings: the mark shows how wide it disperses, the screen
+       shows what it is made of. They can never disagree, because there is only
+       one computation behind both. */
+    var box = document.getElementById('ckpis');
+    if(box){
+      var entries = moves + models + done + logged;
+      var subs = [['models',models],['runs',runs],['finished',done]]
+        .map(function(s){
+          return '<i class="'+(s[1]?'':'zero')+'"><b>'+num(s[1])+'</b>'+s[0]+'</i>';
+        }).join('');
+      var rest = entries ? '' :
+        '<div class="mktfield__rest"><p>Nothing is recorded here yet. '
+      + '<b>A corpus is not written, it is accumulated</b> - every move you make, '
+      + 'every model you run, every piece of work you finish.</p>'
+      + '<button class="engage" type="button" id="corpusAct">Sign in to sync yours</button></div>';
+      box.className = 'mktfield' + (entries ? ' mktfield--live' : '');
+      box.innerHTML =
+          '<p class="mktfield__k">The record' + (entries ? ' &middot; accumulating' : ' &middot; empty') + '</p>'
+        + '<div class="mktfield__n"><b>' + num(entries) + '</b><span>'
+        + (entries === 1 ? 'entry in your corpus' : 'entries in your corpus') + '</span></div>'
+        + '<div class="mktfield__p" aria-hidden="true"></div>'
+        + '<div class="mktfield__s">' + subs + '</div>'
+        + rest;
+      var ca = document.getElementById('corpusAct');
+      if(ca) ca.addEventListener('click', function(){
+        var b = document.getElementById('signBtn'); if(b) b.click();
+      });
+    }
   }
   window.__tuneCorpus = tuneCorpus;
 
