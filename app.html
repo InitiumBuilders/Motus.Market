@@ -1027,6 +1027,63 @@ html[data-mode="lux"]{--votus:#7c4dd8}
   color:var(--cyan);text-shadow:var(--text-glow)}
 .mk span{display:block;font-family:var(--mono);font-size:.72rem;font-weight:700;
   letter-spacing:.16em;text-transform:uppercase;margin-top:6px;opacity:.92}
+
+/* ══════════ THE FIELD ══════════
+   Four equal boxes reading 1 / 0 / 0 / 0 was the app's front door, and it told a
+   stranger one thing: nothing here. But a market with no activity is not broken.
+   It is a field at rest, and the first move sets it in motion — which is this
+   platform's whole thesis, reported as a deficit.
+
+   So the strip becomes an instrument. Every number is still present and nothing
+   is hidden; they are RANKED. The field's population leads, the activity inside
+   it sits quietly beneath, and between them runs a pulse line that carries a
+   travelling light when something is actually moving and lies flat and dim when
+   nothing is. The stillness is not an error state — it is a reading, and it is
+   the honest one. When the field is still, and only then, it says so and offers
+   the single act that starts it. */
+.mktfield{position:relative;margin:30px 0 56px;padding:30px 28px 26px;
+  border-radius:var(--r-pane);border:1px solid var(--edge);background:var(--glass);
+  -webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);overflow:hidden}
+.mktfield__k{font-family:var(--mono);font-size:.72rem;font-weight:700;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--cyan);text-shadow:var(--text-glow);margin:0 0 18px}
+.mktfield__n{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin:0 0 20px}
+.mktfield__n b{font-family:var(--mono);font-size:clamp(2.4rem,11vw,3.4rem);font-weight:700;
+  line-height:.92;color:var(--cyan);text-shadow:var(--text-glow)}
+.mktfield__n span{font-family:var(--mono);font-size:.78rem;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--ink);opacity:.9}
+
+/* the pulse — the field's own aliveness, drawn */
+.mktfield__p{position:relative;height:2px;border-radius:var(--r-pill);
+  background:linear-gradient(90deg,transparent,rgba(120,160,220,.3),transparent);
+  overflow:hidden;margin:0 0 20px}
+.mktfield__p::after{content:"";position:absolute;inset:0;border-radius:inherit;
+  background:linear-gradient(90deg,transparent 0%,var(--cyan) 45%,#fff 50%,
+    var(--cyan) 55%,transparent 100%);
+  transform:translateX(-100%);opacity:0}
+/* it only travels when the field is actually in motion */
+.mktfield--live .mktfield__p::after{opacity:1;animation:mktfieldPulse 3.4s cubic-bezier(.5,0,.5,1) infinite}
+@keyframes mktfieldPulse{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+.mktfield--live .mktfield__p{background:linear-gradient(90deg,transparent,rgba(28,231,255,.4),transparent)}
+
+.mktfield__s{display:flex;gap:10px;flex-wrap:wrap}
+.mktfield__s i{display:flex;align-items:baseline;gap:7px;font-style:normal;
+  font-family:var(--mono);font-size:.74rem;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;padding:9px 14px;border-radius:var(--r-pill);
+  border:1px solid var(--edge);color:var(--ink);opacity:.88}
+.mktfield__s i b{font-size:.94rem;color:var(--cyan)}
+.mktfield__s i.zero b{color:var(--ink);opacity:.55}
+
+/* the reading, when the field is still — and the one act that changes it */
+.mktfield__rest{display:flex;align-items:center;justify-content:space-between;gap:16px;
+  flex-wrap:wrap;margin:22px 0 0;padding:18px 0 0;border-top:1px solid var(--edge)}
+.mktfield__rest p{margin:0;font-size:.95rem;font-weight:500;line-height:1.6;
+  color:var(--ink);max-width:44ch}
+.mktfield__rest p b{color:var(--cyan);font-weight:700}
+@media(max-width:620px){
+  .mktfield{padding:26px 20px 22px}
+  .mktfield__rest{flex-direction:column;align-items:stretch}
+  .mktfield__rest .engage{width:100%;justify-content:center}}
+@media(prefers-reduced-motion:reduce){.mktfield--live .mktfield__p::after{animation:none}}
 .bandhead{font-family:var(--mono);font-size:.78rem;font-weight:700;letter-spacing:.28em;
   text-transform:uppercase;color:var(--cyan);text-shadow:var(--text-glow);
   margin:0 0 24px;display:flex;align-items:center;gap:11px}
@@ -2990,17 +3047,56 @@ html[data-mode="lux"]{--votus:#7c4dd8}
   function moverUrl(m){return m.slug?('https://www.motusmoves.us/mover/'+m.slug):''}
   function offersFor(id){return OFFERS.filter(function(o){return o.moveId===id})}
 
+  /* THE FIELD — the same four numbers, ranked instead of flattened.
+     The population of the field leads; the activity inside it sits beneath; the
+     pulse between them says whether anything is actually moving. Nothing is
+     hidden and nothing is dressed up: when it is still, it says so, and offers
+     the one act that changes that. */
   function drawWKpis(){
     var el=document.getElementById('wkpis');if(!el)return;
-    var movers={};MOVES.forEach(function(m){if(m.slug)movers[m.slug]=1});
     var now=Date.now();
+    var moves=MOVES.length;
     var live=MOVES.filter(function(m){return now-m.ts<DAY}).length;
+    var offers=OFFERS.length;
     var votus=OFFERS.filter(function(o){return o.kind==='votus'}).length;
-    var rows=[['Moves',MOVES.length],['Live · 24h',live],
-      ['Offers',OFFERS.length],['VotusMoves',votus]];
-    el.innerHTML=rows.map(function(r){
-      return '<div class="pane mk"><b>'+num(r[1])+'</b><span>'+r[0]+'</span></div>';
-    }).join('');
+    var inMotion=live+offers;                    /* is anything actually moving? */
+
+    var subs=[['live · 24h',live],['offers',offers],['given freely',votus]]
+      .map(function(s){
+        return '<i class="'+(s[1]?'':'zero')+'"><b>'+num(s[1])+'</b>'+s[0]+'</i>';
+      }).join('');
+
+    /* the invitation only appears when it is true — and it names the act that
+       actually moves this market, which depends on whether the field has any
+       moves for an offer to live inside yet (a service cannot exist on its own) */
+    var rest='';
+    if(!inMotion){
+      rest = moves
+        ? '<div class="mktfield__rest"><p>The field is still. Every offer lives inside '
+          + 'a move — and there ' + (moves===1?'is one waiting':'are '+num(moves)+' waiting') + '. '
+          + '<b>Be the first to offer something inside it.</b></p>'
+          + '<button class="engage" type="button" id="fieldAct">List the first offer</button></div>'
+        : '<div class="mktfield__rest"><p>The field is still — nothing has moved here yet. '
+          + '<b>Every market begins with one move.</b></p>'
+          + '<a class="engage" href="https://www.motusmoves.us" target="_blank" '
+          + 'rel="noopener">Make the first move</a></div>';
+    }
+
+    el.className='mktfield'+(inMotion?' mktfield--live':'');
+    el.innerHTML=
+        '<p class="mktfield__k">The field'+(inMotion?' &middot; in motion':' &middot; at rest')+'</p>'
+      + '<div class="mktfield__n"><b>'+num(moves)+'</b><span>'
+      +   (moves===1?'move in the field':'moves in the field')+'</span></div>'
+      + '<div class="mktfield__p" aria-hidden="true"></div>'
+      + '<div class="mktfield__s">'+subs+'</div>'
+      + rest;
+
+    var act=document.getElementById('fieldAct');
+    /* openList lives inside this file's IIFE and is published on __app — not on
+       window. Reaching for window.openList would have failed silently. */
+    if(act)act.addEventListener('click',function(){
+      if(window.__app&&window.__app.openList)window.__app.openList();
+    });
   }
   function drawBroadcast(){
     var el=document.getElementById('broadcast'),dot=document.getElementById('castDot');
