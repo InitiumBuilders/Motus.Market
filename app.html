@@ -431,22 +431,6 @@
 
 /* ---- MAIN ---- */
 .main{padding:30px 40px 160px;max-width:1120px;width:100%;margin:0 auto}
-.topbar{display:flex;align-items:center;gap:16px;margin-bottom:44px;flex-wrap:wrap}
-.search{flex:1;min-width:220px;display:flex;align-items:center;gap:12px;min-height:52px;
-  padding:0 20px;border-radius:var(--r-pill);background:var(--glass);
-  border:1px solid var(--edge);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur)}
-.search .glyph{width:20px;height:20px;color:var(--cyan)}
-.search input{flex:1;background:none;border:none;outline:none;color:var(--ink);
-  font-family:var(--font);font-size:.98rem;font-weight:500;min-width:0}
-.search input::placeholder{color:var(--ink);opacity:1;font-weight:500}
-.stat{display:flex;flex-direction:column;gap:2px;align-items:flex-end;min-height:52px;
-  justify-content:center;padding:0 20px;border-radius:var(--r-ctl);
-  background:var(--glass);border:1px solid var(--edge);
-  -webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur)}
-.stat b{font-family:var(--mono);font-size:1.02rem;font-weight:700;letter-spacing:.02em}
-.stat span{font-family:var(--mono);font-size:.72rem;font-weight:700;letter-spacing:.18em;
-  text-transform:uppercase}
-.stat.c2 b{color:var(--cyan)}
 
 /* ---- screens ---- */
 .screen{display:none}
@@ -832,7 +816,6 @@ html[data-mode="lux"] .avatar{background:radial-gradient(circle at 34% 30%,#4aa8
   letter-spacing:.12em;flex:0 0 auto;padding-top:3px}
 
 /* ================= THE CORPUS — the mover, live ================= */
-.cs{margin-bottom:30px}
 .phero{position:relative;overflow:hidden;padding:0 0 30px;margin-bottom:26px}
 /* The banner's TOP corners are clipped by .phero's own radius + overflow:hidden,
    and its bottom edge is an internal seam flowing into the card — not an exposed
@@ -1020,13 +1003,9 @@ html[data-mode="lux"]{--votus:#7c4dd8}
 .votusnote b{color:var(--votus)}
 
 /* ================= !MOTUS — the MotusModels Commons ================= */
-.mkpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:30px 0 56px}
-@media(max-width:760px){.mkpis{grid-template-columns:repeat(2,1fr)}}
-.mk{padding:18px 14px;text-align:center;border-radius:var(--r-ctl)}
-.mk b{display:block;font-family:var(--mono);font-size:1.32rem;font-weight:700;
-  color:var(--cyan);text-shadow:var(--text-glow)}
-.mk span{display:block;font-family:var(--mono);font-size:.72rem;font-weight:700;
-  letter-spacing:.16em;text-transform:uppercase;margin-top:6px;opacity:.92}
+/* the four-equal-boxes KPI cards are retired — both strips are the field
+   instrument now, and leaving their rules behind is how the next name
+   collision gets born */
 
 /* ══════════ THE FIELD ══════════
    Four equal boxes reading 1 / 0 / 0 / 0 was the app's front door, and it told a
@@ -1232,7 +1211,6 @@ html[data-mode="lux"]{--votus:#7c4dd8}
   /* the bar grew with the new marks — the page keeps real clearance under it,
      and every band gets more room to breathe on a small screen */
   .main{padding:10px 18px 168px}
-  .topbar{margin-bottom:20px;gap:10px}
   .sh{margin-bottom:26px}
   .sh h1{font-size:1.5rem}
   .sh p{font-size:.98rem}
@@ -1269,9 +1247,6 @@ html[data-mode="lux"]{--votus:#7c4dd8}
     max-width:100%;overflow:hidden;text-overflow:ellipsis;text-align:center}
   .tabbar .nitem:hover,.tabbar .nitem.on{letter-spacing:.06em}
   .tabbar .nitem.on .lab{animation:none}
-            .topbar{margin-bottom:30px}
-  .stat{display:none}
-  .stat.c2{display:flex}
 }
 </style>
 </head>
@@ -1433,7 +1408,6 @@ html[data-mode="lux"]{--votus:#7c4dd8}
 <g id="g-agent"><circle cx="12" cy="12" r="3.1" fill="currentColor"/><ellipse cx="12" cy="12" rx="9.4" ry="4.2" fill="none" stroke="currentColor" stroke-width="1.7" transform="rotate(-26 12 12)"/><circle cx="19.6" cy="8.4" r="1.7" fill="currentColor"/></g>
 <g id="g-loop"><path d="M12 12c-1.9-3.4-3.8-5-5.7-5a4.4 4.4 0 0 0 0 10c1.9 0 3.8-1.6 5.7-5 1.9-3.4 3.8-5 5.7-5a4.4 4.4 0 0 1 0 10c-1.9 0-3.8-1.6-5.7-5Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></g>
 <g id="g-corpus"><path d="M21 12a9 9 0 0 0-9-9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M3 12a9 9 0 0 0 9 9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M17.3 12A5.3 5.3 0 0 0 12 6.7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity=".8"/><path d="M6.7 12a5.3 5.3 0 0 0 5.3 5.3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity=".8"/><circle cx="12" cy="12" r="2.2" fill="currentColor"/></g>
-<g id="g-search"><circle cx="10.8" cy="10.8" r="6.6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m15.7 15.7 4.8 4.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></g>
 <g id="g-bolt"><path d="M13 2 5 13.5h5L10.5 22l8.5-11.5h-5.5L13 2Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></g>
 <g id="g-shield"><path d="M12 2.8 20 6v6.2c0 5-3.4 8-8 9-4.6-1-8-4-8-9V6l8-3.2Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m8.6 11.8 2.4 2.4 4.6-4.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g>
 <g id="g-check"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
@@ -1470,11 +1444,10 @@ html[data-mode="lux"]{--votus:#7c4dd8}
   <!-- ================= MAIN ================= -->
   <main class="main">
     <a class="mbrand" href="/"><img class="inf" src="/assets/logo.png" alt="" aria-hidden="true"><span class="bt"><span class="mo">MOTUS</span><b>.MARKET</b></span></a>
-    <div class="topbar">
-      <label class="search"><svg class="glyph"><use href="#g-search"/></svg>
-        <input id="q" type="search" placeholder="Search offers, models, movers" aria-label="Search"></label>
-      <div class="stat c2"><b id="c2">1,247,208</b><span>The C2 · Motus earned</span></div>
-    </div>
+    <!-- The topbar is gone, and with it the search and the C2 counter. Both come
+         back when there is enough here to need them; until then they were the
+         first two things on every screen and neither answered a question anyone
+         was asking. What replaces them is the space itself. -->
 
     <!-- ========== MARKET — the moves, and the offers inside them ========== -->
     <section class="screen on" id="s-market">
@@ -1938,8 +1911,6 @@ html[data-mode="lux"]{--votus:#7c4dd8}
 
       <div id="mecard"></div>
 
-      <label class="search cs"><svg class="glyph"><use href="#g-search"/></svg>
-        <input id="cq" type="search" placeholder="Search movers — name, handle, mantra…" aria-label="Search movers"></label>
 
       <div id="cprofile"></div>
 
@@ -3020,14 +2991,7 @@ html[data-mode="lux"]{--votus:#7c4dd8}
       }).catch(function(){});
   }
 
-  var cq=document.getElementById('cq');
-  if(cq)cq.addEventListener('input',function(){
-    var s=cq.value.trim().toLowerCase();
-    drawMovers(!s?MOVERS:MOVERS.filter(function(p){
-      return ((p.username||'')+' '+(p.handle||'')+' '+(p.slug||'')+' '+(p.mantra||'')+' '+
-        (p.bio||'')).toLowerCase().indexOf(s)>=0;
-    }));
-  });
+  /* the Corpus mover-search went with the others — drawMovers renders them all */
 
   /* ═══════ THE MARKET — live MotusMoves, and the offers inside them ═══════ */
   var MV_API='https://www.motusmoves.us/api/feed';
@@ -3320,13 +3284,39 @@ html[data-mode="lux"]{--votus:#7c4dd8}
   function g1(m){return (m.author&&m.author.color&&m.author.color[0])||'#1ce7ff'}
   function g2(m){return (m.author&&m.author.color&&m.author.color[1])||'#0066ff'}
 
+  /* THE SAME INSTRUMENT, READING A DIFFERENT FIELD.
+     The Commons had the identical four-equal-boxes problem, so it gets the
+     identical answer rather than a second design: the population leads, the
+     activity sits quietly beneath, and the pulse says whether anything is
+     actually turning. One component used twice is a system; two components
+     doing the same job is drift. */
   function drawKpis(k){
     var el=document.getElementById('mkpis');if(!el)return;
-    var rows=[['models','Models'],['live','Live'],
-      ['runs','Runs'],['conviction','Conviction']];
-    el.innerHTML=rows.map(function(r){
-      return '<div class="pane mk"><b>'+num(k?k[r[0]]:0)+'</b><span>'+r[1]+'</span></div>';
-    }).join('');
+    k=k||{};
+    var models=+k.models||0, live=+k.live||0, runs=+k.runs||0, conv=+k.conviction||0;
+    var turning=live+runs;                    /* a model is only alive when it RUNS */
+
+    var subs=[['live now',live],['runs',runs],['conviction',conv]]
+      .map(function(s){
+        return '<i class="'+(s[1]?'':'zero')+'"><b>'+num(s[1])+'</b>'+s[0]+'</i>';
+      }).join('');
+
+    var rest='';
+    if(!turning){
+      rest='<div class="mktfield__rest"><p>No model is turning right now. '
+         + '<b>A pattern only proves itself by being run.</b></p>'
+         + '<a class="engage" href="https://www.motusmoves.us/model/commons" '
+         + 'target="_blank" rel="noopener">Run one in the Commons</a></div>';
+    }
+
+    el.className='mktfield'+(turning?' mktfield--live':'');
+    el.innerHTML=
+        '<p class="mktfield__k">The commons'+(turning?' &middot; turning':' &middot; at rest')+'</p>'
+      + '<div class="mktfield__n"><b>'+num(models)+'</b><span>'
+      +   (models===1?'model minted':'models minted')+'</span></div>'
+      + '<div class="mktfield__p" aria-hidden="true"></div>'
+      + '<div class="mktfield__s">'+subs+'</div>'
+      + rest;
   }
   function drawInMotion(list){
     var el=document.getElementById('inmotion'),dot=document.getElementById('motionDot');
@@ -3589,41 +3579,13 @@ html[data-mode="lux"]{--votus:#7c4dd8}
     if(cur&&window.__flowLiquid)window.__flowLiquid(cur.getAttribute('data-go'),true);
   });
 
-  /* ---------- search — moves, movers, and the offers inside them ---------- */
-  var q=document.getElementById('q');
-  q.addEventListener('input',function(){
-    if(!document.getElementById('s-market').classList.contains('on'))go('market');
-    var s=q.value.trim().toLowerCase();
-    if(!s){refreshMarket();return}
-    var mel=document.getElementById('moves');
-    var hits=MOVES.filter(function(m){
-      return ((m.title||'')+' '+(m.text||'')+' '+(m.name||'')+' '+(m.tag||'')+' '+(m.mantra||''))
-        .toLowerCase().indexOf(s)>=0;
-    });
-    mel.innerHTML=hits.length?hits.map(function(m){
-      return '<div class="pane pane--hover movecard" data-mv="'+esc(m.id)+'" '+
-        'style="--g1:'+esc(mCol(m,0))+';--g2:'+esc(mCol(m,1))+'">'+
-        '<div class="who"><span class="av" style="'+mAv(m)+'">'+
-        (m.avatar?'':esc((m.name||'?').charAt(0)))+'</span>'+
-        '<span><b>'+esc(m.name||'')+'</b><i>'+esc(m.mantra||'')+'</i></span></div>'+
-        '<h3>'+esc(m.title||'A move')+'</h3><p class="txt">'+esc(m.text||'')+'</p>'+
-        '<p class="more">Open the move &rarr;</p></div>';
-    }).join(''):'<div class="pane restnote">No move matches “'+esc(q.value)+'”.</div>';
-    var oel=document.getElementById('offers');
-    var oh=OFFERS.filter(function(o){
-      return ((o.text||'')+' '+(o.moveTitle||'')).toLowerCase().indexOf(s)>=0});
-    oel.innerHTML=oh.length?oh.map(offerCard).join('')
-      :'<div class="pane restnote">No offer matches yet.</div>';
-    bindMoveCards();bindOfferActions();
-  });
+  /* The search handler went with the search box. It was the only reader of
+     MOVES/OFFERS that bypassed refreshMarket(), so nothing else depended on it. */
 
-  /* ---------- the C2 ticks — it never jumps ---------- */
-  var c2El=document.getElementById('c2'),c2=1247208;
-  setInterval(function(){
-    if(document.hidden)return;
-    c2+=Math.floor(1+Math.random()*4);
-    c2El.textContent=c2.toLocaleString('en-US');
-  },2600);
+  /* The C2 ticker is gone too. It was a setInterval firing every 2.6s for the
+     life of the session to increment a number by a random 1-4 — an invented
+     figure, and a permanent timer, both attached to an element that no longer
+     exists. */
 
   /* ---------- the Focus Sheet ---------- */
   var scrim=document.getElementById('scrim'),sheet=document.getElementById('sheet'),
