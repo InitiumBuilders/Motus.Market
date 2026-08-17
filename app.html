@@ -31,7 +31,10 @@
    mark and the name stay proud but compact — the app is what people came for. */
 @media(max-width:900px){
   .mbrand{display:flex;flex-direction:row;align-items:center;justify-content:center;
-    gap:10px;text-align:center;color:var(--ink);text-decoration:none;margin:0 0 2px}
+    gap:10px;text-align:center;color:var(--ink);text-decoration:none;margin:0 0 2px;
+    /* it is a link, so it has to be reachable by a thumb — the negative margins
+       on the mark had collapsed its box to 36px */
+    min-height:44px}
   .mbrand img.inf{width:104px;height:104px;object-fit:contain;display:block;
     margin:-35px 0 -33px 0;flex:0 0 auto;
     filter:drop-shadow(0 0 7px rgba(0,190,255,.55)) drop-shadow(0 0 16px rgba(0,120,255,.28))}
@@ -1205,7 +1208,7 @@ html[data-mode="lux"]{--votus:#7c4dd8}
   /* every mark occupies the SAME optical box, so no destination shouts */
   .tabbar .nitem .ico{width:40px;height:40px}
   .tabbar .nitem .ix{width:32px;height:32px}
-  .tabbar .nitem .lab{font-size:.72rem;line-height:1;white-space:nowrap;
+  .tabbar .nitem .lab{font-size:.72rem;line-height:1.3;white-space:nowrap;
     max-width:100%;overflow:hidden;text-overflow:ellipsis;text-align:center}
   .tabbar .nitem:hover,.tabbar .nitem.on{letter-spacing:.06em}
   .tabbar .nitem.on .lab{animation:none}
@@ -1412,7 +1415,7 @@ html[data-mode="lux"]{--votus:#7c4dd8}
     <a class="mbrand" href="/"><img class="inf" src="/assets/logo.png" alt="" aria-hidden="true"><span class="bt"><span class="mo">MOTUS</span><b>.MARKET</b></span></a>
     <div class="topbar">
       <label class="search"><svg class="glyph"><use href="#g-search"/></svg>
-        <input id="q" type="search" placeholder="Search offers, models, movers…" aria-label="Search"></label>
+        <input id="q" type="search" placeholder="Search offers, models, movers" aria-label="Search"></label>
       <div class="stat c2"><b id="c2">1,247,208</b><span>The C2 · Motus earned</span></div>
     </div>
 

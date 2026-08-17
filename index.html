@@ -79,6 +79,48 @@ section.proof{padding-top:210px}
 .brandline b{color:var(--cyan);font-weight:800}
 .mantra{font-size:clamp(1.15rem,3.5vw,2rem);font-weight:600;line-height:1.3;
   letter-spacing:.02em;margin:26px 0 0;opacity:.96}
+/* ── THE INVITATION ──
+   Bottom-anchored, never covering, never trapping. It rises once, after the
+   visitor has passed the arrival under their own power. */
+.invite{
+  position:fixed;left:14px;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));
+  z-index:60;display:flex;align-items:center;justify-content:space-between;
+  gap:18px;flex-wrap:wrap;padding:18px 20px;border-radius:var(--r-pane,24px);
+  border:1px solid var(--edge);background:var(--glass);
+  -webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);
+  box-shadow:0 -4px 60px -18px rgba(0,0,0,.85),0 0 90px -40px rgba(28,231,255,.4);
+  opacity:0;transform:translateY(18px);
+  transition:opacity .5s var(--ease-out,ease),transform .5s var(--ease-out,ease);
+  max-width:760px;margin:0 auto;
+  /* an author `display` beats the UA's [hidden]{display:none}, so without this
+     the bar stays LAID OUT at ~400px tall with opacity 0 — an invisible band
+     across the bottom of the page silently eating every tap that lands on it */
+  pointer-events:none}
+.invite[hidden]{display:none}
+.invite.on{opacity:1;transform:none;pointer-events:auto}
+.invite__l{flex:1 1 300px;min-width:0}
+.invite__k{
+  font-family:var(--mono);font-size:.72rem;font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--cyan);margin:0 0 8px}
+.invite__t{font-size:.94rem;font-weight:500;line-height:1.6;margin:0;color:var(--ink)}
+.invite__t b{font-weight:700}
+.invite__a{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.invite__x{
+  appearance:none;-webkit-appearance:none;background:none;border:0;cursor:pointer;
+  min-height:44px;padding:0 14px;border-radius:var(--r-pill,999px);
+  font:600 .88rem/1 inherit;color:var(--ink);opacity:.72;
+  -webkit-tap-highlight-color:transparent;transition:opacity .3s ease}
+.invite__x:hover{opacity:1}
+@media(max-width:560px){
+  .invite{flex-direction:column;align-items:stretch;gap:12px;padding:16px 18px}
+  /* `flex:1 1 300px` was written for the ROW layout, where 300px is a width.
+     Turning the container to a column turns that basis into a HEIGHT — it was
+     forcing a 300px tall block and a 403px bar, half a phone screen. */
+  .invite__l{flex:0 0 auto}
+  .invite__a{justify-content:space-between}
+  .invite__a .btn{flex:1}}
+@media(prefers-reduced-motion:reduce){.invite{transition:none}}
+
 .scrollcue{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);
   display:flex;flex-direction:column;align-items:center;gap:12px;z-index:1}
 .scrollcue span{font-family:var(--mono);font-size:.72rem;font-weight:700;
@@ -136,6 +178,10 @@ html.anim .act .hs.on{opacity:1;filter:blur(0);transform:none;
 .shead p{font-size:1.12rem;font-weight:500;max-width:36em;margin:18px auto 0;line-height:1.65}
 .shead--grand h2{font-size:clamp(2.6rem,7.8vw,4.5rem)}
 .shead--grand .eyebrow{font-size:.9rem}
+
+/* svg sprites carry no viewBox, so an unsized .glyph falls back to the UA 300x150 box */
+.glyph{width:30px;height:30px;flex:none}
+.modeSw .glyph{width:18px;height:18px}
 
 /* ---- rails ---- */
 .rails{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
@@ -470,22 +516,25 @@ footer .mono{font-size:.74rem;font-weight:700;letter-spacing:.3em;text-transform
 </footer>
 
 <!-- ============ THE INVITATION — rises once, the first time ============ -->
-<div class="scrim" id="hopeScrim"></div>
-<div class="sheet" id="hopeSheet" role="dialog" aria-modal="true" aria-label="The Motus Message In Motion" style="text-align:center">
-  <p class="eyebrow" style="margin-bottom:22px">14 · 08 · 2026 — The Motus Message In Motion</p>
-  <p style="font-size:clamp(1.1rem,3.6vw,1.35rem);font-weight:700;font-style:italic;
-    line-height:1.6;margin:0 0 10px">"The hope points towards a strong future for the
-    future of work for many&nbsp;lives."</p>
-  <p class="mono" style="font-size:.78rem;font-weight:700;letter-spacing:.24em;
-    text-transform:uppercase;color:var(--orange);margin:0 0 26px">— August, the founder</p>
-  <p style="font-size:.95rem;font-weight:500;line-height:1.65;margin:0 0 30px">
-    On the day this market took shape, its founder and its AI wrote its founding
-    record together. His exact words — and Claude's reply.</p>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-    <a class="btn btn--prime" href="/hope.html">Read the exchange</a>
-    <button class="btn btn--glass" id="hopeLater" type="button">Later</button>
+<!-- the scrim went with the modal: nothing needs dimming any more -->
+<!-- THE INVITATION DOES NOT GATE THE DOOR.
+     This was a modal with a scrim, fired 5.2s after load: the very first thing a
+     stranger met at motus.market was a dialog covering the hero, asking them to
+     read a founding document before they had seen what this even is. The
+     exchange is worth offering — it is not worth spending the first impression
+     on. So it waits until they have actually passed the arrival, then arrives at
+     the bottom as an invitation that obscures nothing and blocks nothing. -->
+<aside class="invite" id="hopeInvite" hidden>
+  <div class="invite__l">
+    <p class="invite__k">14 · 08 · 2026 — The Motus Message In&nbsp;Motion</p>
+    <p class="invite__t">The day this market took shape, its founder and its AI wrote
+      its founding record together. <b>His words, and Claude's reply.</b></p>
   </div>
-</div>
+  <div class="invite__a">
+    <a class="btn btn--prime" href="/hope.html">Read the exchange</a>
+    <button class="invite__x" id="hopeLater" type="button">Not now</button>
+  </div>
+</aside>
 
 <script>
 (function(){
@@ -731,18 +780,65 @@ footer .mono{font-size:.74rem;font-weight:700;letter-spacing:.3em;text-transform
     });
   }
 
-  /* ---------- the invitation: once per visitor ---------- */
+  /* ---------- the invitation: once per visitor, and never in the way ----------
+     It no longer fires on a timer while the visitor is still reading the
+     arrival. It waits until they have scrolled past it — that is the earliest
+     moment we have earned the right to ask for anything — and then it slides up
+     without a scrim, without trapping focus, and without covering the page. */
   var seen=null;try{seen=localStorage.getItem('motus.hope.invite')}catch(e){}
   if(!seen){
-    var hs=document.getElementById('hopeSheet'),hsc=document.getElementById('hopeScrim');
-    var closeInvite=function(){hs.classList.remove('open');hsc.classList.remove('open')};
-    setTimeout(function(){
-      hs.classList.add('open');hsc.classList.add('open');
-      try{localStorage.setItem('motus.hope.invite','1')}catch(e){}
-    },5200);
-    hsc.addEventListener('click',closeInvite);
-    document.getElementById('hopeLater').addEventListener('click',closeInvite);
-    document.addEventListener('keydown',function(e){if(e.key==='Escape')closeInvite()});
+    var inv=document.getElementById('hopeInvite'), shown=false;
+    var remember=function(){try{localStorage.setItem('motus.hope.invite','1')}catch(e){}};
+    var dismiss=function(){inv.classList.remove('on');
+      inv.style.opacity='';inv.style.transform='';remember();
+      setTimeout(function(){inv.hidden=true},420)};
+    var show=function(){
+      if(shown)return; shown=true; inv.hidden=false;
+      /* a forced reflow, not requestAnimationFrame: the element has to be laid
+         out once before the class lands or the transition has nothing to run
+         from, and rAF can be throttled or deferred in ways a reflow cannot */
+      void inv.offsetWidth;
+      inv.classList.add('on');
+      /* A transition can stall at progress 0 in a non-compositing context, and
+         this bar becomes interactive the moment `.on` lands — invisible AND
+         clickable is the one state it must never rest in. So guarantee the end
+         values just past the transition; a no-op if it already arrived. */
+      setTimeout(function(){ inv.style.opacity='1'; inv.style.transform='none'; },560);
+    };
+    /* THE TRIGGER IS A SCROLL THRESHOLD, AND IT IS SNAP-AWARE.
+       Two things had to be measured to get this right. The page is
+       `scroll-snap-type: y mandatory`, so a scroll lands on a snap point rather
+       than where it was aimed — asking for 1137px landed at 779, which made a
+       934px threshold unreachable. And an IntersectionObserver on the arrival,
+       the more elegant answer, never fired its callback at all in the harness I
+       can verify in, so it would have been a trigger I could not prove.
+       0.6 of a viewport sits well below the first snap past the arrival (779)
+       and well above the arrival's own snap point (0), so it cannot misfire
+       while the hero is still on screen. */
+    var onScroll=function(){
+      if(window.scrollY > innerHeight*0.6){
+        show(); window.removeEventListener('scroll',onScroll);
+      }
+    };
+    window.addEventListener('scroll',onScroll,{passive:true});
+    /* second path to the same idempotent show(): the arrival leaving the
+       viewport. Costs nothing if the scroll listener gets there first, and
+       covers the case where it does not. */
+    if('IntersectionObserver' in window){
+      var arrival=document.getElementById('arrival');
+      if(arrival){
+        var io=new IntersectionObserver(function(es){
+          es.forEach(function(e){ if(!e.isIntersecting){ show(); io.disconnect(); } });
+        },{threshold:0});
+        io.observe(arrival);
+      }
+    }
+    /* and a hand-hold for anyone driving this without either: __invite() */
+    window.__invite=show;
+    document.getElementById('hopeLater').addEventListener('click',dismiss);
+    /* choosing to read it also counts as answered */
+    inv.querySelector('a.btn').addEventListener('click',remember);
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'&&shown)dismiss()});
   }
 })();
 </script>
