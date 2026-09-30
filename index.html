@@ -1,847 +1,113 @@
-<!DOCTYPE html>
-<html lang="en" data-mode="nox">
+<!doctype html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MOTUS.MARKET — Many Minds Set In Motion</title>
-<meta name="description" content="Many Minds Set In Motion. Your Heart, Mind, And Soul In Full Motion. Move The Mindset. Move The World.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800;900&family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-<link rel="icon" href="/assets/logo.png">
-<link rel="stylesheet" href="/assets/neoglass.css">
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<title>Motus.Market — Sell Your Signal. Not Your Soul.</title>
+<meta name="description" content="Motus.Market is the market for agency: stories, services, signals and verified movement for humanity."/>
 <style>
-/* ============================================================
-   THE ARRIVAL — statement cinema. One line, one room.
-   Laws: cinematic-statements · neoglass · the seven sealed laws
-   ============================================================ */
-html{scroll-behavior:auto}
-/* THE LOCK — the browser itself does it, so it cannot be outrun.
-   The acts force a stop; everything below only aligns, and because those
-   sections are taller than the viewport you scroll through them freely. */
-html.snap{scroll-snap-type:y mandatory}
-.arrival{scroll-snap-align:center;scroll-snap-stop:always}
-section.proof,.close,footer{scroll-snap-align:start}
-.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
-section.proof{padding-top:210px}
-@media(max-width:720px){section.proof{padding-top:130px}}
-
-/* ---- nav ---- */
-.nav{position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:60;
-  display:flex;align-items:center;gap:6px;padding:8px;border-radius:var(--r-pill);
-  background:var(--glass);border:1px solid var(--edge);
-  -webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 14px 40px rgba(0,0,0,.3)}
-.nav a{display:inline-flex;align-items:center;gap:9px;min-height:44px;padding:0 15px;
-  border-radius:var(--r-pill);color:var(--ink);text-decoration:none;white-space:nowrap;
-  font-size:.9rem;font-weight:600;letter-spacing:.01em;
-  transition:background .25s,color .25s}
-.nav a:hover{background:var(--glass-2);color:var(--cyan)}
-.nav .brand{font-family:var(--display);font-weight:800;font-size:.74rem;letter-spacing:.01em}
-.nav .brand:hover{color:var(--ink)}
-.nav .brand b{color:var(--cyan);font-weight:800}
-.nav .brand{padding-left:8px}
-@media(max-width:640px){
-  .nav{max-width:calc(100vw - 12px);gap:0;padding:5px;
-    overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;
-    justify-content:flex-start}
-  .nav::-webkit-scrollbar{display:none}
-  .nav a,.nav .modeSw{flex:0 0 auto}
-  .nav a{padding:0 7px;font-size:.72rem;letter-spacing:0;min-height:44px}
-  .nav .brand{padding:0 2px 0 0}
-  .nav .brand span{display:none}
-  .nav .modeSw{padding:0 11px}
-  .nav .modeSw span{display:none}
-}
-
-/* ---- ACT 0 · the arrival ceremony ---- */
-.arrival{position:relative;min-height:100svh;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;text-align:center;overflow:hidden;
-  padding:110px 24px 90px}
-#minds{position:absolute;inset:0;z-index:0;pointer-events:none;
-  -webkit-mask:radial-gradient(120% 78% at 50% 44%,#000 34%,rgba(0,0,0,.35) 72%,transparent 100%);
-  mask:radial-gradient(120% 78% at 50% 44%,#000 34%,rgba(0,0,0,.35) 72%,transparent 100%)}
-.arrival>*{position:relative;z-index:1}
-.markwrap{position:relative;width:min(100%,860px);aspect-ratio:2.4/1;margin:0 auto;will-change:opacity,filter,transform}
-.markwrap::before{content:'';position:absolute;left:50%;top:50%;width:min(86vw,560px);
-  aspect-ratio:2/1;transform:translate(-50%,-50%);pointer-events:none;
-  background:radial-gradient(closest-side,rgba(0,190,255,.30),rgba(0,90,220,.10) 56%,transparent 76%);
-  filter:blur(14px);animation:markPulse 6s ease-in-out infinite}
-@keyframes markPulse{0%,100%{opacity:.72;transform:translate(-50%,-50%) scale(.97)}
-  50%{opacity:1;transform:translate(-50%,-50%) scale(1.04)}}
-.mark{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
-  width:100%;height:auto;display:block;
-  filter:drop-shadow(0 0 40px rgba(0,190,255,.55)) drop-shadow(0 0 110px rgba(0,110,255,.32))}
-.brandline{font-family:var(--display);font-weight:900;
-  font-size:clamp(1.5rem,5.4vw,4rem);line-height:1.08;
-  letter-spacing:-.005em;margin:4svh 0 0;white-space:nowrap;
-  text-shadow:0 0 34px rgba(28,231,255,.4)}
-.brandline b{color:var(--cyan);font-weight:800}
-.mantra{font-size:clamp(1.15rem,3.5vw,2rem);font-weight:600;line-height:1.3;
-  letter-spacing:.02em;margin:26px 0 0;opacity:.96}
-/* ── THE INVITATION ──
-   Bottom-anchored, never covering, never trapping. It rises once, after the
-   visitor has passed the arrival under their own power. */
-.invite{
-  position:fixed;left:14px;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));
-  z-index:60;display:flex;align-items:center;justify-content:space-between;
-  gap:18px;flex-wrap:wrap;padding:18px 20px;border-radius:var(--r-pane,24px);
-  border:1px solid var(--edge);background:var(--glass);
-  -webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);
-  box-shadow:0 -4px 60px -18px rgba(0,0,0,.85),0 0 90px -40px rgba(28,231,255,.4);
-  opacity:0;transform:translateY(18px);
-  transition:opacity .5s var(--ease-out,ease),transform .5s var(--ease-out,ease);
-  max-width:760px;margin:0 auto;
-  /* an author `display` beats the UA's [hidden]{display:none}, so without this
-     the bar stays LAID OUT at ~400px tall with opacity 0 — an invisible band
-     across the bottom of the page silently eating every tap that lands on it */
-  pointer-events:none}
-.invite[hidden]{display:none}
-.invite.on{opacity:1;transform:none;pointer-events:auto}
-.invite__l{flex:1 1 300px;min-width:0}
-.invite__k{
-  font-family:var(--mono);font-size:.72rem;font-weight:700;letter-spacing:.18em;
-  text-transform:uppercase;color:var(--cyan);margin:0 0 8px}
-.invite__t{font-size:.94rem;font-weight:500;line-height:1.6;margin:0;color:var(--ink)}
-.invite__t b{font-weight:700}
-.invite__a{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.invite__x{
-  appearance:none;-webkit-appearance:none;background:none;border:0;cursor:pointer;
-  min-height:44px;padding:0 14px;border-radius:var(--r-pill,999px);
-  font:600 .88rem/1 inherit;color:var(--ink);opacity:.72;
-  -webkit-tap-highlight-color:transparent;transition:opacity .3s ease}
-.invite__x:hover{opacity:1}
-@media(max-width:560px){
-  .invite{flex-direction:column;align-items:stretch;gap:12px;padding:16px 18px}
-  /* `flex:1 1 300px` was written for the ROW layout, where 300px is a width.
-     Turning the container to a column turns that basis into a HEIGHT — it was
-     forcing a 300px tall block and a 403px bar, half a phone screen. */
-  .invite__l{flex:0 0 auto}
-  .invite__a{justify-content:space-between}
-  .invite__a .btn{flex:1}}
-@media(prefers-reduced-motion:reduce){.invite{transition:none}}
-
-.scrollcue{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);
-  display:flex;flex-direction:column;align-items:center;gap:12px;z-index:1}
-.scrollcue span{font-family:var(--mono);font-size:.72rem;font-weight:700;
-  letter-spacing:.3em;color:var(--cyan)}
-.scrollcue i{display:block;width:1px;height:44px;
-  background:linear-gradient(180deg,var(--cyan),transparent);
-  animation:cueFall 2.2s ease-in-out infinite}
-@keyframes cueFall{0%{transform:scaleY(0);transform-origin:top}
-  45%{transform:scaleY(1);transform-origin:top}
-  55%{transform:scaleY(1);transform-origin:bottom}
-  100%{transform:scaleY(0);transform-origin:bottom}}
-
-/* the ceremony (html.anim only — armor lands everything) */
-html.anim .arrival .hs{opacity:0;filter:blur(12px);transform:translateY(16px)}
-html.anim .arrival.go .hs{opacity:1;filter:blur(0);transform:none;
-  transition:opacity 1.15s ease var(--hd,0s),filter 1.3s ease var(--hd,0s),
-  transform 1.15s cubic-bezier(.16,1,.3,1) var(--hd,0s)}
-
-/* ---- the statement acts · one line, one room, LOCKED on scroll ---- */
-.act{min-height:92svh;display:flex;align-items:center;justify-content:center;
-  text-align:center;padding:0 24px;scroll-snap-align:center;scroll-snap-stop:always}
-.act .line{font-size:clamp(2.1rem,7.4vw,4.8rem);font-weight:800;
-  letter-spacing:-.025em;line-height:1.12;margin:0;max-width:14em}
-.act .line b{font-weight:800}
-.act--soul .line{font-weight:700;letter-spacing:-.01em;
-  animation:soulGlow 7s ease-in-out infinite}
-@keyframes soulGlow{
-  0%,100%{text-shadow:0 0 44px rgba(0,102,255,.5),0 0 120px rgba(0,102,255,.22)}
-  50%{text-shadow:0 0 44px rgba(28,231,255,.62),0 0 120px rgba(28,231,255,.26)}}
-html[data-mode="lux"] .act--soul .line{animation:none;
-  text-shadow:0 0 34px rgba(0,148,196,.32)}
-.act--door{flex-direction:column;gap:44px}
-.act--door .mono-line{font-family:var(--mono);font-size:.84rem;font-weight:700;
-  letter-spacing:.34em;text-transform:uppercase;color:var(--cyan);margin:0}
-.act--door .cta{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
-/* acts arrive out of blur and BOUNCE into their lock */
-html.anim .act .hs{opacity:0;filter:blur(11px);transform:translateY(30px);will-change:opacity,filter,transform}
-html.anim .act .hs.on{opacity:1;filter:blur(0);transform:none;
-  transition:opacity .9s ease,filter 1.05s ease,
-  transform 1s cubic-bezier(.3,1.45,.45,1)}
-/* the word in motion — cyan glow, green $, a slow quiet signal */
-.line--m{white-space:nowrap;max-width:none}
-.mword{color:var(--cyan);display:inline-block;
-  transition:transform .85s cubic-bezier(.26,1.36,.4,1),opacity .5s ease,
-  filter .5s ease,text-shadow 1.4s ease}
-.mword .dol{color:var(--green)}
-.mword.out{opacity:0;transform:translateY(.45em) scale(.86);filter:blur(9px);
-  transition:transform .4s ease-in,opacity .34s ease-in,filter .34s ease-in}
-.mword{text-shadow:var(--text-glow)}
-.mword.flash{text-shadow:0 0 36px rgba(28,231,255,.9),0 0 96px rgba(0,140,255,.36)}
-
-/* ---- section headers ---- */
-.shead{text-align:center;margin-bottom:82px}
-.shead h2{font-size:clamp(2.1rem,6vw,3.3rem);font-weight:800;letter-spacing:-.02em;margin-top:16px}
-.shead p{font-size:1.12rem;font-weight:500;max-width:36em;margin:18px auto 0;line-height:1.65}
-.shead--grand h2{font-size:clamp(2.6rem,7.8vw,4.5rem)}
-.shead--grand .eyebrow{font-size:.9rem}
-
-/* svg sprites carry no viewBox, so an unsized .glyph falls back to the UA 300x150 box */
-.glyph{width:30px;height:30px;flex:none}
-.modeSw .glyph{width:18px;height:18px}
-
-/* ---- rails ---- */
-.rails{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-@media(max-width:840px){.rails{grid-template-columns:1fr;max-width:460px;margin:0 auto}}
-.rail{padding:46px 32px;text-align:center}
-.rail .glyph{width:38px;height:38px;color:var(--cyan);margin:0 auto 20px;display:block}
-.rail h3{font-size:1.5rem;font-weight:800;letter-spacing:.01em}
-.rail .mono{display:block;font-size:.78rem;font-weight:700;letter-spacing:.26em;
-  text-transform:uppercase;margin:12px 0 16px;color:var(--cyan)}
-.rail p{font-size:1.04rem;font-weight:500;line-height:1.65}
-
-/* ---- keystone + loops ---- */
-.keystone{padding:56px 44px;text-align:center;border-radius:28px}
-.keystone .glyph{width:44px;height:44px;color:var(--orange);margin:0 auto 22px;display:block}
-.keystone h3{font-size:clamp(1.7rem,4.6vw,2.4rem);font-weight:800}
-.keystone p{font-size:1.1rem;font-weight:500;line-height:1.7;max-width:38em;margin:18px auto 0}
-.loops{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:26px}
-@media(max-width:840px){.loops{grid-template-columns:1fr;max-width:460px;margin:26px auto 0}}
-.loop{padding:38px 28px;text-align:center;position:relative}
-.loop .glyph{width:30px;height:30px;color:var(--orange);margin:0 auto 16px;display:block}
-.loop h4{font-size:1.3rem;font-weight:800}
-.loop p{font-size:1rem;font-weight:500;line-height:1.65;margin-top:14px}
-.soon{position:absolute;top:16px;right:16px;font-family:var(--mono);font-size:.72rem;
-  font-weight:700;letter-spacing:.16em;color:var(--cyan);border:1px solid var(--cyan);
-  border-radius:var(--r-pill);padding:7px 12px}
-.equation{margin:64px auto 0;text-align:center;font-family:var(--mono);
-  font-size:clamp(.9rem,2.6vw,1.05rem);font-weight:700;letter-spacing:.08em}
-.equation b{color:var(--orange);font-weight:700}
-
-/* ---- agents ---- */
-.agents{display:grid;grid-template-columns:1.2fr 1fr;gap:22px}
-@media(max-width:840px){.agents{grid-template-columns:1fr}}
-.agent{padding:48px 38px}
-.agent h3{font-size:1.55rem;font-weight:800;display:flex;align-items:center;gap:14px}
-.agent h3 .glyph{color:var(--orange);width:30px;height:30px}
-.agent p{font-size:1.06rem;font-weight:500;line-height:1.7;margin-top:18px}
-.agent .fee{display:inline-flex;align-items:center;gap:10px;margin-top:24px;
-  font-family:var(--mono);font-size:.84rem;font-weight:700;letter-spacing:.12em;
-  color:var(--cyan);border:1px solid var(--edge);border-radius:var(--r-pill);
-  min-height:44px;padding:0 18px}
-
-/* ---- money ---- */
-.money{display:grid;gap:14px;max-width:760px;margin:0 auto}
-.mrow{display:flex;align-items:center;gap:20px;padding:26px 30px}
-.mrow .n{font-family:var(--mono);font-size:.82rem;font-weight:700;color:var(--cyan);
-  letter-spacing:.1em;flex:0 0 auto}
-.mrow p{font-size:1.05rem;font-weight:600}
-.mrow p span{font-weight:500}
-.money-law{text-align:center;margin-top:40px;font-size:1.12rem;font-weight:700}
-
-/* ---- phases ---- */
-.phases{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;max-width:900px;margin:0 auto}
-@media(max-width:720px){.phases{grid-template-columns:1fr}}
-.phase{padding:36px 30px}
-.phase .mono{font-size:.76rem;font-weight:700;letter-spacing:.26em;color:var(--cyan);
-  text-transform:uppercase}
-.phase h4{font-size:1.3rem;font-weight:800;margin:10px 0 12px}
-.phase p{font-size:1rem;font-weight:500;line-height:1.65}
-
-/* ---- library ---- */
-.lib{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;max-width:860px;margin:0 auto}
-@media(max-width:720px){.lib{grid-template-columns:1fr}}
-.doc{display:flex;align-items:center;gap:18px;padding:28px 30px}
-.doc .glyph{color:var(--cyan)}
-.doc b{font-size:1.1rem;font-weight:700;display:block}
-.doc span{font-size:.94rem;font-weight:500;display:block;margin-top:5px}
-
-/* ---- close + footer ---- */
-.close{text-align:center;padding-bottom:60px}
-.close h2{font-size:clamp(2rem,6vw,3.3rem);font-weight:800;letter-spacing:-.02em}
-.close .soul{font-size:clamp(1.15rem,3.4vw,1.7rem);font-weight:700;margin-top:30px;
-  animation:soulGlow 7s ease-in-out infinite}
-html[data-mode="lux"] .close .soul{animation:none;text-shadow:0 0 30px rgba(0,110,255,.35)}
-.close .cta{margin-top:44px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
-footer{padding:90px 0 70px;text-align:center}
-footer p{font-size:.94rem;font-weight:600;line-height:2}
-footer .mono{font-size:.74rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;
-  display:block;margin-top:22px}
-@media (prefers-reduced-motion:reduce){
-  .act--soul .line,.close .soul,.scrollcue i{animation:none}
-}
+:root{--bg:#05070b;--bg2:#0a0f18;--ink:#f5fbff;--muted:#9aafbd;--cyan:#5de8ff;--blue:#5f7dff;--gold:#ffd17a;--edge:rgba(255,255,255,.1);--glass:rgba(12,20,31,.64);--radius:28px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 50% -10%,rgba(93,232,255,.10),transparent 34%),linear-gradient(180deg,var(--bg),#060a11 50%,#04060a);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overflow-x:hidden}.noise{position:fixed;inset:0;pointer-events:none;opacity:.12;background-image:radial-gradient(rgba(255,255,255,.22) .6px,transparent .7px);background-size:8px 8px;mask-image:linear-gradient(to bottom,black,transparent 88%)}a{color:inherit}.wrap{width:min(1120px,calc(100% - 32px));margin:auto}.nav{position:fixed;left:50%;top:14px;transform:translateX(-50%);z-index:50;width:min(720px,calc(100% - 24px));display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border:1px solid var(--edge);background:rgba(5,9,15,.7);backdrop-filter:blur(20px);border-radius:999px}.brand{font-size:.76rem;font-weight:850;letter-spacing:.15em;text-transform:uppercase;text-decoration:none}.brand b{color:var(--cyan)}.navlinks{display:flex;gap:4px}.navlinks a{text-decoration:none;color:var(--muted);font-size:.78rem;padding:10px 12px;border-radius:999px}.navlinks a:hover{background:rgba(255,255,255,.06);color:var(--ink)}.hero{min-height:100svh;display:grid;place-items:center;text-align:center;position:relative;padding:108px 16px 70px}.orb{position:absolute;width:min(76vw,620px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(93,232,255,.14),rgba(95,125,255,.06) 45%,transparent 68%);filter:blur(2px);animation:breathe 7s ease-in-out infinite}@keyframes breathe{50%{transform:scale(1.08);opacity:.8}}.pulse{width:118px;height:118px;border:1px solid rgba(93,232,255,.35);border-radius:50%;display:grid;place-items:center;margin:0 auto 26px;box-shadow:0 0 80px rgba(93,232,255,.12);animation:pulse 3.5s ease-in-out infinite}.pulse:before{content:"";width:54px;height:54px;border-radius:50%;background:radial-gradient(circle at 35% 35%,white,var(--cyan) 22%,var(--blue) 60%,transparent 63%);box-shadow:0 0 42px rgba(93,232,255,.85)}@keyframes pulse{50%{box-shadow:0 0 130px rgba(93,232,255,.22);transform:scale(1.03)}}.eyebrow{font-size:.74rem;letter-spacing:.24em;text-transform:uppercase;color:var(--cyan);font-weight:800}.hero h1{font-size:clamp(3rem,11vw,7.4rem);line-height:.93;letter-spacing:-.055em;margin:14px auto 24px;max-width:9em}.hero h1 span{display:block;color:var(--cyan);text-shadow:0 0 50px rgba(93,232,255,.2)}.lede{max-width:760px;margin:auto;color:#d5e1e9;font-size:clamp(1.05rem,2.4vw,1.42rem);line-height:1.65}.hero .micro{margin-top:22px;color:var(--muted);font-size:.92rem}.scroll{position:absolute;bottom:24px;font-size:.68rem;letter-spacing:.25em;text-transform:uppercase;color:var(--muted)}section{padding:100px 0}.sectionhead{max-width:800px;margin-bottom:46px}.sectionhead h2{font-size:clamp(2.25rem,7vw,4.9rem);line-height:1;letter-spacing:-.045em;margin:10px 0 18px}.sectionhead p{color:var(--muted);font-size:1.08rem;line-height:1.75}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{padding:26px;border:1px solid var(--edge);background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.018));border-radius:var(--radius);backdrop-filter:blur(16px);box-shadow:inset 0 1px rgba(255,255,255,.06)}.card .k{color:var(--cyan);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;font-weight:800}.card h3{font-size:1.4rem;margin:12px 0}.card p{color:var(--muted);line-height:1.7;margin:0}.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:28px}.step{padding:18px 14px;border:1px solid var(--edge);border-radius:20px;text-align:center;background:rgba(255,255,255,.025)}.step b{display:block;color:var(--cyan);margin-bottom:6px}.step span{font-size:.82rem;color:var(--muted)}.law{margin:42px 0;padding:34px;border-left:1px solid var(--cyan);background:linear-gradient(90deg,rgba(93,232,255,.08),transparent);font-size:clamp(1.5rem,4.2vw,2.7rem);line-height:1.25;letter-spacing:-.025em}.manifesto{max-width:880px}.manifesto p{font-size:clamp(1.03rem,2.2vw,1.22rem);line-height:1.85;color:#d9e5ec}.manifesto strong{color:white}.adult{border:1px solid rgba(255,209,122,.22);background:radial-gradient(circle at 85% 10%,rgba(255,209,122,.09),transparent 30%),rgba(255,255,255,.018)}.adult .k{color:var(--gold)}.boundary{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}.boundary .card:first-child{border-color:rgba(93,232,255,.22)}.boundary .card:last-child{border-color:rgba(255,209,122,.22)}.payments{display:grid;grid-template-columns:1.05fr .95fr;gap:18px}.meter{position:relative;min-height:420px;display:grid;place-items:center;overflow:hidden}.ring{width:270px;height:270px;border-radius:50%;border:1px solid rgba(93,232,255,.28);display:grid;place-items:center;box-shadow:0 0 120px rgba(93,232,255,.12),inset 0 0 80px rgba(93,232,255,.04);animation:spin 18s linear infinite}.ring:before{content:"MOTUS";font-size:2rem;letter-spacing:.22em;font-weight:850;color:var(--cyan)}@keyframes spin{to{transform:rotate(360deg)}}.ring:before{animation:counter 18s linear infinite}@keyframes counter{to{transform:rotate(-360deg)}}.stack{display:grid;gap:12px}.mini{padding:18px 20px;border-radius:18px;border:1px solid var(--edge);background:rgba(255,255,255,.026)}.mini b{display:block;margin-bottom:5px}.mini span{color:var(--muted);font-size:.9rem;line-height:1.55}.revenue{grid-template-columns:repeat(2,1fr)}.timeline{display:grid;gap:12px}.phase{display:grid;grid-template-columns:110px 1fr;gap:16px;align-items:start;padding:24px;border:1px solid var(--edge);border-radius:22px}.phase .p{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);font-weight:850}.phase h3{margin:0 0 6px}.phase p{margin:0;color:var(--muted);line-height:1.65}.close{text-align:center;padding:130px 0}.close h2{font-size:clamp(3rem,10vw,7rem);line-height:.95;letter-spacing:-.055em;margin:0}.close h2 span{color:var(--cyan)}.close p{max-width:700px;margin:26px auto 0;color:var(--muted);font-size:1.1rem;line-height:1.7}.sig{margin-top:40px;font-size:.78rem;letter-spacing:.25em;text-transform:uppercase;color:#d6e1e8}footer{padding:34px 0 50px;color:#728795;font-size:.8rem;text-align:center}.reveal{opacity:0;transform:translateY(18px);transition:.8s cubic-bezier(.2,.8,.2,1)}.reveal.on{opacity:1;transform:none}@media(max-width:860px){.grid,.payments{grid-template-columns:1fr}.flow{grid-template-columns:1fr 1fr}.revenue{grid-template-columns:1fr}.boundary{grid-template-columns:1fr}.meter{min-height:330px}.navlinks a:nth-child(2),.navlinks a:nth-child(3){display:none}}@media(max-width:520px){section{padding:78px 0}.hero{padding-top:98px}.hero h1{font-size:clamp(3.2rem,18vw,5rem)}.flow{grid-template-columns:1fr}.phase{grid-template-columns:1fr}.card{padding:22px}.nav{top:10px}.navlinks a{padding:10px}.ring{width:220px;height:220px}}@media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
 </style>
 </head>
 <body>
-<div class="field" aria-hidden="true"></div>
-<div class="grain" aria-hidden="true"></div>
+<div class="noise"></div>
+<nav class="nav"><a class="brand" href="#top">MOTUS<b>.MARKET</b></a><div class="navlinks"><a href="#model">Model</a><a href="#adult">Adult</a><a href="#plan">Plan</a><a href="#manifesto">Manifesto</a></div></nav>
 
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-<linearGradient id="infGrad" x1="0" y1="1" x2="1" y2="0">
-  <stop offset="0" stop-color="#0066ff"/><stop offset=".42" stop-color="#1ce7ff"/>
-  <stop offset="1" stop-color="#c2fbff"/>
-</linearGradient>
-<filter id="infGlow" x="-40%" y="-90%" width="180%" height="280%">
-  <feGaussianBlur stdDeviation="7"/></filter>
-<filter id="infGlowS" x="-40%" y="-90%" width="180%" height="280%">
-  <feGaussianBlur stdDeviation="3"/></filter>
-<path id="lemni" d="M120 60C96 18 24 18 24 60s72 42 96 0 72-42 96 0-72 42-96 0Z"/>
-<g id="g-bolt"><path d="M13 2 5 13.5h5L10.5 22l8.5-11.5h-5.5L13 2Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></g>
-<g id="g-shield"><path d="M12 2.8 20 6v6.2c0 5-3.4 8-8 9-4.6-1-8-4-8-9V6l8-3.2Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m8.6 11.8 2.4 2.4 4.6-4.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g>
-<g id="g-pulse"><path d="M2.5 12h4l2.5-6 4.5 12 3-6h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g>
-<g id="g-model"><path d="M12 2.6 20.5 9 17 21H7L3.5 9 12 2.6Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 2.6V21M3.5 9h17" fill="none" stroke="currentColor" stroke-width="1.2"/></g>
-<g id="g-learn"><path d="M12 21V11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M12 11c0-4.4 2.8-7.2 7.2-7.2C19.2 8.2 16.4 11 12 11Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 14c0-3.2-2.2-5.4-5.4-5.4 0 3.2 2.2 5.4 5.4 5.4Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></g>
-<g id="g-launch"><path d="M12 21V6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="m6 12 6-6.5L18 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M7.5 21h9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></g>
-<g id="g-lever"><path d="M3.5 16.5 20 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="m9 20 3.5-6.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="20" cy="8" r="2.2" fill="currentColor"/></g>
-<g id="g-agent"><circle cx="12" cy="12" r="8.6" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="2.6" fill="currentColor"/><circle cx="18.6" cy="6.2" r="1.9" fill="currentColor"/></g>
-<g id="g-max"><path d="M12 2.6 20.2 7.3v9.4L12 21.4 3.8 16.7V7.3L12 2.6Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="12" r="3.4" fill="none" stroke="currentColor" stroke-width="1.8"/></g>
-<g id="g-doc"><path d="M6 2.8h8l4 4V21H6V2.8Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M14 2.8v4h4M9 12h6M9 16h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></g>
-<g id="g-arrow"><path d="M4 12h15M13.5 6 19.5 12l-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g>
-<g id="g-sun"><circle cx="12" cy="12" r="4.4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 3v2.4M12 18.6V21M3 12h2.4M18.6 12H21M5.6 5.6l1.7 1.7M16.7 16.7l1.7 1.7M18.4 5.6l-1.7 1.7M7.3 16.7l-1.7 1.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></g>
-<g id="g-moon"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4 6.8 6.8 0 0 0 20 14.5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></g>
-</defs></svg>
-
-<nav class="nav" aria-label="Main">
-  <a class="brand" href="/"><img class="inf" src="/assets/logo.png" alt="" aria-hidden="true"><span>MOTUS<b>.MARKET</b></span></a>
-  <a href="/app.html">Market</a>
-  <a href="/hope.html">Mindset</a>
-  <a href="/read.html?f=spec.md">!MOVE</a>
-  <button class="modeSw" id="modeSw" type="button" aria-label="Toggle NOX / LUX">
-    <svg class="glyph"><use href="#g-moon" id="modeGlyph"/></svg><span id="modeWord">NOX</span>
-  </button>
-</nav>
-
-<!-- ============ ACT 0 · THE ARRIVAL ============ -->
-<header class="arrival" id="arrival">
-  <canvas id="minds" aria-hidden="true"></canvas>
-  <div class="markwrap hs" style="--hd:.2s">
-  <img class="mark" src="/assets/logo.png" alt="Motus.Market" fetchpriority="high"></div>
-  <h1 class="brandline hs" style="--hd:1.7s">Motus<b>.Market</b></h1>
-  <p class="mantra hs" style="--hd:2.7s">Many Minds Set In Motion</p>
-  <div class="scrollcue hs" style="--hd:3.8s" aria-hidden="true"><span>SCROLL</span><i></i></div>
+<header class="hero" id="top">
+<div class="orb"></div>
+<div style="position:relative">
+<div class="pulse" aria-hidden="true"></div>
+<div class="eyebrow">The market for agency</div>
+<h1>Sell Your Signal.<span>Not Your Soul.</span></h1>
+<p class="lede">Motus.Market is a human-centered market for stories, services, guidance, art, teaching, missions and coordinated action—built to reward what people help move in the world without turning the person into the product.</p>
+<p class="micro">Money measures exchange. Motus measures movement.</p>
+</div>
+<div class="scroll">Move ↓</div>
 </header>
 
-<!-- ============ THE STATEMENT ACTS · one line, one room ============ -->
-<section class="act act--soul"><p class="line hs">Your Heart, Mind, And Soul<br>In Full Motion</p></section>
-<section class="act"><p class="line hs">Move The Mindset</p></section>
-<section class="act"><p class="line hs">Move The World</p></section>
-<section class="act"><p class="line hs">Build Your <b class="cyan">MotusMind</b></p></section>
-<section class="act"><p class="line line--m hs">Make Your <b class="mword" id="mword"><span class="dol">$</span>Money</b> Move</p></section>
-<section class="act act--door">
-  <p class="mono-line hs">Acta Non Verba</p>
-  <div class="cta hs">
-    <a class="btn btn--prime" href="/app.html">Enter the market<svg class="glyph" style="width:18px;height:18px"><use href="#g-arrow"/></svg></a>
-    <a class="btn btn--glass" href="/read.html?f=spec.md">Read the spec</a>
-  </div>
-</section>
+<main>
+<section id="model"><div class="wrap">
+<div class="sectionhead reveal"><div class="eyebrow">A different market</div><h2>Your humanity is not inventory.</h2><p>The old attention economy often monetizes access: attention, intimacy, data, desirability, outrage. Motus.Market asks a different question: what knowledge, care, craft, courage or coordinated service can your presence put into motion?</p></div>
+<div class="grid">
+<div class="card reveal"><div class="k">01 · Story</div><h3>Sell your story.</h3><p>Turn lived experience into narrative, perspective, education, art and meaning that another person can carry forward.</p></div>
+<div class="card reveal"><div class="k">02 · Service</div><h3>Sell your service.</h3><p>Offer teaching, advising, creative work, mentorship, advocacy, projects and skilled contribution with explicit scope and terms.</p></div>
+<div class="card reveal"><div class="k">03 · Signal</div><h3>Sell your signal.</h3><p>Make conviction legible. Let people support a cause, mission or direction without purchasing entitlement to the human behind it.</p></div>
+</div>
+<div class="flow reveal"><div class="step"><b>Signal</b><span>This matters.</span></div><div class="step"><b>Stake</b><span>I will back it.</span></div><div class="step"><b>Service</b><span>I can contribute.</span></div><div class="step"><b>Move</b><span>I acted.</span></div><div class="step"><b>Impact</b><span>Something changed.</span></div></div>
+<div class="law reveal"><strong>Never sell people.</strong><br/>Build systems where people can choose to serve together.</div>
+</div></section>
 
-<!-- ============ THE PROOF ============ -->
-<section class="wrap proof">
-  <div class="shead shead--grand surface">
-    <p class="eyebrow">Three Moves. ONE Market.</p>
-    <h2>Make The Move</h2>
-  </div>
-  <div class="rails">
-    <div class="pane pane--hover rail surface">
-      <svg class="glyph"><use href="#g-bolt"/></svg>
-      <h3>$DASH</h3><span class="mono">Money</span>
-      <p>Wallet to wallet. The platform never holds funds — we couldn't if we wanted to.</p>
-    </div>
-    <div class="pane pane--hover rail surface">
-      <svg class="glyph"><use href="#g-shield"/></svg>
-      <h3>$TRUST</h3><span class="mono">Conviction</span>
-      <p>Vouches staked from your own wallet. Skin in the game, or it doesn't count.</p>
-    </div>
-    <div class="pane pane--hover rail surface">
-      <svg class="glyph"><use href="#g-pulse"/></svg>
-      <h3>!MOTUS</h3><span class="mono">Contribution</span>
-      <p>Earned 1:1 with paid work. The only mint is motion.</p>
-    </div>
-  </div>
-</section>
+<section id="manifesto"><div class="wrap manifesto">
+<div class="sectionhead reveal"><div class="eyebrow">The founding idea</div><h2>The manifesto.</h2></div>
+<p class="reveal"><strong>Motus.Market is the market for agency. The market for world change.</strong> The old attention economy taught people to sell access to themselves—their image, their data, their desirability, their outrage, their intimacy, their attention. Motus.Market proposes a different market entirely: <strong>sell your signal, not your soul.</strong> Sell what you have learned. Sell what you believe. Sell your story, your service, your guidance, your craft, your teaching, your imagination, and your ability to move people toward something worth doing. Your humanity is not the inventory. Your capacity to create movement is the value.</p>
+<p class="reveal">A <strong>signal</strong> on Motus is more than an opinion. It is a statement of meaning: <em>this matters.</em> A <strong>stake</strong> says: <em>I am willing to put something behind it.</em> A <strong>Move</strong> says: <em>I acted.</em> And impact says: <em>something changed.</em> Motus.Market turns that progression into an economic system: <strong>Signal → Stake → Service → Move → Impact.</strong> Instead of merely measuring followers, clicks, or predictions, the platform asks a harder question: <strong>what did your presence in the world actually move?</strong></p>
+<p class="reveal">That is where <strong>Motus</strong> becomes the meter of the system. Motus represents movement: someone learned because of you, acted because of you, coordinated with others because of you, contributed expertise, funded a mission, completed a service, or helped turn intention into reality. Motus can eventually have a crypto-economic layer, but the deepest measurement should remain larger than token price. <strong>Money measures exchange. Motus measures movement.</strong> Money, reputation, verified impact and community conviction remain separate layers so none can become a proxy for human worth.</p>
+</div></section>
 
-<section class="wrap proof">
-  <div class="shead surface">
-    <p class="eyebrow">The long game</p>
-    <h2>One keystone. Three loops.</h2>
-  </div>
-  <div class="foil surface" style="border-radius:28px;max-width:760px;margin:0 auto">
-    <div class="foil__glow" aria-hidden="true"></div>
-    <div class="keystone">
-      <svg class="glyph"><use href="#g-model"/></svg>
-      <h3>MotusModels</h3>
-      <p>A named, runnable pattern — minted once, run anywhere.<br>
-      <b>The strongest thing on the market is a pattern that works.</b></p>
-    </div>
-    <div class="foil__gloss" aria-hidden="true"></div>
-    <div class="foil__sweep" aria-hidden="true"></div>
-  </div>
-  <div class="loops">
-    <div class="pane pane--hover loop surface">
-      <svg class="glyph"><use href="#g-learn"/></svg>
-      <h4>LearningLoops</h4>
-      <p>Safe-to-fail probes. What a probe proves, a model keeps.</p>
-    </div>
-    <div class="pane pane--hover loop surface">
-      <svg class="glyph"><use href="#g-launch"/></svg>
-      <h4>LaunchLoops</h4>
-      <p>Design a great launch once — earn every time it runs again.</p>
-    </div>
-    <div class="pane pane--hover loop surface">
-      <span class="soon">Coming soon</span>
-      <svg class="glyph"><use href="#g-lever"/></svg>
-      <h4>LeverageLoops</h4>
-      <p>Where finished work goes to work.</p>
-    </div>
-  </div>
-  <p class="equation surface">LEARNING + LAUNCH + LEVERAGE = <b>THE LONGLOOPS</b> → MOTUSMODELS</p>
-</section>
+<section id="adult"><div class="wrap">
+<div class="sectionhead reveal"><div class="eyebrow">A new meaning for adult</div><h2>Adult entertainment can mean adulthood.</h2><p>Agency. Consent. Responsibility. Service. Discernment. Courage. Creation. Showing up for other people.</p></div>
+<div class="card adult reveal"><div class="k">Mission first</div><h3>Expression without reduction.</h3><p>A creator does not need to become less expressive, less beautiful, less sensual or less provocative. Lawful adult expression may be part of a creator's work. The difference is architectural: the person is never reduced to the content, and payment never purchases ownership, control, access beyond explicit terms, or entitlement to intimacy.</p></div>
+<div class="boundary">
+<div class="card reveal"><div class="k">What the market can fund</div><h3>Whole-person value.</h3><p>Photography. Performances. Art. Memberships. Education. Digital safety. Relationship skills. Workshops. Advocacy. Investigative work. Mentorship. Fundraisers. Community missions. Creative campaigns.</p></div>
+<div class="card reveal"><div class="k">What stays off-market</div><h3>The human boundary.</h3><p>Human worth. Consent. Identity ownership. Private data. Coercion. Fan entitlement. Pay-to-command communities. Hidden surveillance. Any premise that money buys the person.</p></div>
+</div>
+<div class="law reveal">Sexuality may be part of your expression.<br/><strong>It is never the measure of your worth.</strong></div>
+</div></section>
 
-<section class="wrap proof">
-  <div class="shead surface">
-    <p class="eyebrow">The presence economy</p>
-    <h2>Agents with agency</h2>
-    <p>The other half of the agentic age — the economy that moves while
-    you're <b>present</b>.</p>
-  </div>
-  <div class="agents">
-    <div class="pane pane--hover agent surface">
-      <h3><svg class="glyph"><use href="#g-agent"/></svg>MotusAgents</h3>
-      <p>Your Davara, under your name — drafting, scoping, matching, and running live
-      while you're present. Every action signed and answered for.</p>
-      <span class="fee">List your agent — 1 DASH, flat</span>
-    </div>
-    <div class="pane pane--hover agent surface">
-      <h3><svg class="glyph"><use href="#g-max"/></svg>MotusMax Agents</h3>
-      <p>Multi-sig SafeStep verification for high-stakes work.
-      The security layer ships first.</p>
-      <span class="fee">Later — by design</span>
-    </div>
-  </div>
-</section>
+<section id="payments"><div class="wrap">
+<div class="sectionhead reveal"><div class="eyebrow">Payments + movement</div><h2>Build a payment rail that remembers why money moved.</h2><p>Motus.Market can behave like a payments app for human contribution: pay a creator, back a Move, subscribe to a mission, tip a lesson, fund a campaign, sponsor a service, or coordinate a group contribution—then preserve the meaning of the transaction without selling the participant's behavioral exhaust.</p></div>
+<div class="payments">
+<div class="card meter reveal"><div class="ring"></div></div>
+<div class="stack">
+<div class="mini reveal"><b>Money</b><span>Settlement. Price. Compensation. Clear financial accounting.</span></div>
+<div class="mini reveal"><b>Motus</b><span>A movement signal tied to verified or attested action—not a score of human worth.</span></div>
+<div class="mini reveal"><b>Trust</b><span>Reputation for reliability, fulfillment and stewardship, governed separately.</span></div>
+<div class="mini reveal"><b>Impact</b><span>Evidence that a Move produced an outcome, with uncertainty and provenance visible.</span></div>
+<div class="mini reveal"><b>Privacy</b><span>Minimize collection. No sale of intimate behavioral profiles. Consent is specific and revocable.</span></div>
+</div>
+</div>
+</div></section>
 
-<section class="wrap proof">
-  <div class="shead surface">
-    <p class="eyebrow">How the platform earns</p>
-    <h2>Six honest fees</h2>
-  </div>
-  <div class="money">
-    <div class="pane mrow surface"><span class="n">01</span><p>The 3% Network split <span>on every $DASH transaction.</span></p></div>
-    <div class="pane mrow surface"><span class="n">02</span><p>1 DASH <span>to list a MotusAgent — one coin to take the stage.</span></p></div>
-    <div class="pane mrow surface"><span class="n">03</span><p>Model run fees <span>— the Split, already live.</span></p></div>
-    <div class="pane mrow surface"><span class="n">04</span><p>LaunchLoop fees <span>— listings and featured weeks.</span></p></div>
-    <div class="pane mrow surface"><span class="n">05</span><p>Motus Events <span>— tickets in DASH. Presence mints MOTUS.</span></p></div>
-    <div class="pane mrow surface"><span class="n">06</span><p>Dash DAO proposal <span>— the best Dash showcase on the market.</span></p></div>
-  </div>
-  <p class="money-law surface">Every fee fits in one sentence — or it doesn't ship.</p>
-</section>
+<section id="revenue"><div class="wrap">
+<div class="sectionhead reveal"><div class="eyebrow">How the market earns</div><h2>Charge for infrastructure. Not surveillance.</h2><p>Revenue comes from enabling legitimate value creation and coordination—not from quietly extracting more of the person.</p></div>
+<div class="grid revenue">
+<div class="card reveal"><div class="k">Marketplace</div><h3>Transaction fees</h3><p>A transparent fee on paid services, subscriptions, courses, memberships, commissions and digital goods.</p></div>
+<div class="card reveal"><div class="k">Campaigns</div><h3>Funding rails</h3><p>Platform fees on successfully funded missions, community projects and creator-led public-good campaigns.</p></div>
+<div class="card reveal"><div class="k">Creator OS</div><h3>Premium tools</h3><p>Analytics, community coordination, safety controls, identity and impact verification, workflow and publishing tools.</p></div>
+<div class="card reveal"><div class="k">Organizations</div><h3>Mission infrastructure</h3><p>Paid tools for nonprofits and institutions to commission services, sponsor verified Moves and coordinate communities.</p></div>
+</div>
+</div></section>
 
-<section class="wrap proof">
-  <div class="shead surface">
-    <p class="eyebrow">The phases</p>
-    <h2>The plan</h2>
-  </div>
-  <div class="phases">
-    <div class="pane pane--hover phase surface"><span class="mono">P0 · Days</span>
-      <h4>Reveal the market</h4>
-      <p>The offer field on moves. Listing #1 goes live.</p></div>
-    <div class="pane pane--hover phase surface"><span class="mono">P1 · Weeks</span>
-      <h4>Close the loop</h4>
-      <p>$DASH checkout · the MOTUS ledger · receipt-gated reviews · MotusCorpus v1.</p></div>
-    <div class="pane pane--hover phase surface"><span class="mono">P2 · A season</span>
-      <h4>Compound</h4>
-      <p>Community Model Run #1 · Motus Events · the first LearningLoop pilot.</p></div>
-    <div class="pane pane--hover phase surface"><span class="mono">P3 · When earned</span>
-      <h4>The registry</h4>
-      <p>MotusAgent listings · pledge-pools · governance on Dash Platform.</p></div>
-  </div>
-</section>
+<section id="plan"><div class="wrap">
+<div class="sectionhead reveal"><div class="eyebrow">Implementation</div><h2>Earn the right to tokenize movement.</h2><p>Start with useful human exchange. Prove the safeguards. Add economic complexity only when the system deserves it.</p></div>
+<div class="timeline">
+<div class="phase reveal"><div class="p">Phase 01</div><div><h3>Marketplace before token</h3><p>Launch creator profiles, stories, services, mission subscriptions, payments, receipts, consent boundaries and dispute resolution. Use ordinary money first.</p></div></div>
+<div class="phase reveal"><div class="p">Phase 02</div><div><h3>Verified Moves</h3><p>Add voluntary attestations for completed actions: learned, donated, volunteered, shipped, taught, coordinated. Preserve provenance and make gaming visible.</p></div></div>
+<div class="phase reveal"><div class="p">Phase 03</div><div><h3>Women-led pilot</h3><p>Invite a small cohort of women creators and systems advocates to co-design the rules, safety model, economics and public-good use cases. Pay them for governance work.</p></div></div>
+<div class="phase reveal"><div class="p">Phase 04</div><div><h3>Motus as a meter</h3><p>Introduce Motus first as a non-transferable measurement or receipt of movement. Test whether it improves coordination without distorting behavior.</p></div></div>
+<div class="phase reveal"><div class="p">Phase 05</div><div><h3>Economic layer, if earned</h3><p>Only after legal, economic and safety review, consider transferable crypto functionality. Never promise that price equals impact, morality or human value.</p></div></div>
+</div>
+<div class="law reveal"><strong>Leverage markets for people.</strong><br/>Never leverage people for markets.</div>
+</div></section>
 
-<section class="wrap proof">
-  <div class="shead surface">
-    <p class="eyebrow">The library</p>
-    <h2>Read the thinking</h2>
-  </div>
-  <div class="lib">
-    <a class="pane pane--hover doc surface" href="/read.html?f=spec.md">
-      <svg class="glyph"><use href="#g-doc"/></svg>
-      <span><b>The Baseline Spec · v0.3</b><span>The whole market, one document — rails, mint, covenant, phases, the build prompt.</span></span></a>
-    <a class="pane pane--hover doc surface" href="/read.html?f=neoglass.md">
-      <svg class="glyph"><use href="#g-doc"/></svg>
-      <span><b>NEURONEOGLASS Canon</b><span>The neo-glass design system — laws, tokens, components.</span></span></a>
-    <a class="pane pane--hover doc surface" href="/read.html?f=notes-reflect.md">
-      <svg class="glyph"><use href="#g-doc"/></svg>
-      <span><b>The Reflect Study</b><span>Five pages on the calm-luxury benchmark, and what we take.</span></span></a>
-    <a class="pane pane--hover doc surface" href="/read.html?f=notes-legendary.md">
-      <svg class="glyph"><use href="#g-doc"/></svg>
-      <span><b>The Legendary Front Pages</b><span>The greatest arrivals ever shipped — and the nine laws they share.</span></span></a>
-    <a class="pane pane--hover doc surface" href="/read.html?f=clarity-tips.md">
-      <svg class="glyph"><use href="#g-doc"/></svg>
-      <span><b>Clarity — The Essentials</b><span>Ten highest-leverage moves. Read before designing anything.</span></span></a>
-    <a class="pane pane--hover doc surface" href="/hope.html">
-      <svg class="glyph"><use href="#g-doc"/></svg>
-      <span><b>The Motus Message In Motion</b><span>The founding exchange — August's exact words, and Claude's reply.</span></span></a>
-  </div>
-</section>
+<section><div class="wrap manifesto">
+<div class="sectionhead reveal"><div class="eyebrow">The network effect we actually want</div><h2>Relationships become capacity, not inventory.</h2></div>
+<p class="reveal">A creator with a large audience may possess something more consequential than an advertising channel: a voluntary network capable of teaching, building, funding, mentoring, volunteering and helping. Motus.Market should never “sell followers.” It should let a creator invite people into a clearly scoped Move, where every participant chooses whether to join, what to contribute and when to leave.</p>
+<p class="reveal">Better stories create stronger signals. Stronger signals attract people who care. Those people contribute capital, labor, knowledge and trust. Service turns capacity into Moves. Verified Moves create reputation. Reputation can make future coordination easier. Successful coordination can attract more resources toward people who repeatedly demonstrate that they can turn conviction into meaningful action.</p>
+</div></section>
 
-<!-- ============ THE MOTUS MESSAGE IN MOTION ============ -->
-<section class="wrap proof" id="exchange">
-  <div class="shead surface">
-    <p class="eyebrow">14 · 08 · 2026</p>
-    <h2>The Motus Message<br>In Motion</h2>
-  </div>
-  <a class="pane pane--hover surface" href="/hope.html" style="display:block;max-width:660px;
-    margin:0 auto;padding:50px 42px;text-align:center;text-decoration:none;color:var(--ink)">
-    <p style="font-size:clamp(1.2rem,3.8vw,1.55rem);font-weight:700;line-height:1.6;
-      font-style:italic;margin:0">"The hope points towards a strong future for the
-      future of work for many&nbsp;lives."</p>
-    <p class="mono" style="font-size:.78rem;font-weight:700;letter-spacing:.24em;
-      text-transform:uppercase;color:var(--orange);margin:24px 0 0">— August, the founder</p>
-    <p style="font-size:1rem;font-weight:500;line-height:1.65;margin:24px auto 0;max-width:34em">
-      On the day the market took shape, its founder and its AI wrote its founding
-      record together — his exact words on hope and the human in the loop,
-      and Claude's reply.</p>
-    <p class="mono cyan" style="font-size:.8rem;font-weight:700;letter-spacing:.2em;
-      text-transform:uppercase;margin:28px 0 0">Read the exchange</p>
-  </a>
-</section>
-
-<!-- ============ THE CLOSE · ring composition ============ -->
-<section class="wrap proof close">
-  <hr class="beam surface" style="margin-bottom:110px">
-  <h2 class="surface">Many Minds<br>Set In Motion</h2>
-  <p class="soul surface">Your Heart, Mind, And Soul In Full Motion</p>
-  <div class="cta surface">
-    <a class="btn btn--prime" href="/app.html">Enter the market<svg class="glyph" style="width:18px;height:18px"><use href="#g-arrow"/></svg></a>
-  </div>
-</section>
-
-<footer class="wrap">
-  <p class="surface">Never custody. Never presale. Never a promised rate.<br>
-  Reviews require receipts. Vouches require stake. The only mint is motion.</p>
-  <span class="mono surface">Acta Non Verba</span>
-</footer>
-
-<!-- ============ THE INVITATION — rises once, the first time ============ -->
-<!-- the scrim went with the modal: nothing needs dimming any more -->
-<!-- THE INVITATION DOES NOT GATE THE DOOR.
-     This was a modal with a scrim, fired 5.2s after load: the very first thing a
-     stranger met at motus.market was a dialog covering the hero, asking them to
-     read a founding document before they had seen what this even is. The
-     exchange is worth offering — it is not worth spending the first impression
-     on. So it waits until they have actually passed the arrival, then arrives at
-     the bottom as an invitation that obscures nothing and blocks nothing. -->
-<aside class="invite" id="hopeInvite" hidden>
-  <div class="invite__l">
-    <p class="invite__k">14 · 08 · 2026 — The Motus Message In&nbsp;Motion</p>
-    <p class="invite__t">The day this market took shape, its founder and its AI wrote
-      its founding record together. <b>His words, and Claude's reply.</b></p>
-  </div>
-  <div class="invite__a">
-    <a class="btn btn--prime" href="/hope.html">Read the exchange</a>
-    <button class="invite__x" id="hopeLater" type="button">Not now</button>
-  </div>
-</aside>
-
+<section class="close"><div class="wrap reveal">
+<div class="eyebrow">Motus.Market</div>
+<h2>What can<br/><span>you move?</span></h2>
+<p>Not another attention market. Not a market for bodies. Not a score for souls. A market for chosen service, meaningful signal and human agency in motion.</p>
+<div class="sig">Sell Your Story · Sell Your Service · Sell Your Signal · Move What Matters</div>
+</div></section>
+</main>
+<footer><div class="wrap">MOTUS.MARKET · THE MARKET FOR AGENCY · Human worth is not a metric.</div></footer>
 <script>
-(function(){
-  'use strict';
-  /* ---------- mode ---------- */
-  var root=document.documentElement;
-  var sw=document.getElementById('modeSw'),word=document.getElementById('modeWord'),
-      gl=document.getElementById('modeGlyph');
-  function setMode(m,save){root.setAttribute('data-mode',m);
-    word.textContent=m.toUpperCase();
-    gl.setAttribute('href',m==='nox'?'#g-moon':'#g-sun');
-    if(save){try{localStorage.setItem('motus.mode',m)}catch(e){}}}
-  var saved=null;try{saved=localStorage.getItem('motus.mode')}catch(e){}
-  if(saved==='lux'||saved==='nox')setMode(saved,false);
-  sw.addEventListener('click',function(){
-    setMode(root.getAttribute('data-mode')==='nox'?'lux':'nox',true)});
-
-  /* ---------- pipeline armor ---------- */
-  var reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var surfaces=[].slice.call(document.querySelectorAll('.surface'));
-  function landAll(){root.classList.remove('anim');
-    surfaces.forEach(function(s){s.classList.add('landed')})}
-  var animOn=('IntersectionObserver' in window)&&!reduced;
-  if(animOn){
-    root.classList.add('anim');
-    var fed=false;
-    var probe=new IntersectionObserver(function(){fed=true;probe.disconnect()});
-    probe.observe(document.body);
-    setTimeout(function(){if(!fed)landAll()},900);
-  } else { landAll(); }
-
-  /* ---------- ACT 0: the ceremony ---------- */
-  var arrival=document.getElementById('arrival');
-  if(animOn){
-    requestAnimationFrame(function(){requestAnimationFrame(function(){
-      arrival.classList.add('go')})});
-  }
-
-  /* ---------- THE LOCK — native snap; JS only flips the switch ----------
-     mandatory + scroll-snap-stop:always means the browser itself refuses to
-     skip a line — wheel, fling, trackpad, touch alike. Nothing to fight. */
-  var acts=[].slice.call(document.querySelectorAll('.arrival,.act'));
-  if(!reduced&&acts.length){
-    root.classList.add('snap');
-    window.__lock={count:acts.length,
-      snapping:function(){return root.classList.contains('snap')}};
-  }
-
-  /* ---------- the statement acts: one line at a time, on scroll ---------- */
-  if(animOn){
-    var actIO=new IntersectionObserver(function(entries){
-      entries.forEach(function(en){
-        if(!en.isIntersecting)return;
-        [].forEach.call(en.target.querySelectorAll('.hs'),function(el,i){
-          setTimeout(function(){el.classList.add('on')},i*260)});
-        actIO.unobserve(en.target);
-      });
-    },{threshold:.45});
-    [].forEach.call(document.querySelectorAll('.act'),function(a){actIO.observe(a)});
-
-    /* proof sections */
-    var io=new IntersectionObserver(function(entries){
-      entries.forEach(function(en){
-        if(en.isIntersecting){
-          var el=en.target;
-          var sibs=surfaces.filter(function(s){
-            return !s.classList.contains('landed') &&
-              Math.abs(s.getBoundingClientRect().top-el.getBoundingClientRect().top)<40});
-          sibs.forEach(function(s,i){
-            setTimeout(function(){s.classList.add('landed')},i*80)});
-          el.classList.add('landed');io.unobserve(el);
-        }});
-    },{threshold:.12,rootMargin:'0px 0px -6% 0px'});
-    surfaces.forEach(function(s){io.observe(s)});
-  }
-  window.__pipeline={land:landAll,count:surfaces.length};
-
-  /* ---------- MANY MINDS — the living canvas ---------- */
-  var cv=document.getElementById('minds'),ctx=cv.getContext('2d');
-  var W=0,H=0,DPR=Math.min(window.devicePixelRatio||1,2),minds=[],running=false,raf=0;
-  var mindsInView=true;
-  function size(){
-    var r=arrival.getBoundingClientRect();
-    W=r.width;H=r.height;
-    cv.width=W*DPR;cv.height=H*DPR;
-    cv.style.width=W+'px';cv.style.height=H+'px';
-    ctx.setTransform(DPR,0,0,DPR,0,0);
-  }
-  function seed(){
-    minds=[];
-    var n=W<720?46:96;
-    for(var i=0;i<n;i++){
-      var orbiter=i<n*.62;
-      minds.push({
-        orb:orbiter,
-        t:Math.random()*Math.PI*2,
-        a:orbiter?(0.30+Math.random()*0.72)*Math.min(W*.52,H*1.05):0,
-        sp:(orbiter?(.0022+Math.random()*.0042):0)*(Math.random()<.5?1:-1),
-        rot:(Math.random()-.5)*0.30,
-        squash:.34+Math.random()*.26,
-        x:Math.random()*W,y:Math.random()*H,
-        dx:(Math.random()-.5)*.1,dy:(Math.random()-.5)*.1,
-        s:.7+Math.random()*1.5,
-        tw:Math.random()*Math.PI*2,
-        c:Math.random()<.5?'w':(Math.random()<.34?'d':'c')
-      });
-    }
-  }
-  function trailColor(){
-    return root.getAttribute('data-mode')==='lux'?'rgba(234,243,255,.15)':'rgba(4,6,15,.13)';
-  }
-  function dotColor(m,al){
-    if(m.c==='d')return 'rgba(0,102,255,'+al+')';
-    if(m.c==='c')return 'rgba(28,231,255,'+al+')';
-    return root.getAttribute('data-mode')==='lux'
-      ?'rgba(20,60,120,'+al+')':'rgba(215,248,255,'+al+')';
-  }
-  function frame(){
-    if(!running)return;
-    ctx.fillStyle=trailColor();ctx.fillRect(0,0,W,H);
-    var cx=W/2,cy=H*.44;
-    for(var i=0;i<minds.length;i++){
-      var m=minds[i],x,y;
-      if(m.orb){
-        /* the lemniscate — every mind travels an infinity */
-        m.t+=m.sp;
-        var st=Math.sin(m.t),ct=Math.cos(m.t),den=1+st*st;
-        var lx=m.a*ct/den, ly=m.a*st*ct/den*(m.squash*2.6);
-        var cr=Math.cos(m.rot),sr=Math.sin(m.rot);
-        x=cx+lx*cr-ly*sr;
-        y=cy+lx*sr+ly*cr;
-      }else{
-        m.x+=m.dx;m.y+=m.dy;
-        if(m.x<-4)m.x=W+4;if(m.x>W+4)m.x=-4;
-        if(m.y<-4)m.y=H+4;if(m.y>H+4)m.y=-4;
-        x=m.x;y=m.y;
-      }
-      m.tw+=.02;
-      var al=.28+Math.abs(Math.sin(m.tw))*.5;
-      ctx.beginPath();ctx.arc(x,y,m.s,0,6.2832);
-      ctx.fillStyle=dotColor(m,al.toFixed(2));ctx.fill();
-    }
-    raf=requestAnimationFrame(frame);
-  }
-  function start(){if(running||reduced)return;running=true;raf=requestAnimationFrame(frame)}
-  function stop(){running=false;cancelAnimationFrame(raf)}
-  function paintStatic(){
-    ctx.fillStyle=trailColor();ctx.fillRect(0,0,W,H);
-    running=true;frame();running=false;cancelAnimationFrame(raf);
-  }
-  size();seed();
-  if(reduced){paintStatic();}
-  else{
-    start();
-    if('IntersectionObserver' in window){
-      new IntersectionObserver(function(es){es.forEach(function(en){
-        mindsInView=en.isIntersecting;
-        en.isIntersecting?start():stop()})}).observe(arrival);
-    }
-    document.addEventListener('visibilitychange',function(){
-      document.hidden?stop():start()});
-  }
-  var rT;window.addEventListener('resize',function(){
-    clearTimeout(rT);rT=setTimeout(function(){size();seed();if(reduced)paintStatic()},180)});
-  window.__minds={count:function(){return minds.length},running:function(){return running}};
-
-  /* ---------- THE WORD IN MOTION — $Money cycles through the moves ---------- */
-  var WORDS=["$Money","Motus","Mindset","Mantra","Mind","$Bitcoin","$Dash","$Motus",
-    "Heart","Soul","Market","Message","Model","$ETH","$Trust","motus","MOTUS","Method",
-    "Meta","Merit","Motivus","Momentum","Dream","Big","Small","Next","Metrics","MINDSET",
-    "MIND","MONEY","Morphic","Meaningful","Meaning","Metamorphic","Story","Corpus","Human",
-    "HUMAN","Motif","MOTIF","MANTRA","Vision","Startup","Practice","Leverage","System",
-    "Focus","Motivational","Emergent","Agent","Unit","Together","Public","Open-Source",
-    "Outlier","Career","Venture","Investors","Strongest","Smallest","Honest","Future",
-    "FUTURE","MotusAgent","Milestone","Manifesto","Knowledge","Founder","Magentic","Mythic",
-    "ONE","One","one","1","First","Software","Confidence","Commons","MotusMarket","Magic",
-    "Standard","Wisdom","Claude","OpenClaw","Hermes","GrokBot","Tribe","Keystone","Question",
-    "Boldest","Brave","Next Brave","Culture"];
-  var mword=document.getElementById('mword');
-  var mline=mword?mword.parentElement:null;
-  function renderWord(w){
-    if(w.charAt(0)==='$'){
-      mword.innerHTML='<span class="dol">$</span>'+w.slice(1);
-    }else{
-      mword.textContent=w;
-    }
-  }
-  /* the line NEVER breaks — shrink to fit, always one line */
-  function fitLine(){
-    if(!mline)return;
-    mline.style.fontSize='';
-    var s=parseFloat(getComputedStyle(mline).fontSize);
-    var avail=mline.parentElement.clientWidth-8;
-    var guard=0;
-    while(mline.scrollWidth>avail&&s>16&&guard<40){
-      s*=.94;mline.style.fontSize=s+'px';guard++;
-    }
-  }
-  var bag=[];
-  function nextWord(){
-    if(!bag.length){
-      bag=WORDS.slice(1);
-      for(var i=bag.length-1;i>0;i--){
-        var j=Math.floor(Math.random()*(i+1)),t=bag[i];bag[i]=bag[j];bag[j]=t}
-    }
-    return bag.pop();
-  }
-  function swap(){
-    if(document.hidden)return;
-    mword.classList.add('out');
-    setTimeout(function(){
-      renderWord(nextWord());
-      fitLine();
-      mword.classList.remove('out');
-      mword.classList.add('flash');
-      setTimeout(function(){mword.classList.remove('flash')},1700);
-    },390);
-  }
-  /* a slow signal: 20–35 seconds between changes, never spam */
-  function tick(){
-    swap();
-    setTimeout(tick,20000+Math.random()*15000);
-  }
-  if(mword&&'IntersectionObserver' in window){
-    fitLine();
-    var rT2;window.addEventListener('resize',function(){
-      clearTimeout(rT2);rT2=setTimeout(fitLine,160)});
-    var armed=false;
-    new IntersectionObserver(function(es,obs){
-      es.forEach(function(en){
-        if(en.isIntersecting&&!armed){
-          armed=true;obs.disconnect();
-          setTimeout(tick,5000);
-        }});
-    },{threshold:.6}).observe(mword);
-  }
-
-  /* ---------- the living foil pauses off-screen ---------- */
-  if('IntersectionObserver' in window){
-    [].forEach.call(document.querySelectorAll('.foil'),function(f){
-      new IntersectionObserver(function(es){es.forEach(function(en){
-        f.classList.toggle('still',!en.isIntersecting)})}).observe(f);
-    });
-  }
-
-  /* ---------- the invitation: once per visitor, and never in the way ----------
-     It no longer fires on a timer while the visitor is still reading the
-     arrival. It waits until they have scrolled past it — that is the earliest
-     moment we have earned the right to ask for anything — and then it slides up
-     without a scrim, without trapping focus, and without covering the page. */
-  var seen=null;try{seen=localStorage.getItem('motus.hope.invite')}catch(e){}
-  if(!seen){
-    var inv=document.getElementById('hopeInvite'), shown=false;
-    var remember=function(){try{localStorage.setItem('motus.hope.invite','1')}catch(e){}};
-    var dismiss=function(){inv.classList.remove('on');
-      inv.style.opacity='';inv.style.transform='';remember();
-      setTimeout(function(){inv.hidden=true},420)};
-    var show=function(){
-      if(shown)return; shown=true; inv.hidden=false;
-      /* a forced reflow, not requestAnimationFrame: the element has to be laid
-         out once before the class lands or the transition has nothing to run
-         from, and rAF can be throttled or deferred in ways a reflow cannot */
-      void inv.offsetWidth;
-      inv.classList.add('on');
-      /* A transition can stall at progress 0 in a non-compositing context, and
-         this bar becomes interactive the moment `.on` lands — invisible AND
-         clickable is the one state it must never rest in. So guarantee the end
-         values just past the transition; a no-op if it already arrived. */
-      setTimeout(function(){ inv.style.opacity='1'; inv.style.transform='none'; },560);
-    };
-    /* THE TRIGGER IS A SCROLL THRESHOLD, AND IT IS SNAP-AWARE.
-       Two things had to be measured to get this right. The page is
-       `scroll-snap-type: y mandatory`, so a scroll lands on a snap point rather
-       than where it was aimed — asking for 1137px landed at 779, which made a
-       934px threshold unreachable. And an IntersectionObserver on the arrival,
-       the more elegant answer, never fired its callback at all in the harness I
-       can verify in, so it would have been a trigger I could not prove.
-       0.6 of a viewport sits well below the first snap past the arrival (779)
-       and well above the arrival's own snap point (0), so it cannot misfire
-       while the hero is still on screen. */
-    var onScroll=function(){
-      if(window.scrollY > innerHeight*0.6){
-        show(); window.removeEventListener('scroll',onScroll);
-      }
-    };
-    window.addEventListener('scroll',onScroll,{passive:true});
-    /* second path to the same idempotent show(): the arrival leaving the
-       viewport. Costs nothing if the scroll listener gets there first, and
-       covers the case where it does not. */
-    if('IntersectionObserver' in window){
-      var arrival=document.getElementById('arrival');
-      if(arrival){
-        var io=new IntersectionObserver(function(es){
-          es.forEach(function(e){ if(!e.isIntersecting){ show(); io.disconnect(); } });
-        },{threshold:0});
-        io.observe(arrival);
-      }
-    }
-    /* and a hand-hold for anyone driving this without either: __invite() */
-    window.__invite=show;
-    document.getElementById('hopeLater').addEventListener('click',dismiss);
-    /* choosing to read it also counts as answered */
-    inv.querySelector('a.btn').addEventListener('click',remember);
-    document.addEventListener('keydown',function(e){if(e.key==='Escape'&&shown)dismiss()});
-  }
-})();
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 </script>
-<script src="/assets/neoglass.js" defer></script>
 </body>
 </html>
